@@ -1,0 +1,62 @@
+﻿<Window x:Class="HotelApp.DanhSachNhanVien"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NMCNPM"
+        mc:Ignorable="d"
+         Title="Danh Sách Nhân Viên" Height="700" Width="1300"
+        WindowStartupLocation="CenterScreen"
+        WindowState="Maximized">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Grid Margin="0,0,0,0" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left">
+            <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="87" VerticalAlignment="Top" Width="150" Margin="0,-16,0,0">
+                <Grid>
+                    <Label Content="Name" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Margin="0,20,0,0" Grid.ColumnSpan="2"/>
+                    <Label Content="Title" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Margin="0,50,0,0" Grid.ColumnSpan="2"/>
+                </Grid>
+            </Border>
+
+            <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="601" VerticalAlignment="Top" Width="150" Margin="0,70,0,0">
+                <Grid>
+                    <Button Content="Danh sách phòng" HorizontalAlignment="Center" VerticalAlignment="Top"  Padding="-40,0,0,0" Width="150" Height = "30" Margin="0,0,0,0" BorderBrush="Transparent" Background="White"/>
+                    <Button Content="Danh sách nhân viên" HorizontalAlignment="Left" VerticalAlignment="Top"  Padding="-25,0,0,0" Width="150" Height = "30" Margin="0,30,0,0" BorderBrush="Transparent" Background="White"/>
+                    <Button Content="Danh sách khách" HorizontalAlignment="Left" VerticalAlignment="Top"  Padding="-45,0,0,0" Width="150" Height = "30" Margin="0,60,0,0" BorderBrush="Transparent" Background="White"/>
+                    <Button Content="Báo cáo doanh thu" HorizontalAlignment="Left" VerticalAlignment="Top"  Padding="-30,0,0,0" Width="150" Height = "30" Margin="0,90,0,0" BorderBrush="Transparent" Background="White"/>
+                    <Button Content="Báo cáo mật độ" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="-50,0,0,0" Width="150" Height = "30" Margin="0,120,0,0" BorderBrush="Transparent" Background="White"/>
+                    <Button Content="Loại phòng" HorizontalAlignment="Left" VerticalAlignment="Top"  Padding="-70,0,0,0" Width="150" Height = "30" Margin="0,150,0,0" BorderBrush="Transparent" Background="White"/>
+                    <Button Content="Loại khách" HorizontalAlignment="Left" VerticalAlignment="Top"  Padding="-75,0,0,0" Width="150" Height = "30" Margin="0,180,0,0" BorderBrush="Transparent" Background="White"/>
+                    <Button Content="Phụ thu" HorizontalAlignment="Left" VerticalAlignment="Top"  Padding="-90,0,0,0" Width="150" Height = "30" Margin="0,210,0,0" BorderBrush="Transparent" Background="White"/>
+                    <Button Content="Đăng xuất" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="-80,0,0,0" Width="149" Height = "30" Margin="0,240,0,0" BorderBrush="Transparent" Background="White"/>
+                </Grid>
+            </Border>
+
+        </Grid>
+        <StackPanel Margin="0,0,0,0" Grid.Row="0" Grid.Column="1">
+            <Label Content="DANH SÁCH NHÂN VIÊN" HorizontalAlignment="Left" Margin="409,58,0,0" VerticalAlignment="Top" FontSize="25" FontWeight="Black"/>
+            <ListView Name="ListItem">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Columns="3" HorizontalAlignment="Stretch"></UniformGrid>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Height="300" Width="300">
+                        
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
+    </Grid>
+</Window>
