@@ -23,6 +23,11 @@ namespace HotelApp
 		public MainWindow()
 		{
 			InitializeComponent();
+			this.Hide();
+			TypeOfCustomer TOC = new TypeOfCustomer();
+			TOC.Show();
+			//TypeOfRoom TOR = new TypeOfRoom();
+			//TOR.Show();
 		}
 	}
 }

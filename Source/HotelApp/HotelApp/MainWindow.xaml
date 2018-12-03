@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HotelApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="700" Width="1300" VerticalAlignment="Top" HorizontalAlignment="Left">
     <Grid>
-        <Border BorderBrush="Orange" BorderThickness="2" CornerRadius="10" Height="87" Width="200" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="300,40,0,0" Background="Blue">
-        <Label   Content="Hotel"  FontSize="50" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" Foreground="White" Background="blue" VerticalContentAlignment="Center"/>
+        <Border BorderBrush="Orange" BorderThickness="2" CornerRadius="10" Height="87" Width="200" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="550,40,0,0" Background="Blue" Grid.Column="2">
+            <Label   Content="Hotel"  FontSize="50" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" Foreground="White" Background="blue" VerticalContentAlignment="Center"/>
         </Border>
 
     </Grid>
