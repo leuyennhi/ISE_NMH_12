@@ -56,12 +56,25 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="TypeOfCustomer.xaml.cs">
-      <DependentUpon>TypeOfCustomer.xaml</DependentUpon>
+    <Compile Include="ThongTinTaiKhoan.xaml.cs">
+      <DependentUpon>ThongTinTaiKhoan.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TypeOfRoom.xaml.cs">
-      <DependentUpon>TypeOfRoom.xaml</DependentUpon>
-    </Compile>
+    <Page Include="BaoCaoDoanhThu.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="BaoCaoMatDo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ChinhSuaThongTinPhong.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="DanhSachNhanVien.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -70,17 +83,25 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="BaoCaoDoanhThu.xaml.cs">
+      <DependentUpon>BaoCaoDoanhThu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BaoCaoMatDo.xaml.cs">
+      <DependentUpon>BaoCaoMatDo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ChinhSuaThongTinPhong.xaml.cs">
+      <DependentUpon>ChinhSuaThongTinPhong.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DanhSachNhanVien.xaml.cs">
+      <DependentUpon>DanhSachNhanVien.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="TypeOfCustomer.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="ThongTinTaiKhoan.xaml">
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="TypeOfRoom.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>

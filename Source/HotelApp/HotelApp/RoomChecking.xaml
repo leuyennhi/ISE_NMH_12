@@ -1,0 +1,31 @@
+﻿<Window x:Class="WpfSign_in.RoomChecking"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Hotel Management" Height="700" Width="1300" FontSize="14"
+        ResizeMode="NoResize">
+    <Window.Background>
+        <ImageBrush ImageSource="images/screen.jpg"/>
+    </Window.Background>
+    <Border CornerRadius="10" Margin="10,10,4,10">
+        <StackPanel  HorizontalAlignment="Center" Width="612">
+            <Label Content="KIỂM TRA CHI TIẾT PHÒNG" Foreground="White" HorizontalAlignment="Center" FontSize="25"/>
+            <Separator></Separator>
+            <Label Content="PHÒNG 1" Foreground="White" HorizontalAlignment="Center" FontSize="18" FontStyle="Italic"/>
+            <Button x:Name="btnEdit" Content="Chỉnh sửa thông tin phòng" Width="249" HorizontalAlignment="Center" Margin="353,10,10,20" Background="#545d6a" Foreground="White" FontSize="18" Height="36"/>
+            <Grid HorizontalAlignment="Center" Background="White" Height="300">
+                <Label Content="Loại phòng:" Margin="150,0,338,255" FontSize="20" FontWeight="Bold"></Label>
+                <Label Content="A" Margin="280,1,240,255" FontSize="20" FontWeight="Bold"></Label>
+                <Label Content="Đơn giá:" Margin="150,50,338,205" FontSize="20" FontWeight="Bold"></Label>
+                <Label Content="150.000VND/đêm" Margin="250,52,147,205" FontSize="20" FontWeight="Bold"></Label>
+                <Label Content="Còn trống:" Margin="150,100,338,153" FontSize="20" FontWeight="Bold"></Label>
+                <Label Content="Còn" Margin="280,100,147,153" FontSize="20" FontWeight="Bold"></Label>
+                <Label Content="Lầu:" Margin="150,150,407,111" FontSize="20" FontWeight="Bold"></Label>
+                <Label Content="1" Margin="280,150,147,111" FontSize="20" FontWeight="Bold"></Label>
+                <Label Content="Ghi chú:" Margin="150,200,377,61" FontSize="20" FontWeight="Bold"></Label>
+                <Label Content="Chưa có" Margin="280,200,147,61" FontSize="20" FontWeight="Bold"></Label>
+            </Grid>
+            <Button x:Name="btnBook" Content="Đặt phòng" Width="181" HorizontalAlignment="Center" Margin="0 50 0 0" Background="#545d6a" Foreground="White" FontSize="18" Height="41"/>
+            <Button x:Name="btnDelete" Content="Xoá phòng" Width="100" HorizontalAlignment="Center" Margin="256,50,256,0" Background="#545d6a" Foreground="White" FontSize="18" Height="34"/>
+        </StackPanel>
+    </Border>
+</Window>

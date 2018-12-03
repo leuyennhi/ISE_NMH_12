@@ -13,16 +13,21 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WpfSign_in
+namespace HotelApp
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class BaoCaoDoanhThu : Window
     {
-        public MainWindow()
+        public BaoCaoDoanhThu()
         {
             InitializeComponent();
+        }
+
+        private void Button_DragEnter(object sender, DragEventArgs e)
+        {
+
         }
     }
 }
