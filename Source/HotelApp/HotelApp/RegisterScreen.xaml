@@ -1,0 +1,29 @@
+﻿<Window x:Class="WpfSign_in.RegisterScreen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Hotel Management" Height="700" Width="1300" FontSize="14"
+        ResizeMode="NoResize">
+    <Window.Background>
+        <ImageBrush ImageSource="images/screen.jpg"/>
+    </Window.Background>
+    <Border CornerRadius="10" Margin="10,10,4,10">
+        <StackPanel  HorizontalAlignment="Center" Width="612">
+            <Label Content="ĐĂNG KÍ" Foreground="White" HorizontalAlignment="Center" FontSize="25"/>
+            <Separator></Separator>
+            <Label Content="Họ tên:" Foreground="White"/>
+            <TextBox Name="txtName" Background="#545d6a" Foreground="White" FontSize="18" Margin="50,0,0,0"/>
+            <Label Content="Số điện thoại:" Foreground="White"/>
+            <TextBox Name="txtPhoneNumber" Background="#545d6a" Foreground="White" FontSize="18" Margin="50,0,0,0"/>
+            <Label Content="Ngày, tháng, năm sinh:" Foreground="White"/>
+            <DatePicker Height="25" HorizontalAlignment="Left" Margin="50,0,0,0" Name="datePicker" VerticalAlignment="Top" Width="115"/>
+            <Label Content="Username:" Foreground="White"/>
+            <TextBox Name="txtUsername" Background="#545d6a" Foreground="White" FontSize="18" Margin="50,0,0,0"/>
+            <Label Content="Password:" Foreground="White"/>
+            <PasswordBox Name="txtPassword" Background="#545d6a" Foreground="White" FontSize="18" Margin="50,0,0,0"/>
+            <Label Content="Confirm Password:" Foreground="White"/>
+            <PasswordBox Name="txtConfirmPassword" Background="#545d6a" Foreground="White" FontSize="18" Margin="50,0,0,0"/>
+            <Button x:Name="btnLogin" Content="Đăng kí" Margin="10 50" Width="100" Background="#545d6a" Foreground="White" FontSize="18"/>
+            <Button x:Name="btnCancel" Content="Huỷ bỏ" Margin="10 0" Width="100" Background="#545d6a" Foreground="White" FontSize="18"/>
+        </StackPanel>
+    </Border>
+</Window>
