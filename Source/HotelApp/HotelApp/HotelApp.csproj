@@ -56,8 +56,26 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="LoginScreen.xaml.cs">
+      <DependentUpon>LoginScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PasswordChanging.xaml.cs">
+      <DependentUpon>PasswordChanging.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RegisterScreen.xaml.cs">
+      <DependentUpon>RegisterScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RoomChecking.xaml.cs">
+      <DependentUpon>RoomChecking.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ThongTinTaiKhoan.xaml.cs">
       <DependentUpon>ThongTinTaiKhoan.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TypeOfCustomer.xaml.cs">
+      <DependentUpon>TypeOfCustomer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TypeOfRoom.xaml.cs">
+      <DependentUpon>TypeOfRoom.xaml</DependentUpon>
     </Compile>
     <Page Include="BaoCaoDoanhThu.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -72,10 +90,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="DanhSachNhanVien.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -95,11 +109,31 @@
     <Compile Include="DanhSachNhanVien.xaml.cs">
       <DependentUpon>DanhSachNhanVien.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
+    <Page Include="LoginScreen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PasswordChanging.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="RegisterScreen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="RoomChecking.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="ThongTinTaiKhoan.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="TypeOfCustomer.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="TypeOfRoom.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -142,6 +176,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\User.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\screen.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

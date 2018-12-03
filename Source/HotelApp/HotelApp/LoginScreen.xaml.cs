@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace WpfSign_in
+namespace HotelApp
 {
     /// <summary>
     /// Interaction logic for LoginScreen.xaml
