@@ -5,6 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HotelApp"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        WindowState="Maximized"
         Title="TypeOfCustomer" Height="700" Width="1300" >
     <!--Loaded="Window_Loaded"
         Closing="Window_Closing" 

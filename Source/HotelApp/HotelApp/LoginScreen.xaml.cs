@@ -22,6 +22,7 @@ namespace HotelApp
         public LoginScreen()
         {
             InitializeComponent();
+			
         }
     }
 }
