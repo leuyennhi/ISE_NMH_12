@@ -5,44 +5,117 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HotelApp"
         mc:Ignorable="d"
-        Title="TypeOfRoom" Height="300" Width="373" Loaded="Window_Loaded" ResizeMode="CanMinimize">
-    <Canvas>
-        <TextBox Canvas.Left="12" Canvas.Top="12" Height="23" Name="textBox1" 
+        WindowStartupLocation="CenterScreen"
+        WindowState="Maximized"
+        Title="HelloApp" Height="700" Width="1300" >
+    <!--Loaded="Window_Loaded"
+        Closing="Window_Closing" 
+        ResizeMode="CanMinimize">-->
+    <DockPanel Background="LightGray" LastChildFill="True">
+        <StackPanel Background="LightGray" MaxWidth="300" >
+            <StackPanel Orientation="Horizontal" Margin="0,20">
+                <Image HorizontalAlignment="Left" Height="80" VerticalAlignment="Top" Width="80" Source="pack://siteoforigin:,,,/Resources/User.png"/>
 
-            Width="120" TextChanged="textBox1_TextChanged" />
-        <TextBox Canvas.Left="146" Canvas.Top="12" Height="23" Name="textBox2" 
+                <StackPanel>
+                    <Label HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" MaxWidth="220">
+                        <Label.Content>
+                            <AccessText TextWrapping="Wrap" Text="Nguyen Thanh Nhut"/>
+                        </Label.Content>
+                    </Label>
+                    <Label Content="Nhân viên" HorizontalAlignment="Left"  VerticalAlignment="Top" FontSize="20" FontWeight="Bold" MaxWidth="220" Height="40"/>
 
-            Width="120" TextChanged="textBox2_TextChanged" />
-        <ListView Canvas.Left="12" Canvas.Top="68" Height="183" Name="listView1" 
+                </StackPanel>
 
-            Width="253" SelectionChanged="listView1_SelectionChanged" 
+            </StackPanel>
 
-            SelectionMode="Single">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="Col1" Width="150" 
+            <Menu HorizontalAlignment="Left" Height="800" VerticalAlignment="Top">
+                <MenuItem Header="Danh sách phòng" Height="40"  MinWidth="245" MaxWidth="300" FontSize="20" FontWeight="Bold" BorderThickness="0.3" BorderBrush="LightGray">
+                </MenuItem>
 
-                        DisplayMemberBinding="{Binding Col1}"></GridViewColumn>
-                    <GridViewColumn Header="Col1" Width="50" 
+                <MenuItem Header="Danh sách khách" Height="40" MinWidth="245" MaxWidth="300" FontSize="20" FontWeight="Bold" BorderThickness="0.3" BorderBrush="LightGray" >
+                </MenuItem>
 
-                        DisplayMemberBinding="{Binding Col2}"></GridViewColumn>
-                </GridView>
-            </ListView.View>
-        </ListView>
-        <Button Name="addButton" Canvas.Left="122" Canvas.Top="41" Height="21" 
+                <MenuItem Header="Danh sách nhân viên" Height="40" MinWidth="245" MaxWidth="300" FontSize="20" FontWeight="Bold" BorderThickness="0.3" BorderBrush="LightGray" >
+                </MenuItem>
 
-            Width="69" Click="addButton_Click" IsDefault="True">Add</Button>
-        <Button Name="removeButton" Canvas.Left="197" Canvas.Top="41" Height="21" 
+                <MenuItem Header="Loại phòng" Height="40" MinWidth="245" MaxWidth="300" FontSize="20" FontWeight="Bold" BorderThickness="0.3" BorderBrush="LightGray"  >
+                </MenuItem>
 
-            Width="69" Click="removeButton_Click">Remove</Button>
-        <!--<Button Name="okButton" Canvas.Left="274" Canvas.Top="13" Content="OK" 
+                <MenuItem Header="Loại khách" Height="40" MinWidth="245" MaxWidth="300" FontSize="20" FontWeight="Bold" BorderThickness="0.3" BorderBrush="LightGray" >
+                </MenuItem>
 
-            Height="22" Width="74" Click="okButton_Click" />-->
-        <!--<Button Name="closeButton" Canvas.Left="274" Canvas.Top="44" Content="Close" 
-            Height="22" Width="74" Click="closeButton_Click" />-->
-        <Button Name="saveButton" Canvas.Left="274" Canvas.Top="75" Content="Save" 
+                <MenuItem Header="Báo cáo doanh thu" Height="40" MinWidth="245" MaxWidth="300" FontSize="20" FontWeight="Bold" BorderThickness="0.3" BorderBrush="LightGray" >
+                </MenuItem>
 
-            Height="22" Width="74"/>
-        <!--Click="saveButton_Click"-->
-    </Canvas>
+                <MenuItem Header="Báo cáo mật độ" Height="40" MinWidth="245" MaxWidth="300" FontSize="20" FontWeight="Bold" BorderThickness="0.3" BorderBrush="LightGray" >
+                </MenuItem>
+
+                <MenuItem Header="Thay đổi phụ thu" Height="40" MinWidth="245" MaxWidth="300" FontSize="20" FontWeight="Bold" BorderThickness="0.3" BorderBrush="LightGray">
+                </MenuItem>
+
+                <MenuItem Header="Thay đổi số khách tối đa"  Height="40" MinWidth="245" MaxWidth="300" FontSize="20" FontWeight="Bold" BorderThickness="0.3" BorderBrush="LightGray">
+                </MenuItem>
+
+                <MenuItem Header="Thông tin tài khoản" Height="40" MinWidth="245" MaxWidth="300" FontSize="20" FontWeight="Bold" BorderThickness="0.3" BorderBrush="LightGray">
+                </MenuItem>
+
+                <MenuItem Header="Đăng xuất" Height="40" MinWidth="245" MaxWidth="300" FontSize="20" FontWeight="Bold" BorderThickness="0.3" BorderBrush="LightGray">
+                </MenuItem>
+            </Menu>
+        </StackPanel>
+        <StackPanel Margin="0,0,40,0">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,20,0,0">
+                <Border BorderBrush="White" BorderThickness="2" CornerRadius="10" Height="87" Width="600" HorizontalAlignment="Left" VerticalAlignment="Top"  Background="Blue">
+                    <Label   Content="Danh sách loại phòng"  FontSize="50" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" Foreground="White" Background="blue" VerticalContentAlignment="Center"/>
+                </Border>
+            </StackPanel >
+            <StackPanel Orientation="Horizontal" Margin="0,50,0,0" HorizontalAlignment="Right">
+                <Canvas Width="32" Height="32" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="2.125,0.469">
+                    <Image Width="32" Height="32" Margin="0" Source="pack://siteoforigin:,,,/Resources/add.png"/>
+                    <Button  Height="32" Width="32" Margin="0" Background="Transparent" BorderThickness="0" Click="ThemHang"/>
+                </Canvas>
+                <Canvas Width="32" Height="32" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="2.125,0.469">
+                    <Image Width="32" Height="32" Margin="0" Source="pack://siteoforigin:,,,/Resources/edit.png"/>
+                    <Button  Height="32" Width="32" Margin="0" Background="Transparent" BorderThickness="0" Click="ChinhSuaHang"/>
+                </Canvas>
+                <Canvas Width="32" Height="32" Margin="10,0,100,0" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <Image Width="32" Height="32" Margin="0" Source="pack://siteoforigin:,,,/Resources/trash.png"/>
+                    <Button  Height="32" Width="32" Margin="0" Background="Transparent" BorderThickness="0" Click="XoaHang"/>
+                </Canvas>
+            </StackPanel>
+            <StackPanel Height="40" Orientation="Horizontal" Margin="0,10,0,0" HorizontalAlignment="Center">
+                <Label Content="Loại phòng:"  VerticalContentAlignment="Center" FontSize="16" Margin="10,0,0,0"/>
+                <Border BorderBrush="White" Height="35" Background="White" BorderThickness="2" CornerRadius="15" Width="500" HorizontalAlignment="Center" VerticalAlignment="Center" >
+                    <TextBox TextWrapping="Wrap"  Width="480" BorderThickness="0" FontSize="18" VerticalContentAlignment="Center" Name="TORText" GotFocus="RemoveTORText" LostFocus="AddTORText"/>
+                </Border>
+                <Label Content="Phụ thu:"  VerticalContentAlignment="Center" FontSize="16" Margin="10,0,0,0"/>
+                <Border BorderBrush="White" Height="35" Background="White" BorderThickness="2" CornerRadius="15" Width="120" HorizontalAlignment="Center" VerticalAlignment="Center" >
+                    <TextBox TextWrapping="Wrap"  Width="100" BorderThickness="0" FontSize="18" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Name="CoeffText" GotFocus="RemoveCoefficientText" LostFocus="AddCoefficientText"/>
+                </Border>
+            </StackPanel>
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0">
+                <ListView Name="lvTypeRoom" FontSize="20" Height="400" SelectionChanged="listView1_SelectionChanged" SelectionMode="Single" BorderThickness="0" Grid.Column="3" IsSynchronizedWithCurrentItem="True">
+                    <ListView.Resources>
+                        <Style TargetType="{x:Type GridViewColumnHeader}">
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        </Style>
+                    </ListView.Resources>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="STT" Width="200" DisplayMemberBinding="{Binding STT}" />
+                            <GridViewColumn Header="Loại phòng" Width="500" DisplayMemberBinding="{Binding LoaiPhong}" />
+                            <GridViewColumn Header="Phụ thu" Width="200" DisplayMemberBinding="{Binding PhuThu}" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </StackPanel>
+        </StackPanel>
+
+
+    </DockPanel>
 </Window>

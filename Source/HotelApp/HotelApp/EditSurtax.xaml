@@ -1,0 +1,73 @@
+﻿<Window x:Class="HotelApp.EditSurtax"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HotelApp"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        WindowState="Maximized"
+        Title="HelloApp" Height="700" Width="1300" >
+    
+    <DockPanel Background="LightGray" LastChildFill="True">
+        <StackPanel Background="LightGray" MaxWidth="300" >
+            <StackPanel Orientation="Horizontal" Margin="0,20">
+                <Image HorizontalAlignment="Left" Height="80" VerticalAlignment="Top" Width="80" Source="pack://siteoforigin:,,,/Resources/User.png"/>
+
+                <StackPanel>
+                    <Label HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" MaxWidth="220">
+                        <AccessText TextWrapping="Wrap" Text="Nguyen Thanh Nhut"/>
+                    </Label>
+                    <Label Content="Nhân viên" HorizontalAlignment="Left"  VerticalAlignment="Top" FontSize="20" FontWeight="Bold" MaxWidth="220" Height="40"/>
+
+                </StackPanel>
+
+            </StackPanel>
+
+            <Menu HorizontalAlignment="Left" Height="800" VerticalAlignment="Top">
+                <MenuItem Header="Danh sách phòng" Height="40"  MinWidth="245" MaxWidth="300" FontSize="20" FontWeight="Bold" BorderThickness="0.3" BorderBrush="LightGray"/>
+
+                <MenuItem Header="Danh sách khách" Height="40" MinWidth="245" MaxWidth="300" FontSize="20" FontWeight="Bold" BorderThickness="0.3" BorderBrush="LightGray" />
+
+                <MenuItem Header="Danh sách nhân viên" Height="40" MinWidth="245" MaxWidth="300" FontSize="20" FontWeight="Bold" BorderThickness="0.3" BorderBrush="LightGray" />
+
+                <MenuItem Header="Loại phòng" Height="40" MinWidth="245" MaxWidth="300" FontSize="20" FontWeight="Bold" BorderThickness="0.3" BorderBrush="LightGray"  />
+
+                <MenuItem Header="Loại khách" Height="40" MinWidth="245" MaxWidth="300" FontSize="20" FontWeight="Bold" BorderThickness="0.3" BorderBrush="LightGray" />
+
+                <MenuItem Header="Báo cáo doanh thu" Height="40" MinWidth="245" MaxWidth="300" FontSize="20" FontWeight="Bold" BorderThickness="0.3" BorderBrush="LightGray" />
+
+                <MenuItem Header="Báo cáo mật độ" Height="40" MinWidth="245" MaxWidth="300" FontSize="20" FontWeight="Bold" BorderThickness="0.3" BorderBrush="LightGray" />
+
+                <MenuItem Header="Thay đổi phụ thu" Height="40" MinWidth="245" MaxWidth="300" FontSize="20" FontWeight="Bold" BorderThickness="0.3" BorderBrush="LightGray"/>
+
+                <MenuItem Header="Thay đổi số khách tối đa"  Height="40" MinWidth="245" MaxWidth="300" FontSize="20" FontWeight="Bold" BorderThickness="0.3" BorderBrush="LightGray"/>
+
+                <MenuItem Header="Thông tin tài khoản" Height="40" MinWidth="245" MaxWidth="300" FontSize="20" FontWeight="Bold" BorderThickness="0.3" BorderBrush="LightGray"/>
+
+                <MenuItem Header="Đăng xuất" Height="40" MinWidth="245" MaxWidth="300" FontSize="20" FontWeight="Bold" BorderThickness="0.3" BorderBrush="LightGray"/>
+            </Menu>
+            <Label Content="Label"/>
+        </StackPanel>
+        <StackPanel Margin="0,0,40,0">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,40,0,0">
+                <Border BorderBrush="White" BorderThickness="2" CornerRadius="10" Height="80" Width="600" HorizontalAlignment="Left" VerticalAlignment="Top"  Background="Blue">
+                    <Label   Content="Chỉnh sửa phụ thu"  FontSize="50" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" Foreground="White" Background="blue" VerticalContentAlignment="Center"/>
+                </Border>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,150,0,0" HorizontalAlignment="Center">
+                <Label Content="Tỉ lệ phụ thu: " FontSize="30"/>
+                <Border BorderBrush="White" Height="50" Background="White" BorderThickness="1" CornerRadius="25" Width="440" HorizontalAlignment="Center" VerticalAlignment="Center" >
+                    <TextBox TextWrapping="Wrap" Text="sdsajdhgsaj" BorderThickness="0" VerticalContentAlignment="Center" Width="400" FontSize="25"/>
+                </Border>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,150,0,0">
+                <Button Content="Thêm" Width="150" FontSize="25" Height="50" Background="White"/>
+                <Button Content="Hủy bỏ" Width="150" FontSize="25" Margin="40,0,0,0" Background="White"/>
+            </StackPanel>
+
+        </StackPanel>
+
+
+    </DockPanel>
+</Window>

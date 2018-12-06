@@ -19,188 +19,174 @@ namespace HotelApp
 	/// </summary>
 	public partial class TypeOfRoom : Window
 	{
+		private List<ListViewDataRoom> items = new List<ListViewDataRoom>();
+		private bool editAction = false;
+		private int Stttext = 0;
+
 		public TypeOfRoom()
 		{
 			InitializeComponent();
 
-			List<ListViewData> items = new List<ListViewData>();
-			items.Add(new ListViewData() { Col1 = "join", Col2 = "21" });
-			items.Add(new ListViewData() { Col1 = "zach", Col2 = "18" });
-			items.Add(new ListViewData() { Col1 = "mark", Col2 = "23" });
-			listView1.ItemsSource = items;
+			//string indexPath = "pack://siteoforigin:,,,/Resources/add.png";
+			//BitmapImage image = new BitmapImage();
+			//image.BeginInit();
+			//image.UriSource = new Uri(indexPath);
+			//image.EndInit();
+
+			items.Add(new ListViewDataRoom() { STT = 1, LoaiPhong = "Phong vip", PhuThu = (float)50000});
+			items.Add(new ListViewDataRoom() { STT = 2, LoaiPhong = "Phong thuong", PhuThu = (float)15000 });
+			items.Add(new ListViewDataRoom() { STT = 3, LoaiPhong = "Phong bad", PhuThu = (float)3223.32});
+			lvTypeRoom.ItemsSource = items;
 
 		}
 
-		private void textBox1_TextChanged(object sender, TextChangedEventArgs e)
+		public void RemoveTORText(object sender, EventArgs e)
 		{
-			RefreshListView(textBox1.Text, textBox2.Text);
+			//TOCText.Text = "";
 		}
 
-		private void textBox2_TextChanged(object sender, TextChangedEventArgs e)
+		public void AddTORText(object sender, EventArgs e)
 		{
-			RefreshListView(textBox1.Text, textBox2.Text);
+			if (string.IsNullOrWhiteSpace(TORText.Text)) { }
+			//TOCText.Text = "Nhập loại khách hàng...";
 		}
 
-		private bool stopRefreshControls;
-		private bool dataChanged;
-
-		private void RefreshListView(string value1, string value2)
+		public void RemoveCoefficientText(object sender, EventArgs e)
 		{
-			ListViewData lvc = (ListViewData)listView1.SelectedItem;
-			if (lvc != null && !stopRefreshControls)
+			//CoeffText.Text = "";
+		}
+
+		public void AddCoefficientText(object sender, EventArgs e)
+		{
+			if (string.IsNullOrWhiteSpace(CoeffText.Text)) { }
+			//CoeffText.Text = "Nhập hệ số...";
+		}
+
+		private void XoaHang(object sender, RoutedEventArgs e)
+		{
+			int selectedIndex = lvTypeRoom.SelectedIndex;
+
+			List<ListViewDataRoom> tempArr = new List<ListViewDataRoom>();
+			int j = 1;
+
+			for (int i = 0; i < items.Count; i++)
 			{
-				setDataChanged(true);
-
-				lvc.Col1 = value1;
-				lvc.Col2 = value2;
-
-				listView1.Items.Refresh();
+				if (i == selectedIndex) continue;
+				ListViewDataRoom temp = new ListViewDataRoom();
+				temp = items[i];
+				temp.STT = j;
+				tempArr.Add(temp);
+				j++;
 			}
+			lvTypeRoom.ItemsSource = tempArr;
+			items = tempArr;
 		}
-		private void setDataChanged(bool value)
+
+		private void ThemHang(object sender, RoutedEventArgs e)
 		{
-			dataChanged = value;
-			saveButton.IsEnabled = value;
+
+			if (!kiemtraHeSo(CoeffText.Text) || TORText.Text.Length < 1)
+			{
+				return;
+			}
+
+			List<ListViewDataRoom> tempArr = new List<ListViewDataRoom>();
+
+			int i;
+
+			for (i = 0; i < items.Count; i++)
+			{
+				tempArr.Add(items[i]);
+			}
+
+			tempArr.Add(new ListViewDataRoom() { STT = i + 1, LoaiPhong = TORText.Text, PhuThu = float.Parse(CoeffText.Text) });
+
+			lvTypeRoom.ItemsSource = tempArr;
+			items = tempArr;
+
+			TORText.Text = "";
+			CoeffText.Text = "";
+
+		}
+
+		private bool kiemtraHeSo(String str)
+		{
+			if (str.Length < 1)
+			{
+				return false;
+			}
+			for (var i = 0; i < str.Length; i++)
+			{
+				if ((str[i] > '9' || str[i] < '0') && str[i] != '.')
+				{
+					return false;
+				}
+			}
+			return true;
+		}
+
+		private void ChinhSuaHang(object sender, RoutedEventArgs e)
+		{
+
+			editAction = true;
+
+			if (!kiemtraHeSo(CoeffText.Text) || TORText.Text.Length < 1)
+			{
+				return;
+			}
+
+			List<ListViewDataRoom> tempArr = new List<ListViewDataRoom>();
+
+			for (int i = 1; i <= items.Count; i++)
+			{
+				if (i == Stttext)
+				{
+					tempArr.Add(new ListViewDataRoom() { STT = i, LoaiPhong = TORText.Text, PhuThu = float.Parse(CoeffText.Text) });
+					continue;
+				}
+				tempArr.Add(items[i - 1]);
+			}
+			lvTypeRoom.ItemsSource = tempArr;
+
+			items = tempArr;
+
+			TORText.Text = "";
+			CoeffText.Text = "";
 		}
 
 		private void listView1_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-			ListViewData lvc = (ListViewData)listView1.SelectedItem;
+			ListViewDataRoom lvc = (ListViewDataRoom)lvTypeRoom.SelectedItem;
 			if (lvc != null)
 			{
-				stopRefreshControls = true;
-				textBox1.Text = lvc.Col1;
-				textBox2.Text = lvc.Col2;
-				stopRefreshControls = false;
+				if (editAction)
+				{
+					Stttext = lvc.STT;
+					TORText.Text = lvc.LoaiPhong.ToString();
+					CoeffText.Text = lvc.PhuThu.ToString();
+				}
+
 			}
 		}
 
-		private void addButton_Click(object sender, RoutedEventArgs e)
+		private void DSPhong(object sender, RoutedEventArgs e)
 		{
-			setDataChanged(true);
-			AddRow();
+			MessageBox.Show("Danh sách phòng");
 		}
 
-		private void AddRow()
+		private void LoaiPhong(object sender, RoutedEventArgs e)
 		{
-			listView1.Items.Add(new ListViewData("", ""));
-			listView1.SelectedIndex = listView1.Items.Count - 1;
-
-			textBox1.Text = "";
-			textBox2.Text = "";
-			textBox1.Focus();
+			MessageBox.Show("loại phòng");
 		}
 
-		private void removeButton_Click(object sender, RoutedEventArgs e)
-		{
-			setDataChanged(true);
-			int selectedIndex = listView1.SelectedIndex;
-
-			listView1.Items.Remove(listView1.SelectedItem);
-
-			// if no rows left, add a blank row
-			if (listView1.Items.Count == 0)
-			{
-				AddRow();
-			}
-			// otherwise select next row
-			else if (selectedIndex <= listView1.Items.Count - 1)
-			{
-				listView1.SelectedIndex = selectedIndex;
-			}
-			else // not above cases? Select last row
-			{
-				listView1.SelectedIndex = listView1.Items.Count - 1;
-			}
-		}
-
-		public void Save(System.Windows.Data.CollectionView items)
-		{
-			//XDocument xdoc = new XDocument();
-
-			//XElement xeRoot = new XElement("Data");
-			//XElement xeSubRoot = new XElement("Rows");
-
-			//foreach (var item in items)
-			//{
-			//	ListViewData lvc = (ListViewData)item;
-
-			//	XElement xRow = new XElement("Row");
-			//	xRow.Add(new XElement("col1", lvc.Col1));
-			//	xRow.Add(new XElement("col2", lvc.Col2));
-
-			//	xeSubRoot.Add(xRow);
-			//}
-			//xeRoot.Add(xeSubRoot);
-			//xdoc.Add(xeRoot);
-
-			//xdoc.Save("MyData.xml");
-		}
-
-		private void Window_Loaded(object sender, RoutedEventArgs e)
-		{
-			ShowData();
-
-			if (listView1.Items.Count == 0)
-			{
-				AddRow();
-			}
-			else
-			{
-				listView1.SelectedIndex = 0;
-			}
-			setDataChanged(false);
-			textBox1.Focus();
-		}
-
-		private void ShowData()
-		{
-			//MyData md = new MyData();
-			//listView1.Items.Clear();
-
-			//foreach (var row in md.GetRows())
-			//{
-			//	listView1.Items.Add(row);
-			//}
-		}
-
-		public IEnumerable<object> GetRows()
-		{
-			List<ListViewData> rows = new List<ListViewData>();
-
-			//if (File.Exists("MyData.xml"))
-			//{
-			//	// Create the query 
-			//	var rowsFromFile = from c in XDocument.Load(
-			//						"MyData.xml").Elements(
-			//						"Data").Elements("Rows").Elements("Row")
-			//					   select c;
-
-			//	// Execute the query 
-			//	foreach (var row in rowsFromFile)
-			//	{
-			//		rows.Add(new ListViewData(row.Element("col1").Value,
-			//						row.Element("col2").Value));
-			//	}
-			//}
-			return rows;
-		}
 	}
 
-	public class ListViewData
+	public class ListViewDataRoom
 	{
-		public ListViewData()
-		{
-			// default constructor
-		}
+		public int STT { get; set; }
 
-		public ListViewData(string col1, string col2)
-		{
-			Col1 = col1;
-			Col2 = col2;
-		}
+		public string LoaiPhong { get; set; }
 
-		public string Col1 { get; set; }
-		public string Col2 { get; set; }
+		public float PhuThu { get; set; }
 	}
 }

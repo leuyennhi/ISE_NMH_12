@@ -7,11 +7,178 @@
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         WindowState="Maximized"
-        Title="TypeOfCustomer" Height="700" Width="1300" >
+        Title="HelloApp" Height="700" Width="1300" >
     <!--Loaded="Window_Loaded"
         Closing="Window_Closing" 
         ResizeMode="CanMinimize">-->
-    <Grid>
+    <DockPanel Background="LightGray" LastChildFill="True">
+        <StackPanel Background="LightGray" MaxWidth="300" >
+            <StackPanel Orientation="Horizontal" Margin="0,20">
+                <Image HorizontalAlignment="Left" Height="80" VerticalAlignment="Top" Width="80" Source="pack://siteoforigin:,,,/Resources/User.png"/>
+
+                <StackPanel>
+                    <Label HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" MaxWidth="220">
+                        <Label.Content>
+                            <AccessText TextWrapping="Wrap" Text="Nguyen Thanh Nhut"/>
+                        </Label.Content>
+                    </Label>
+                    <Label Content="Nhân viên" HorizontalAlignment="Left"  VerticalAlignment="Top" FontSize="20" FontWeight="Bold" MaxWidth="220" Height="40"/>
+
+                </StackPanel>
+
+            </StackPanel>
+
+            <Menu HorizontalAlignment="Left" Height="800" VerticalAlignment="Top">
+                <MenuItem Header="Danh sách phòng" Height="40"  MinWidth="245" MaxWidth="300" FontSize="20" FontWeight="Bold" BorderThickness="0.3" BorderBrush="LightGray">
+                </MenuItem>
+
+                <MenuItem Header="Danh sách khách" Height="40" MinWidth="245" MaxWidth="300" FontSize="20" FontWeight="Bold" BorderThickness="0.3" BorderBrush="LightGray" >
+                </MenuItem>
+
+                <MenuItem Header="Danh sách nhân viên" Height="40" MinWidth="245" MaxWidth="300" FontSize="20" FontWeight="Bold" BorderThickness="0.3" BorderBrush="LightGray" >
+                </MenuItem>
+
+                <MenuItem Header="Loại phòng" Height="40" MinWidth="245" MaxWidth="300" FontSize="20" FontWeight="Bold" BorderThickness="0.3" BorderBrush="LightGray"  >
+                </MenuItem>
+
+                <MenuItem Header="Loại khách" Height="40" MinWidth="245" MaxWidth="300" FontSize="20" FontWeight="Bold" BorderThickness="0.3" BorderBrush="LightGray" >
+                </MenuItem>
+
+                <MenuItem Header="Báo cáo doanh thu" Height="40" MinWidth="245" MaxWidth="300" FontSize="20" FontWeight="Bold" BorderThickness="0.3" BorderBrush="LightGray" >
+                </MenuItem>
+
+                <MenuItem Header="Báo cáo mật độ" Height="40" MinWidth="245" MaxWidth="300" FontSize="20" FontWeight="Bold" BorderThickness="0.3" BorderBrush="LightGray" >
+                </MenuItem>
+
+                <MenuItem Header="Thay đổi phụ thu" Height="40" MinWidth="245" MaxWidth="300" FontSize="20" FontWeight="Bold" BorderThickness="0.3" BorderBrush="LightGray">
+                </MenuItem>
+
+                <MenuItem Header="Thay đổi số khách tối đa"  Height="40" MinWidth="245" MaxWidth="300" FontSize="20" FontWeight="Bold" BorderThickness="0.3" BorderBrush="LightGray">
+                </MenuItem>
+
+                <MenuItem Header="Thông tin tài khoản" Height="40" MinWidth="245" MaxWidth="300" FontSize="20" FontWeight="Bold" BorderThickness="0.3" BorderBrush="LightGray">
+                </MenuItem>
+
+                <MenuItem Header="Đăng xuất" Height="40" MinWidth="245" MaxWidth="300" FontSize="20" FontWeight="Bold" BorderThickness="0.3" BorderBrush="LightGray">
+                </MenuItem>
+            </Menu>
+        </StackPanel>
+        <StackPanel Margin="0,0,40,0">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,20,0,0">
+                <Border BorderBrush="White" BorderThickness="2" CornerRadius="10" Height="87" Width="600" HorizontalAlignment="Left" VerticalAlignment="Top"  Background="Blue">
+                    <Label   Content="Danh sách loại khách"  FontSize="50" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" Foreground="White" Background="blue" VerticalContentAlignment="Center"/>
+                </Border>
+            </StackPanel >
+            <StackPanel Orientation="Horizontal" Margin="0,50,0,0" HorizontalAlignment="Right">
+                <Canvas Width="32" Height="32" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="2.125,0.469">
+                    <Image Width="32" Height="32" Margin="0" Source="pack://siteoforigin:,,,/Resources/add.png"/>
+                    <Button  Height="32" Width="32" Margin="0" Background="Transparent" BorderThickness="0" Click="ThemHang"/>
+                </Canvas>
+                <Canvas Width="32" Height="32" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="2.125,0.469">
+                    <Image Width="32" Height="32" Margin="0" Source="pack://siteoforigin:,,,/Resources/edit.png"/>
+                    <Button  Height="32" Width="32" Margin="0" Background="Transparent" BorderThickness="0" Click="ChinhSuaHang"/>
+                </Canvas>
+                <Canvas Width="32" Height="32" Margin="10,0,100,0" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <Image Width="32" Height="32" Margin="0" Source="pack://siteoforigin:,,,/Resources/trash.png"/>
+                    <Button  Height="32" Width="32" Margin="0" Background="Transparent" BorderThickness="0" Click="XoaHang"/>
+                </Canvas>
+            </StackPanel>
+            <StackPanel Height="40" Orientation="Horizontal" Margin="0,10,0,0" HorizontalAlignment="Center">
+                <Label Content="Loại khách:"  VerticalContentAlignment="Center" FontSize="16" Margin="10,0,0,0"/>
+                <Border BorderBrush="White" Height="35" Background="White" BorderThickness="2" CornerRadius="15" Width="500" HorizontalAlignment="Center" VerticalAlignment="Center" >
+                    <TextBox TextWrapping="Wrap"  Width="480" BorderThickness="0" FontSize="18" VerticalContentAlignment="Center" Name="TOCText" GotFocus="RemoveTOCText" LostFocus="AddTOCText"/>
+                </Border>
+                <Label Content="Hệ số:"  VerticalContentAlignment="Center" FontSize="16" Margin="10,0,0,0"/>
+                <Border BorderBrush="White" Height="35" Background="White" BorderThickness="2" CornerRadius="15" Width="120" HorizontalAlignment="Center" VerticalAlignment="Center" >
+                    <TextBox TextWrapping="Wrap"  Width="100" BorderThickness="0" FontSize="18" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Name="CoeffText" GotFocus="RemoveCoefficientText" LostFocus="AddCoefficientText"/>
+                </Border>
+            </StackPanel>
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0">
+                <ListView Name="lvTypeCustommer" FontSize="20" Height="400" SelectionChanged="listView1_SelectionChanged" SelectionMode="Single" BorderThickness="0" Grid.Column="3" IsSynchronizedWithCurrentItem="True">
+                    <ListView.Resources>
+                        <Style TargetType="{x:Type GridViewColumnHeader}">
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        </Style>
+                    </ListView.Resources>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="STT" Width="200" DisplayMemberBinding="{Binding STT}" />
+                            <GridViewColumn Header="Loại khách" Width="500" DisplayMemberBinding="{Binding LoaiKhach}" />
+                            <GridViewColumn Header="Hệ số" Width="200" DisplayMemberBinding="{Binding HeSo}" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </StackPanel>
+        </StackPanel>
+
+
+    </DockPanel>
+    
+    
+    <!--<StackPanel Background="LightGray" Orientation="Horizontal">
+        <StackPanel Background="Gray" MaxWidth="300">
+            <StackPanel Orientation="Horizontal" Margin="0,20">
+                <Image HorizontalAlignment="Left" Height="80" VerticalAlignment="Top" Width="80" Source="pack://siteoforigin:,,,/Resources/User.png"/>
+
+                <StackPanel>
+                    <Label HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Width="220">
+                        <Label.Content>
+                            <AccessText TextWrapping="Wrap" Text="Nguyen Thanh Nhut"/>
+                        </Label.Content>
+                    </Label>
+                    <Label Content="Nhân viên" HorizontalAlignment="Left"  VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Width="220" Height="40"/>
+                  
+                </StackPanel>
+
+            </StackPanel>
+            
+            <Menu HorizontalAlignment="Left" Height="800" VerticalAlignment="Top" Width="300">
+                <MenuItem Header="Danh sách phòng" Height="40" Width="300" FontSize="20" FontWeight="Bold" BorderThickness="0.3" BorderBrush="LightGray">
+                </MenuItem>
+
+                <MenuItem Header="Danh sách khách" Height="40" Width="300" FontSize="20" FontWeight="Bold" BorderThickness="0.3" BorderBrush="LightGray" >
+                </MenuItem>
+
+                <MenuItem Header="Danh sách nhân viên" Height="40" Width="300" FontSize="20" FontWeight="Bold" BorderThickness="0.3" BorderBrush="LightGray" >
+                </MenuItem>
+
+                <MenuItem Header="Loại phòng" Height="40" Width="300" FontSize="20" FontWeight="Bold" BorderThickness="0.3" BorderBrush="LightGray"  >
+                </MenuItem>
+
+                <MenuItem Header="Loại khách" Height="40" Width="300" FontSize="20" FontWeight="Bold" BorderThickness="0.3" BorderBrush="LightGray" >
+                </MenuItem>
+
+                <MenuItem Header="Báo cáo doanh thu" Height="40" Width="300" FontSize="20" FontWeight="Bold" BorderThickness="0.3" BorderBrush="LightGray" >
+                </MenuItem>
+
+                <MenuItem Header="Báo cáo mật độ" Height="40" Width="300" FontSize="20" FontWeight="Bold" BorderThickness="0.3" BorderBrush="LightGray" >
+                </MenuItem>
+
+                <MenuItem Header="Thay đổi phụ thu" Height="40" Width="300" FontSize="20" FontWeight="Bold" BorderThickness="0.3" BorderBrush="LightGray">
+                </MenuItem>
+
+                <MenuItem Header="Thay đổi số khách tối đa" Height="40" Width="300" FontSize="20" FontWeight="Bold" BorderThickness="0.3" BorderBrush="LightGray">
+                </MenuItem>
+
+                <MenuItem Header="Thông tin tài khoản" Height="40" Width="300" FontSize="20" FontWeight="Bold" BorderThickness="0.3" BorderBrush="LightGray">
+                </MenuItem>
+
+                <MenuItem Header="Đăng xuất" Height="40" Width="300" FontSize="20" FontWeight="Bold" BorderThickness="0.3" BorderBrush="LightGray">
+                </MenuItem>
+            </Menu>
+          
+        </StackPanel>
+       
+
+    </StackPanel>-->
+    
+    
+    <!--<Grid Background="LightGray">
         <Border BorderBrush="Orange" BorderThickness="2" CornerRadius="10" Height="87" Width="600" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="460,40,0,0" Background="Blue">
             <Label   Content="Danh sách loại khách"  FontSize="50" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" Foreground="White" Background="blue" VerticalContentAlignment="Center"/>
         </Border>
@@ -32,16 +199,6 @@
                     <GridViewColumn Header="STT" Width="200" DisplayMemberBinding="{Binding STT}" />
                     <GridViewColumn Header="Loại khách" Width="500" DisplayMemberBinding="{Binding LoaiKhach}" />
                     <GridViewColumn Header="Hệ số" Width="200" DisplayMemberBinding="{Binding HeSo}" />
-                    <!--<GridViewColumn Width="120">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <Canvas Width="30" Height="30" Margin="10">
-                                    <Image Width="20" Height="20" Margin="0" Source="{Binding ImageTrashSource}"/>
-                                    <Button  Height="20" Width="20" Margin="0" Background="Transparent" BorderThickness="0" Click="XoaHang"/>
-                                </Canvas>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>-->
                 </GridView>
             </ListView.View>
         </ListView>
@@ -57,45 +214,41 @@
             <Image Width="32" Height="32" Margin="0" Source="pack://siteoforigin:,,,/Resources/add.png"/>
             <Button  Height="32" Width="32" Margin="0" Background="Transparent" BorderThickness="0" Click="ThemHang"/>
         </Canvas>
-        <Menu HorizontalAlignment="Left" Height="490" VerticalAlignment="Top" Width="280" Margin="30,150,0,0">
-            <MenuItem Header="Danh sách phòng" Height="40" Width="280" FontSize="20" FontWeight="Bold" BorderThickness="1" BorderBrush="Gray" Margin="0,1" Click="DSPhong">
+        <Menu HorizontalAlignment="Left" Height="520" VerticalAlignment="Top" Width="280" Margin="0,150,0,0">
+            <MenuItem Header="Danh sách phòng" Height="40" Width="280" FontSize="20" FontWeight="Bold" BorderThickness="0.3" BorderBrush="LightGray" Click="DSPhong">
             </MenuItem>
 
-            <MenuItem Header="Danh sách khách" Height="40" Width="280" FontSize="20" FontWeight="Bold" BorderThickness="1" BorderBrush="Gray" Margin="0,1">
+            <MenuItem Header="Danh sách khách" Height="40" Width="280" FontSize="20" FontWeight="Bold" BorderThickness="0.3" BorderBrush="LightGray" >
             </MenuItem>
 
-            <MenuItem Header="Danh sách nhân viên" Height="40" Width="280" FontSize="20" FontWeight="Bold" BorderThickness="1" BorderBrush="Gray" Margin="0,1">
+            <MenuItem Header="Danh sách nhân viên" Height="40" Width="280" FontSize="20" FontWeight="Bold" BorderThickness="0.3" BorderBrush="LightGray" >
             </MenuItem>
 
-            <MenuItem Header="Loại phòng" Height="40" Width="280" FontSize="20" FontWeight="Bold" BorderThickness="1" BorderBrush="Gray" Margin="0,1" Click="LoaiPhong">
+            <MenuItem Header="Loại phòng" Height="40" Width="280" FontSize="20" FontWeight="Bold" BorderThickness="0.3" BorderBrush="LightGray"  Click="LoaiPhong">
             </MenuItem>
 
-            <MenuItem Header="Loại khách" Height="40" Width="280" FontSize="20" FontWeight="Bold" BorderThickness="1" BorderBrush="Gray" Margin="0,1">
+            <MenuItem Header="Loại khách" Height="40" Width="280" FontSize="20" FontWeight="Bold" BorderThickness="0.3" BorderBrush="LightGray" >
             </MenuItem>
 
-            <MenuItem Header="Báo cáo doanh thu" Height="40" Width="280" FontSize="20" FontWeight="Bold" BorderThickness="1" BorderBrush="Gray" Margin="0,1">
+            <MenuItem Header="Báo cáo doanh thu" Height="40" Width="280" FontSize="20" FontWeight="Bold" BorderThickness="0.3" BorderBrush="LightGray" >
             </MenuItem>
 
-            <MenuItem Header="Báo cáo mật độ" Height="40" Width="280" FontSize="20" FontWeight="Bold" BorderThickness="1" BorderBrush="Gray" Margin="0,1">
+            <MenuItem Header="Báo cáo mật độ" Height="40" Width="280" FontSize="20" FontWeight="Bold" BorderThickness="0.3" BorderBrush="LightGray" >
             </MenuItem>
 
-            <MenuItem Header="Thay đổi phụ thu" Height="40" Width="280" FontSize="20" FontWeight="Bold" BorderThickness="1" BorderBrush="Gray" Margin="0,1">
+            <MenuItem Header="Thay đổi phụ thu" Height="40" Width="280" FontSize="20" FontWeight="Bold" BorderThickness="0.3" BorderBrush="LightGray">
             </MenuItem>
 
-            <MenuItem Header="Thay đổi số khách tối đa" Height="40" Width="280" FontSize="20" FontWeight="Bold" BorderThickness="1" BorderBrush="Gray" Margin="0,1">
+            <MenuItem Header="Thay đổi số khách tối đa" Height="40" Width="280" FontSize="20" FontWeight="Bold" BorderThickness="0.3" BorderBrush="LightGray">
             </MenuItem>
 
-            <MenuItem Header="Thông tin tài khoản" Height="40" Width="280" FontSize="20" FontWeight="Bold" BorderThickness="1" BorderBrush="Gray" Margin="0,1">
+            <MenuItem Header="Thông tin tài khoản" Height="40" Width="280" FontSize="20" FontWeight="Bold" BorderThickness="0.3" BorderBrush="LightGray">
             </MenuItem>
 
-            <MenuItem Header="Đăng xuất" Height="40" Width="280" FontSize="20" FontWeight="Bold" BorderThickness="1" BorderBrush="Gray" Margin="0,1">
+            <MenuItem Header="Đăng xuất" Height="40" Width="280" FontSize="20" FontWeight="Bold" BorderThickness="0.3" BorderBrush="LightGray">
             </MenuItem>
         </Menu>
-        <Label HorizontalAlignment="Left" Margin="0,640,0,0" VerticalAlignment="Top" Width="1295" Height="30" Background="Blue" BorderThickness="0"/>
-        <Label HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="20" Height="645" Background="Blue" BorderThickness="0"/>
-        <Label HorizontalAlignment="Left" Margin="1268,0,0,0" VerticalAlignment="Top" Width="20" Height="645" Background="Blue" BorderThickness="0"/>
-        <Label HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="1295" Height="15" Background="Blue" BorderThickness="0"/>
-        <Image HorizontalAlignment="Left" Height="80" Margin="25,40,0,0" VerticalAlignment="Top" Width="80" Source="pack://siteoforigin:,,,/Resources/User.png"/>
+         <Image HorizontalAlignment="Left" Height="80" Margin="25,40,0,0" VerticalAlignment="Top" Width="80" Source="pack://siteoforigin:,,,/Resources/User.png"/>
         
         <Label Content="Nhân viên" HorizontalAlignment="Left" Margin="110,95,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Width="200" Height="40"/>
         <Label HorizontalAlignment="Left" Margin="110,30,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Width="200">
@@ -104,5 +257,5 @@
             </Label.Content>
         </Label>
 
-    </Grid>
+    </Grid>-->
 </Window>

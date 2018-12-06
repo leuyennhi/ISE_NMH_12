@@ -23,10 +23,20 @@ namespace HotelApp
         {
             InitializeComponent();
 			this.Hide();
+			//EditSurtax edSur = new EditSurtax();
+			//edSur.Show();
+
+			AddRoomScreen addroom = new AddRoomScreen();
+			addroom.Show();
+
+			//TypeOfRoom TOR = new TypeOfRoom();
+			//TOR.Show();
+
 			//TypeOfCustomer TOC = new TypeOfCustomer();
 			//TOC.Show();
-			BaoCaoDoanhThu bcdt = new BaoCaoDoanhThu();
-			bcdt.Show();
+
+			//BaoCaoDoanhThu bcdt = new BaoCaoDoanhThu();
+			//bcdt.Show();
 			//BaoCaoMatDo bcmd = new BaoCaoMatDo();
 			//bcmd.Show();
 			//ChinhSuaThongTinPhong csttp = new ChinhSuaThongTinPhong();
@@ -42,5 +52,5 @@ namespace HotelApp
 			//ThongTinTaiKhoan tttk = new ThongTinTaiKhoan();
 			//tttk.Show();
 		}
-    }
+	}
 }
