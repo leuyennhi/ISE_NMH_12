@@ -11,31 +11,24 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Navigation;
 
 namespace HotelApp
 {
     /// <summary>
     /// Interaction logic for TypeOfCustomer.xaml
     /// </summary>
-    public partial class TypeOfCustomer : Window
+    public partial class TypeOfCustomer : UserControl
     {
 		private List<ListViewDataCustommer> items = new List<ListViewDataCustommer>();
 		private bool editAction = false;
 		private int Stttext = 0;
 
-		public TypeOfCustomer()
+		public TypeOfCustomer(ConnectData conData)
         {
             InitializeComponent();
 
-			//string indexPath = "pack://siteoforigin:,,,/Resources/add.png";
-			//BitmapImage image = new BitmapImage();
-			//image.BeginInit();
-			//image.UriSource = new Uri(indexPath);
-			//image.EndInit();
-
-			items.Add(new ListViewDataCustommer() { STT = 1, LoaiKhach = "Khach trong nuoc", HeSo = (float)1.0 });
-			items.Add(new ListViewDataCustommer() { STT = 2, LoaiKhach = "Khach nuoc ngoai", HeSo = (float)1.5 });
-			items.Add(new ListViewDataCustommer() { STT = 3, LoaiKhach = "Khach vip", HeSo = (float)0.9 });
+			items = conData.getTypeOfCustommer();
 			lvTypeCustommer.ItemsSource = items;
 
 		}
@@ -64,22 +57,27 @@ namespace HotelApp
 
 		private void XoaHang(object sender, RoutedEventArgs e)
 		{
+			
 			int selectedIndex = lvTypeCustommer.SelectedIndex;
-
-			List<ListViewDataCustommer> tempArr = new List<ListViewDataCustommer>();
-			int j = 1;
-
-			for (int i = 0; i < items.Count; i++)
+			MessageBoxResult result = MessageBox.Show("Bạn muốn xóa hàng " + (selectedIndex + 1).ToString() + "?", "Cảnh báo!!!", MessageBoxButton.YesNo);
+	
+			if (result == MessageBoxResult.Yes)
 			{
-				if (i == selectedIndex) continue;
-				ListViewDataCustommer temp = new ListViewDataCustommer();
-				temp = items[i];
-				temp.STT = j;
-				tempArr.Add(temp);
-				j++;
+				List<ListViewDataCustommer> tempArr = new List<ListViewDataCustommer>();
+				int j = 1;
+
+				for (int i = 0; i < items.Count; i++)
+				{
+					if (i == selectedIndex) continue;
+					ListViewDataCustommer temp = new ListViewDataCustommer();
+					temp = items[i];
+					temp.STT = j;
+					tempArr.Add(temp);
+					j++;
+				}
+				lvTypeCustommer.ItemsSource = tempArr;
+				items = tempArr;
 			}
-			lvTypeCustommer.ItemsSource = tempArr;
-			items = tempArr;
 		}
 
 		private void ThemHang(object sender, RoutedEventArgs e)
@@ -87,26 +85,30 @@ namespace HotelApp
 
 			if (!kiemtraHeSo(CoeffText.Text) || TOCText.Text.Length < 1)
 			{
+				MessageBox.Show("Bạn chưa nhập thông tin hoặc hệ số sai (hệ số bao gồm số từ 0->9 hoặc thêm dấu chấm nếu là số thực.", "Cảnh báo!!!", MessageBoxButton.OK);
 				return;
 			}
+			MessageBoxResult result = MessageBox.Show("Bạn muốn thêm khách hàng?", "Xác nhận!!!", MessageBoxButton.YesNo);
 
-			List<ListViewDataCustommer> tempArr = new List<ListViewDataCustommer>();
-
-			int i;
-
-			for (i = 0; i < items.Count; i++)
+			if (result == MessageBoxResult.Yes)
 			{
-				tempArr.Add(items[i]);
+				List<ListViewDataCustommer> tempArr = new List<ListViewDataCustommer>();
+
+				int i;
+
+				for (i = 0; i < items.Count; i++)
+				{
+					tempArr.Add(items[i]);
+				}
+
+				tempArr.Add(new ListViewDataCustommer() { STT = i + 1, LoaiKhach = TOCText.Text, HeSo = float.Parse(CoeffText.Text) });
+
+				lvTypeCustommer.ItemsSource = tempArr;
+				items = tempArr;
+
+				TOCText.Text = "";
+				CoeffText.Text = "";
 			}
-
-			tempArr.Add(new ListViewDataCustommer() { STT = i + 1, LoaiKhach = TOCText.Text, HeSo = float.Parse(CoeffText.Text) });
-
-			lvTypeCustommer.ItemsSource = tempArr;
-			items = tempArr;
-
-			TOCText.Text = "";
-			CoeffText.Text = "";
-
 		}
 
 		private bool kiemtraHeSo(String str)
@@ -125,33 +127,40 @@ namespace HotelApp
 			return true;
 		}
 
+		int numSuportEdit = 0;
 		private void ChinhSuaHang(object sender, RoutedEventArgs e)
 		{
-
 			editAction = true;
-
 			if (!kiemtraHeSo(CoeffText.Text) || TOCText.Text.Length < 1)
 			{
+				if (numSuportEdit == 1)
+				{
+					MessageBox.Show("Bạn chưa chỉnh sửa thông tin hoặc hệ số sai (hệ số bao gồm số từ 0->9 hoặc thêm dấu chấm nếu là số thực.", "Cảnh báo!!!", MessageBoxButton.OK);
+				}
 				return;
 			}
+			MessageBoxResult result = MessageBox.Show("Bạn muốn chỉnh sửa khách hàng?", "Xác nhận!!!", MessageBoxButton.YesNo);
 
-			List<ListViewDataCustommer> tempArr = new List<ListViewDataCustommer>();
+			if (result == MessageBoxResult.Yes)
+			{
+				List<ListViewDataCustommer> tempArr = new List<ListViewDataCustommer>();
 
-			for (int i = 1; i <= items.Count; i++)
-			{ 
-				if (i == Stttext)
+				for (int i = 1; i <= items.Count; i++)
 				{
-					tempArr.Add(new ListViewDataCustommer() { STT = i, LoaiKhach = TOCText.Text, HeSo = float.Parse(CoeffText.Text) });
-					continue;
+					if (i == Stttext)
+					{
+						tempArr.Add(new ListViewDataCustommer() { STT = i, LoaiKhach = TOCText.Text, HeSo = float.Parse(CoeffText.Text) });
+						continue;
+					}
+					tempArr.Add(items[i - 1]);
 				}
-				tempArr.Add(items[i-1]);
-			}
-			lvTypeCustommer.ItemsSource = tempArr;
+				lvTypeCustommer.ItemsSource = tempArr;
 
-			items = tempArr;
-			
-			TOCText.Text = "";
-			CoeffText.Text = "";
+				items = tempArr;
+
+				TOCText.Text = "";
+				CoeffText.Text = "";
+			}
 		}
 
 		private void listView1_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -161,6 +170,7 @@ namespace HotelApp
 			{
 				if (editAction)
 				{
+					numSuportEdit = 1;
 					Stttext = lvc.STT;
 					TOCText.Text = lvc.LoaiKhach.ToString();
 					CoeffText.Text = lvc.HeSo.ToString();
@@ -180,14 +190,4 @@ namespace HotelApp
 		}
 
 	}
-
-	public class ListViewDataCustommer
-	{
-		public int STT { get; set; }
-
-		public string LoaiKhach { get; set; }
-
-		public float HeSo { get; set; }
-	}
-
 }

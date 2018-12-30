@@ -23,17 +23,6 @@ namespace HotelApp
         {
             InitializeComponent();
 			this.Hide();
-			//EditSurtax edSur = new EditSurtax();
-			//edSur.Show();
-
-			AddRoomScreen addroom = new AddRoomScreen();
-			addroom.Show();
-
-			//TypeOfRoom TOR = new TypeOfRoom();
-			//TOR.Show();
-
-			//TypeOfCustomer TOC = new TypeOfCustomer();
-			//TOC.Show();
 
 			//BaoCaoDoanhThu bcdt = new BaoCaoDoanhThu();
 			//bcdt.Show();

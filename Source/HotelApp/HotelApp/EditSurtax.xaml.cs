@@ -11,17 +11,74 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Navigation;
 
 namespace HotelApp
 {
 	/// <summary>
 	/// Interaction logic for EditSurtax.xaml
 	/// </summary>
-	public partial class EditSurtax : Window
+	public partial class EditSurtax : UserControl
 	{
+		private List<string> listTypeRoom = new List<string>();
+		private string typeRoom = "";
+
 		public EditSurtax()
 		{
 			InitializeComponent();
+			InitializeComponent();
+			listTypeRoom.Add("All");
+			listTypeRoom.Add("A");
+			listTypeRoom.Add("B");
+			listTypeRoom.Add("C");
+		}
+
+		private void Combobox_Loaded(object sender, RoutedEventArgs e)
+		{
+			var combo = sender as ComboBox;
+			combo.ItemsSource = listTypeRoom;
+			combo.SelectedIndex = 0;
+			combo.Background = Brushes.Yellow;
+		}
+		private void Combobox_SelectionChanged(object sender, RoutedEventArgs e)
+		{
+			var selectedComboItem = sender as ComboBox;
+			typeRoom = selectedComboItem.SelectedItem as string;
+			//MessageBox.Show(typeRoom);
+		}
+
+		private bool kiemtraPhuThu(String str)
+		{
+			if (str.Length < 1)
+			{
+				return false;
+			}
+			for (var i = 0; i < str.Length; i++)
+			{
+				if ((str[i] > '9' || str[i] < '0') && str[i] != '.')
+				{
+					return false;
+				}
+			}
+			return true;
+		}
+
+		private void Cancel(object sender, RoutedEventArgs e)
+		{
+			return;
+		}
+		private void AddCoeff(object sender, RoutedEventArgs e)
+		{
+			if (!kiemtraPhuThu(txtPhuThu.Text))
+			{
+				MessageBox.Show("Bạn chưa nhập phụ thu hoặc nhập sai (phụ thu bao gồm số từ 0->9 hoặc có dấu chấm nếu là số thực)", "Cảnh báo!!!", MessageBoxButton.OK);
+				return;
+			}
+			MessageBoxResult result = MessageBox.Show("Bạn muốn chỉnh sửa phụ thu?", "Xác nhận!!!", MessageBoxButton.YesNo);
+
+			if (result == MessageBoxResult.Yes)
+			{
+			}
 		}
 	}
 }

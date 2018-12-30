@@ -11,31 +11,25 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Navigation;
+using System.Data.SqlClient;
 
 namespace HotelApp
 {
 	/// <summary>
 	/// Interaction logic for TypeOfRoom.xaml
 	/// </summary>
-	public partial class TypeOfRoom : Window
+	public partial class TypeOfRoom : UserControl
 	{
 		private List<ListViewDataRoom> items = new List<ListViewDataRoom>();
 		private bool editAction = false;
 		private int Stttext = 0;
 
-		public TypeOfRoom()
+		public TypeOfRoom(ConnectData conData)
 		{
 			InitializeComponent();
 
-			//string indexPath = "pack://siteoforigin:,,,/Resources/add.png";
-			//BitmapImage image = new BitmapImage();
-			//image.BeginInit();
-			//image.UriSource = new Uri(indexPath);
-			//image.EndInit();
-
-			items.Add(new ListViewDataRoom() { STT = 1, LoaiPhong = "Phong vip", PhuThu = (float)50000});
-			items.Add(new ListViewDataRoom() { STT = 2, LoaiPhong = "Phong thuong", PhuThu = (float)15000 });
-			items.Add(new ListViewDataRoom() { STT = 3, LoaiPhong = "Phong bad", PhuThu = (float)3223.32});
+			items = conData.getTypeOfRoom();
 			lvTypeRoom.ItemsSource = items;
 
 		}
@@ -53,60 +47,68 @@ namespace HotelApp
 
 		public void RemoveCoefficientText(object sender, EventArgs e)
 		{
-			//CoeffText.Text = "";
+			//CostText.Text = "";
 		}
 
 		public void AddCoefficientText(object sender, EventArgs e)
 		{
-			if (string.IsNullOrWhiteSpace(CoeffText.Text)) { }
-			//CoeffText.Text = "Nhập hệ số...";
+			if (string.IsNullOrWhiteSpace(CostText.Text)) { }
+			//CostText.Text = "Nhập hệ số...";
 		}
 
 		private void XoaHang(object sender, RoutedEventArgs e)
 		{
 			int selectedIndex = lvTypeRoom.SelectedIndex;
+			MessageBoxResult result = MessageBox.Show("Bạn muốn xóa hàng " + (selectedIndex + 1).ToString() + "?", "Cảnh báo!!!", MessageBoxButton.YesNo);
 
-			List<ListViewDataRoom> tempArr = new List<ListViewDataRoom>();
-			int j = 1;
-
-			for (int i = 0; i < items.Count; i++)
+			if (result == MessageBoxResult.Yes)
 			{
-				if (i == selectedIndex) continue;
-				ListViewDataRoom temp = new ListViewDataRoom();
-				temp = items[i];
-				temp.STT = j;
-				tempArr.Add(temp);
-				j++;
+				List<ListViewDataRoom> tempArr = new List<ListViewDataRoom>();
+				int j = 1;
+
+				for (int i = 0; i < items.Count; i++)
+				{
+					if (i == selectedIndex) continue;
+					ListViewDataRoom temp = new ListViewDataRoom();
+					temp = items[i];
+					temp.STT = j;
+					tempArr.Add(temp);
+					j++;
+				}
+				lvTypeRoom.ItemsSource = tempArr;
+				items = tempArr;
 			}
-			lvTypeRoom.ItemsSource = tempArr;
-			items = tempArr;
 		}
 
 		private void ThemHang(object sender, RoutedEventArgs e)
 		{
 
-			if (!kiemtraHeSo(CoeffText.Text) || TORText.Text.Length < 1)
+			if (!kiemtraHeSo(CostText.Text) || TORText.Text.Length < 1)
 			{
+				MessageBox.Show("Bạn chưa nhập thông tin hoặc hệ số sai (hệ số bao gồm số từ 0->9 hoặc thêm dấu chấm nếu là số thực.", "Cảnh báo!!!", MessageBoxButton.OK);
 				return;
 			}
+			MessageBoxResult result = MessageBox.Show("Bạn muốn thêm loại phòng?", "Xác nhận!!!", MessageBoxButton.YesNo);
 
-			List<ListViewDataRoom> tempArr = new List<ListViewDataRoom>();
-
-			int i;
-
-			for (i = 0; i < items.Count; i++)
+			if (result == MessageBoxResult.Yes)
 			{
-				tempArr.Add(items[i]);
+				List<ListViewDataRoom> tempArr = new List<ListViewDataRoom>();
+
+				int i;
+
+				for (i = 0; i < items.Count; i++)
+				{
+					tempArr.Add(items[i]);
+				}
+
+				tempArr.Add(new ListViewDataRoom() { STT = i + 1, LoaiPhong = TORText.Text, Dongia = float.Parse(CostText.Text) });
+
+				lvTypeRoom.ItemsSource = tempArr;
+				items = tempArr;
+
+				TORText.Text = "";
+				CostText.Text = "";
 			}
-
-			tempArr.Add(new ListViewDataRoom() { STT = i + 1, LoaiPhong = TORText.Text, PhuThu = float.Parse(CoeffText.Text) });
-
-			lvTypeRoom.ItemsSource = tempArr;
-			items = tempArr;
-
-			TORText.Text = "";
-			CoeffText.Text = "";
-
 		}
 
 		private bool kiemtraHeSo(String str)
@@ -125,33 +127,42 @@ namespace HotelApp
 			return true;
 		}
 
+		int numSuportEdit = 0;
 		private void ChinhSuaHang(object sender, RoutedEventArgs e)
 		{
 
 			editAction = true;
 
-			if (!kiemtraHeSo(CoeffText.Text) || TORText.Text.Length < 1)
+			if (!kiemtraHeSo(CostText.Text) || TORText.Text.Length < 1)
 			{
+				if (numSuportEdit == 1)
+				{
+					MessageBox.Show("Bạn chưa chỉnh sửa thông tin hoặc hệ số sai (hệ số bao gồm số từ 0->9 hoặc thêm dấu chấm nếu là số thực.", "Cảnh báo!!!", MessageBoxButton.OK);
+				}
 				return;
 			}
+			MessageBoxResult result = MessageBox.Show("Bạn muốn chỉnh sửa khách hàng?", "Xác nhận!!!", MessageBoxButton.YesNo);
 
-			List<ListViewDataRoom> tempArr = new List<ListViewDataRoom>();
-
-			for (int i = 1; i <= items.Count; i++)
+			if (result == MessageBoxResult.Yes)
 			{
-				if (i == Stttext)
+				List<ListViewDataRoom> tempArr = new List<ListViewDataRoom>();
+
+				for (int i = 1; i <= items.Count; i++)
 				{
-					tempArr.Add(new ListViewDataRoom() { STT = i, LoaiPhong = TORText.Text, PhuThu = float.Parse(CoeffText.Text) });
-					continue;
+					if (i == Stttext)
+					{
+						tempArr.Add(new ListViewDataRoom() { STT = i, LoaiPhong = TORText.Text, Dongia = float.Parse(CostText.Text) });
+						continue;
+					}
+					tempArr.Add(items[i - 1]);
 				}
-				tempArr.Add(items[i - 1]);
+				lvTypeRoom.ItemsSource = tempArr;
+
+				items = tempArr;
+
+				TORText.Text = "";
+				CostText.Text = "";
 			}
-			lvTypeRoom.ItemsSource = tempArr;
-
-			items = tempArr;
-
-			TORText.Text = "";
-			CoeffText.Text = "";
 		}
 
 		private void listView1_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -161,9 +172,10 @@ namespace HotelApp
 			{
 				if (editAction)
 				{
+					numSuportEdit = 1;
 					Stttext = lvc.STT;
 					TORText.Text = lvc.LoaiPhong.ToString();
-					CoeffText.Text = lvc.PhuThu.ToString();
+					CostText.Text = lvc.Dongia.ToString();
 				}
 
 			}
@@ -178,15 +190,19 @@ namespace HotelApp
 		{
 			MessageBox.Show("loại phòng");
 		}
-
+		
+		private void LoaiKhach(object sender, RoutedEventArgs e)
+		{
+			//Main.Content = new TypeOfCustomer();
+		}
 	}
 
-	public class ListViewDataRoom
-	{
-		public int STT { get; set; }
+	//public class ListViewDataRoom
+	//{
+	//	public int STT { get; set; }
 
-		public string LoaiPhong { get; set; }
+	//	public string LoaiPhong { get; set; }
 
-		public float PhuThu { get; set; }
-	}
+	//	public float Dongia { get; set; }
+	//}
 }

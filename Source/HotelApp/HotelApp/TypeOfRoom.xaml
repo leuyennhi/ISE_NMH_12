@@ -1,75 +1,22 @@
-﻿<Window x:Class="HotelApp.TypeOfRoom"
+﻿<UserControl x:Class="HotelApp.TypeOfRoom"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HotelApp"
         mc:Ignorable="d"
-        WindowStartupLocation="CenterScreen"
-        WindowState="Maximized"
-        Title="HelloApp" Height="700" Width="1300" >
+        Height="612" Width="1100" >
     <!--Loaded="Window_Loaded"
         Closing="Window_Closing" 
         ResizeMode="CanMinimize">-->
-    <DockPanel Background="LightGray" LastChildFill="True">
-        <StackPanel Background="LightGray" MaxWidth="300" >
-            <StackPanel Orientation="Horizontal" Margin="0,20">
-                <Image HorizontalAlignment="Left" Height="80" VerticalAlignment="Top" Width="80" Source="pack://siteoforigin:,,,/Resources/User.png"/>
-
-                <StackPanel>
-                    <Label HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" MaxWidth="220">
-                        <Label.Content>
-                            <AccessText TextWrapping="Wrap" Text="Nguyen Thanh Nhut"/>
-                        </Label.Content>
-                    </Label>
-                    <Label Content="Nhân viên" HorizontalAlignment="Left"  VerticalAlignment="Top" FontSize="20" FontWeight="Bold" MaxWidth="220" Height="40"/>
-
-                </StackPanel>
-
-            </StackPanel>
-
-            <Menu HorizontalAlignment="Left" Height="800" VerticalAlignment="Top">
-                <MenuItem Header="Danh sách phòng" Height="40"  MinWidth="245" MaxWidth="300" FontSize="20" FontWeight="Bold" BorderThickness="0.3" BorderBrush="LightGray">
-                </MenuItem>
-
-                <MenuItem Header="Danh sách khách" Height="40" MinWidth="245" MaxWidth="300" FontSize="20" FontWeight="Bold" BorderThickness="0.3" BorderBrush="LightGray" >
-                </MenuItem>
-
-                <MenuItem Header="Danh sách nhân viên" Height="40" MinWidth="245" MaxWidth="300" FontSize="20" FontWeight="Bold" BorderThickness="0.3" BorderBrush="LightGray" >
-                </MenuItem>
-
-                <MenuItem Header="Loại phòng" Height="40" MinWidth="245" MaxWidth="300" FontSize="20" FontWeight="Bold" BorderThickness="0.3" BorderBrush="LightGray"  >
-                </MenuItem>
-
-                <MenuItem Header="Loại khách" Height="40" MinWidth="245" MaxWidth="300" FontSize="20" FontWeight="Bold" BorderThickness="0.3" BorderBrush="LightGray" >
-                </MenuItem>
-
-                <MenuItem Header="Báo cáo doanh thu" Height="40" MinWidth="245" MaxWidth="300" FontSize="20" FontWeight="Bold" BorderThickness="0.3" BorderBrush="LightGray" >
-                </MenuItem>
-
-                <MenuItem Header="Báo cáo mật độ" Height="40" MinWidth="245" MaxWidth="300" FontSize="20" FontWeight="Bold" BorderThickness="0.3" BorderBrush="LightGray" >
-                </MenuItem>
-
-                <MenuItem Header="Thay đổi phụ thu" Height="40" MinWidth="245" MaxWidth="300" FontSize="20" FontWeight="Bold" BorderThickness="0.3" BorderBrush="LightGray">
-                </MenuItem>
-
-                <MenuItem Header="Thay đổi số khách tối đa"  Height="40" MinWidth="245" MaxWidth="300" FontSize="20" FontWeight="Bold" BorderThickness="0.3" BorderBrush="LightGray">
-                </MenuItem>
-
-                <MenuItem Header="Thông tin tài khoản" Height="40" MinWidth="245" MaxWidth="300" FontSize="20" FontWeight="Bold" BorderThickness="0.3" BorderBrush="LightGray">
-                </MenuItem>
-
-                <MenuItem Header="Đăng xuất" Height="40" MinWidth="245" MaxWidth="300" FontSize="20" FontWeight="Bold" BorderThickness="0.3" BorderBrush="LightGray">
-                </MenuItem>
-            </Menu>
-        </StackPanel>
+    <DockPanel Background="#DEDEDE" LastChildFill="True">
         <StackPanel Margin="0,0,40,0">
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,20,0,0">
                 <Border BorderBrush="White" BorderThickness="2" CornerRadius="10" Height="87" Width="600" HorizontalAlignment="Left" VerticalAlignment="Top"  Background="Blue">
                     <Label   Content="Danh sách loại phòng"  FontSize="50" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" Foreground="White" Background="blue" VerticalContentAlignment="Center"/>
                 </Border>
             </StackPanel >
-            <StackPanel Orientation="Horizontal" Margin="0,50,0,0" HorizontalAlignment="Right">
+            <StackPanel Orientation="Horizontal" Margin="0,50,40,0" HorizontalAlignment="Right">
                 <Canvas Width="32" Height="32" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="2.125,0.469">
                     <Image Width="32" Height="32" Margin="0" Source="pack://siteoforigin:,,,/Resources/add.png"/>
                     <Button  Height="32" Width="32" Margin="0" Background="Transparent" BorderThickness="0" Click="ThemHang"/>
@@ -86,15 +33,15 @@
             <StackPanel Height="40" Orientation="Horizontal" Margin="0,10,0,0" HorizontalAlignment="Center">
                 <Label Content="Loại phòng:"  VerticalContentAlignment="Center" FontSize="16" Margin="10,0,0,0"/>
                 <Border BorderBrush="White" Height="35" Background="White" BorderThickness="2" CornerRadius="15" Width="500" HorizontalAlignment="Center" VerticalAlignment="Center" >
-                    <TextBox TextWrapping="Wrap"  Width="480" BorderThickness="0" FontSize="18" VerticalContentAlignment="Center" Name="TORText" GotFocus="RemoveTORText" LostFocus="AddTORText"/>
+                    <TextBox TextWrapping="Wrap" Foreground="Black" Width="480" BorderThickness="0" FontSize="18" VerticalContentAlignment="Center" Name="TORText" GotFocus="RemoveTORText" LostFocus="AddTORText"/>
                 </Border>
-                <Label Content="Phụ thu:"  VerticalContentAlignment="Center" FontSize="16" Margin="10,0,0,0"/>
-                <Border BorderBrush="White" Height="35" Background="White" BorderThickness="2" CornerRadius="15" Width="120" HorizontalAlignment="Center" VerticalAlignment="Center" >
-                    <TextBox TextWrapping="Wrap"  Width="100" BorderThickness="0" FontSize="18" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Name="CoeffText" GotFocus="RemoveCoefficientText" LostFocus="AddCoefficientText"/>
+                <Label Content="Đơn giá:"  VerticalContentAlignment="Center" FontSize="16" Margin="10,0,0,0"/>
+                <Border BorderBrush="White" Height="35" Background="White" BorderThickness="2" CornerRadius="15" Width="170" HorizontalAlignment="Center" VerticalAlignment="Center" >
+                    <TextBox TextWrapping="Wrap"  Width="150"  Foreground="Black" BorderThickness="0" FontSize="18" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Name="CostText" GotFocus="RemoveCoefficientText" LostFocus="AddCoefficientText"/>
                 </Border>
             </StackPanel>
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0">
-                <ListView Name="lvTypeRoom" FontSize="20" Height="400" SelectionChanged="listView1_SelectionChanged" SelectionMode="Single" BorderThickness="0" Grid.Column="3" IsSynchronizedWithCurrentItem="True">
+                <ListView Name="lvTypeRoom" FontSize="20" Height="400" Width="900" SelectionChanged="listView1_SelectionChanged" SelectionMode="Single" BorderThickness="0" Grid.Column="3" IsSynchronizedWithCurrentItem="True">
                     <ListView.Resources>
                         <Style TargetType="{x:Type GridViewColumnHeader}">
                             <Setter Property="HorizontalContentAlignment" Value="Center"/>
@@ -107,15 +54,14 @@
                     </ListView.ItemContainerStyle>
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="STT" Width="200" DisplayMemberBinding="{Binding STT}" />
-                            <GridViewColumn Header="Loại phòng" Width="500" DisplayMemberBinding="{Binding LoaiPhong}" />
-                            <GridViewColumn Header="Phụ thu" Width="200" DisplayMemberBinding="{Binding PhuThu}" />
+                            <GridViewColumn Header="STT" Width="100" DisplayMemberBinding="{Binding STT}" />
+                            <GridViewColumn Header="Loại phòng" Width="300" DisplayMemberBinding="{Binding LoaiPhong}" />
+                            <GridViewColumn Header="Đơn giá" Width="300" DisplayMemberBinding="{Binding Dongia}" />
+                            <GridViewColumn Header="Số lượng" Width="200" DisplayMemberBinding="{Binding SoLuong}" />
                         </GridView>
                     </ListView.View>
                 </ListView>
             </StackPanel>
         </StackPanel>
-
-
     </DockPanel>
-</Window>
+</UserControl>
