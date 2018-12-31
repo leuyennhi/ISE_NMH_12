@@ -23,11 +23,11 @@ namespace HotelApp
 		private List<ListViewDataCustommer> items = new List<ListViewDataCustommer>();
 		private bool editAction = false;
 		private int Stttext = 0;
-
+		private ConnectData connectData;
 		public TypeOfCustomer(ConnectData conData)
         {
             InitializeComponent();
-
+			connectData = conData;
 			items = conData.getTypeOfCustommer();
 			lvTypeCustommer.ItemsSource = items;
 
@@ -77,6 +77,8 @@ namespace HotelApp
 				}
 				lvTypeCustommer.ItemsSource = tempArr;
 				items = tempArr;
+
+				connectData.deleteTypeOfCustomer(selectedIndex + 1);
 			}
 		}
 
@@ -108,6 +110,9 @@ namespace HotelApp
 
 				TOCText.Text = "";
 				CoeffText.Text = "";
+
+				connectData.setTypeOfCustomer(items[i]);
+				
 			}
 		}
 
@@ -150,6 +155,7 @@ namespace HotelApp
 					if (i == Stttext)
 					{
 						tempArr.Add(new ListViewDataCustommer() { STT = i, LoaiKhach = TOCText.Text, HeSo = float.Parse(CoeffText.Text) });
+						connectData.updateTypeOfCustomer(tempArr[i - 1]);
 						continue;
 					}
 					tempArr.Add(items[i - 1]);

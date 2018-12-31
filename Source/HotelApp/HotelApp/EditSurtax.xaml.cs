@@ -22,11 +22,14 @@ namespace HotelApp
 	{
 		private List<string> listTypeRoom = new List<string>();
 		private string typeRoom = "";
-
-		public EditSurtax()
+		ConnectData connectData;
+		public EditSurtax( ConnectData conData)
 		{
 			InitializeComponent();
 			InitializeComponent();
+
+			conData.getSurtax();
+
 			listTypeRoom.Add("All");
 			listTypeRoom.Add("A");
 			listTypeRoom.Add("B");

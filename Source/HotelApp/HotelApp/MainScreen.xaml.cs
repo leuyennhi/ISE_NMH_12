@@ -27,8 +27,6 @@ namespace HotelApp
 			InitializeComponent();
 
 			conData = new ConnectData();
-			//conData.getTypeOfRoom();
-			
 			//nếu là nhân viên thì ẩn đi
 			//MucDSNhanVien.Visibility = Visibility.Hidden;
 			//MucDSNhanVien.Visibility = Visibility.Collapsed;
@@ -90,7 +88,7 @@ namespace HotelApp
 				case "MucMatDoDoanhThu":
 					break;
 				case "MucChinhSuaPhuThu":
-					usc = new EditSurtax();
+					usc = new EditSurtax(conData);
 					GridMain.Children.Add(usc);
 					break;
 				case "MucChinhSuaSoKhachToiDa":

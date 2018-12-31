@@ -24,14 +24,13 @@ namespace HotelApp
 		private List<ListViewDataRoom> items = new List<ListViewDataRoom>();
 		private bool editAction = false;
 		private int Stttext = 0;
-
+		ConnectData connectData;
 		public TypeOfRoom(ConnectData conData)
 		{
 			InitializeComponent();
-
-			items = conData.getTypeOfRoom();
+			connectData = conData;
+			items = conData.getTypeOfRoom();        //get data in server
 			lvTypeRoom.ItemsSource = items;
-
 		}
 
 		public void RemoveTORText(object sender, EventArgs e)
@@ -77,6 +76,8 @@ namespace HotelApp
 				}
 				lvTypeRoom.ItemsSource = tempArr;
 				items = tempArr;
+
+				connectData.deleteTypeOfRoom(selectedIndex + 1);
 			}
 		}
 
@@ -108,6 +109,10 @@ namespace HotelApp
 
 				TORText.Text = "";
 				CostText.Text = "";
+
+				connectData.setTypeOfRoom(items[i]);            //set data in server
+
+
 			}
 		}
 
@@ -152,6 +157,7 @@ namespace HotelApp
 					if (i == Stttext)
 					{
 						tempArr.Add(new ListViewDataRoom() { STT = i, LoaiPhong = TORText.Text, Dongia = float.Parse(CostText.Text) });
+						connectData.updateTypeOfRoom(tempArr[i - 1]);		//update data in server
 						continue;
 					}
 					tempArr.Add(items[i - 1]);
