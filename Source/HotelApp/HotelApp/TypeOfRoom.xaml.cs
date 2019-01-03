@@ -27,6 +27,7 @@ namespace HotelApp
 		ConnectData connectData;
 		public TypeOfRoom(ConnectData conData)
 		{
+			
 			InitializeComponent();
 			connectData = conData;
 			items = conData.getTypeOfRoom();        //get data in server
@@ -59,25 +60,16 @@ namespace HotelApp
 		{
 			int selectedIndex = lvTypeRoom.SelectedIndex;
 			MessageBoxResult result = MessageBox.Show("Bạn muốn xóa hàng " + (selectedIndex + 1).ToString() + "?", "Cảnh báo!!!", MessageBoxButton.YesNo);
-
 			if (result == MessageBoxResult.Yes)
 			{
-				List<ListViewDataRoom> tempArr = new List<ListViewDataRoom>();
-				int j = 1;
-
-				for (int i = 0; i < items.Count; i++)
+				if (!connectData.deleteTypeOfRoom(items[selectedIndex].LoaiPhong))
 				{
-					if (i == selectedIndex) continue;
-					ListViewDataRoom temp = new ListViewDataRoom();
-					temp = items[i];
-					temp.STT = j;
-					tempArr.Add(temp);
-					j++;
+					return;
 				}
-				lvTypeRoom.ItemsSource = tempArr;
-				items = tempArr;
+				items = connectData.getTypeOfRoom();
+				lvTypeRoom.ItemsSource = items;
 
-				connectData.deleteTypeOfRoom(selectedIndex + 1);
+
 			}
 		}
 
@@ -93,26 +85,15 @@ namespace HotelApp
 
 			if (result == MessageBoxResult.Yes)
 			{
-				List<ListViewDataRoom> tempArr = new List<ListViewDataRoom>();
-
-				int i;
-
-				for (i = 0; i < items.Count; i++)
+				ListViewDataRoom temp = new ListViewDataRoom() { STT = items.Count + 1, LoaiPhong = TORText.Text, Dongia = float.Parse(CostText.Text) };
+				
+				if (connectData.setTypeOfRoom(temp))            //set data in server
 				{
-					tempArr.Add(items[i]);
+					items = connectData.getTypeOfRoom();
+					lvTypeRoom.ItemsSource = items;
+					TORText.Text = "";
+					CostText.Text = "";
 				}
-
-				tempArr.Add(new ListViewDataRoom() { STT = i + 1, LoaiPhong = TORText.Text, Dongia = float.Parse(CostText.Text) });
-
-				lvTypeRoom.ItemsSource = tempArr;
-				items = tempArr;
-
-				TORText.Text = "";
-				CostText.Text = "";
-
-				connectData.setTypeOfRoom(items[i]);            //set data in server
-
-
 			}
 		}
 
@@ -156,8 +137,11 @@ namespace HotelApp
 				{
 					if (i == Stttext)
 					{
-						tempArr.Add(new ListViewDataRoom() { STT = i, LoaiPhong = TORText.Text, Dongia = float.Parse(CostText.Text) });
-						connectData.updateTypeOfRoom(tempArr[i - 1]);		//update data in server
+						tempArr.Add(new ListViewDataRoom() { STT = i, LoaiPhong = TORText.Text, Dongia = float.Parse(CostText.Text), MaLP = items[i-1].MaLP });
+						if (!connectData.updateTypeOfRoom(tempArr[i - 1], items[i - 1].Dongia, items[i - 1].LoaiPhong))      //update data in server
+						{
+							return;
+						}
 						continue;
 					}
 					tempArr.Add(items[i - 1]);
@@ -186,29 +170,5 @@ namespace HotelApp
 
 			}
 		}
-
-		private void DSPhong(object sender, RoutedEventArgs e)
-		{
-			MessageBox.Show("Danh sách phòng");
-		}
-
-		private void LoaiPhong(object sender, RoutedEventArgs e)
-		{
-			MessageBox.Show("loại phòng");
-		}
-		
-		private void LoaiKhach(object sender, RoutedEventArgs e)
-		{
-			//Main.Content = new TypeOfCustomer();
-		}
 	}
-
-	//public class ListViewDataRoom
-	//{
-	//	public int STT { get; set; }
-
-	//	public string LoaiPhong { get; set; }
-
-	//	public float Dongia { get; set; }
-	//}
 }

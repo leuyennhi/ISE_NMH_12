@@ -72,6 +72,8 @@ namespace HotelApp
 			switch (((ListViewItem)((ListView)sender).SelectedItem).Name)
 			{
 				case "MucDSPhong":
+					usc = new AddRoomScreen(conData);
+					GridMain.Children.Add(usc);
 					break;
 				case "MucDSKhach":
 					break;

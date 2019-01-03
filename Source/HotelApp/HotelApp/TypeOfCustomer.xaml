@@ -11,8 +11,8 @@
     <DockPanel Background="#DEDEDE" LastChildFill="True">
         <StackPanel Margin="0,0,40,0">
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,20,0,0">
-                <Border BorderBrush="White" BorderThickness="2" CornerRadius="10" Height="87" Width="600" HorizontalAlignment="Left" VerticalAlignment="Top"  Background="Blue">
-                    <Label   Content="Danh sách loại khách"  FontSize="50" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" Foreground="White" Background="blue" VerticalContentAlignment="Center"/>
+                <Border BorderBrush="White" BorderThickness="2" CornerRadius="10" Height="60" Width="400" HorizontalAlignment="Left" VerticalAlignment="Top"  Background="Blue">
+                    <Label   Content="Danh sách loại khách"  FontSize="35" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" Foreground="White" Background="blue" VerticalContentAlignment="Center"/>
                 </Border>
             </StackPanel >
             <StackPanel Orientation="Horizontal" Margin="0,50,40,0" HorizontalAlignment="Right">
@@ -40,7 +40,7 @@
                 </Border>
             </StackPanel>
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0">
-                <ListView Name="lvTypeCustommer" FontSize="20" Height="400" Width="900" SelectionChanged="listView1_SelectionChanged" SelectionMode="Single" BorderThickness="0" Grid.Column="3" IsSynchronizedWithCurrentItem="True">
+                <ListView Name="lvTypeCustommer" FontSize="20" Height="350" Width="900" SelectionChanged="listView1_SelectionChanged" SelectionMode="Single" BorderThickness="0" Grid.Column="3" IsSynchronizedWithCurrentItem="True">
                     <ListView.Resources>
                         <Style TargetType="{x:Type GridViewColumnHeader}">
                             <Setter Property="HorizontalContentAlignment" Value="Center"/>

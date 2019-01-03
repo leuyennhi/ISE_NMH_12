@@ -60,26 +60,29 @@ namespace HotelApp
 			
 			int selectedIndex = lvTypeCustommer.SelectedIndex;
 			MessageBoxResult result = MessageBox.Show("Bạn muốn xóa hàng " + (selectedIndex + 1).ToString() + "?", "Cảnh báo!!!", MessageBoxButton.YesNo);
-	
+
 			if (result == MessageBoxResult.Yes)
 			{
-				List<ListViewDataCustommer> tempArr = new List<ListViewDataCustommer>();
-				int j = 1;
-
-				for (int i = 0; i < items.Count; i++)
+				if (!connectData.deleteTypeOfCustomer(items[selectedIndex].LoaiKhach))
 				{
-					if (i == selectedIndex) continue;
-					ListViewDataCustommer temp = new ListViewDataCustommer();
-					temp = items[i];
-					temp.STT = j;
-					tempArr.Add(temp);
-					j++;
+					return;
 				}
-				lvTypeCustommer.ItemsSource = tempArr;
-				items = tempArr;
+				items = connectData.getTypeOfCustommer();
+				lvTypeCustommer.ItemsSource = items;
 
-				connectData.deleteTypeOfCustomer(selectedIndex + 1);
 			}
+		}
+
+		private bool checkExistInListCustomer(List<ListViewDataCustommer> item, string chuoi)
+		{
+			for (int i = 0; i < item.Count; i++)
+			{
+				if(item[i].LoaiKhach == chuoi)
+				{
+					return false;
+				}
+			}
+			return true;
 		}
 
 		private void ThemHang(object sender, RoutedEventArgs e)
@@ -94,25 +97,16 @@ namespace HotelApp
 
 			if (result == MessageBoxResult.Yes)
 			{
-				List<ListViewDataCustommer> tempArr = new List<ListViewDataCustommer>();
+				ListViewDataCustommer temp = new ListViewDataCustommer() { STT = items.Count + 1, LoaiKhach = TOCText.Text, HeSo = float.Parse(CoeffText.Text) };
 
-				int i;
-
-				for (i = 0; i < items.Count; i++)
+				if (connectData.setTypeOfCustomer(temp))
 				{
-					tempArr.Add(items[i]);
+					items = connectData.getTypeOfCustommer();
+					lvTypeCustommer.ItemsSource = items;
+
+					TOCText.Text = "";
+					CoeffText.Text = "";
 				}
-
-				tempArr.Add(new ListViewDataCustommer() { STT = i + 1, LoaiKhach = TOCText.Text, HeSo = float.Parse(CoeffText.Text) });
-
-				lvTypeCustommer.ItemsSource = tempArr;
-				items = tempArr;
-
-				TOCText.Text = "";
-				CoeffText.Text = "";
-
-				connectData.setTypeOfCustomer(items[i]);
-				
 			}
 		}
 
@@ -154,8 +148,11 @@ namespace HotelApp
 				{
 					if (i == Stttext)
 					{
-						tempArr.Add(new ListViewDataCustommer() { STT = i, LoaiKhach = TOCText.Text, HeSo = float.Parse(CoeffText.Text) });
-						connectData.updateTypeOfCustomer(tempArr[i - 1]);
+						tempArr.Add(new ListViewDataCustommer() { STT = i, LoaiKhach = TOCText.Text, HeSo = float.Parse(CoeffText.Text), MaLK = items[i-1].MaLK });
+						if(!connectData.updateTypeOfCustomer(tempArr[i - 1], items[i - 1].HeSo, items[i - 1].LoaiKhach ))
+						{
+							return;
+						}
 						continue;
 					}
 					tempArr.Add(items[i - 1]);
@@ -184,16 +181,5 @@ namespace HotelApp
 
 			}
 		}
-
-		private void DSPhong(object sender, RoutedEventArgs e)
-		{
-			MessageBox.Show("Danh sách khách");
-		}
-
-		private void LoaiPhong(object sender, RoutedEventArgs e)
-		{
-			MessageBox.Show("loại khách");
-		}
-
 	}
 }

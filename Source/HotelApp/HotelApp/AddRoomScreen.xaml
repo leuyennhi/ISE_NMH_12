@@ -294,8 +294,8 @@
     <DockPanel Background="#DEDEDE" LastChildFill="True">
         <StackPanel>
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,40,0,0">
-                    <Border BorderBrush="White" BorderThickness="2" CornerRadius="10" Height="80" Width="400" HorizontalAlignment="Left" VerticalAlignment="Top"  Background="Blue">
-                        <Label   Content="Thêm phòng"  FontSize="50" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" Foreground="White" Background="blue" VerticalContentAlignment="Center"/>
+                    <Border BorderBrush="White" BorderThickness="2" CornerRadius="10" Height="60" Width="400" HorizontalAlignment="Left" VerticalAlignment="Top"  Background="Blue">
+                        <Label   Content="Thêm phòng"  FontSize="35" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" Foreground="White" Background="blue" VerticalContentAlignment="Center"/>
                     </Border>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0,50,0,0" HorizontalAlignment="Center">

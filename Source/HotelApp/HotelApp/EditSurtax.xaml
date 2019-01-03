@@ -294,11 +294,11 @@
     <DockPanel Background="#DEDEDE" LastChildFill="True">
         <StackPanel >
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,40,0,0">
-                <Border BorderBrush="White" BorderThickness="2" CornerRadius="10" Height="80" Width="600" HorizontalAlignment="Left" VerticalAlignment="Top"  Background="Blue">
-                    <Label   Content="Chỉnh sửa phụ thu"  FontSize="50" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" Foreground="White" Background="blue" VerticalContentAlignment="Center"/>
+                <Border BorderBrush="White" BorderThickness="2" CornerRadius="10" Height="60" Width="400" HorizontalAlignment="Left" VerticalAlignment="Top"  Background="Blue">
+                    <Label   Content="Chỉnh sửa phụ thu"  FontSize="35" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" Foreground="White" Background="blue" VerticalContentAlignment="Center"/>
                 </Border>
             </StackPanel>
-            <StackPanel  Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,150,0,0">
+            <StackPanel  Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,100,0,0">
                 <Label Content="Loại phòng: " FontSize="30" Margin="0,0,23,0"/>
                 <Border BorderBrush="White" Height="50" Background="White" BorderThickness="1" CornerRadius="25" Width="140" HorizontalAlignment="Center" VerticalAlignment="Center" >
                     <ComboBox  Loaded="Combobox_Loaded" SelectionChanged="Combobox_SelectionChanged" VerticalContentAlignment="Center"
@@ -323,7 +323,7 @@
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,150,0,0">
-                <Button Content="Thêm" Width="150" Foreground="Black" FontSize="25" Height="50" Background="White" Click="AddCoeff"/>
+                <Button Content="Chỉnh sửa" Width="150" Foreground="Black" FontSize="25" Height="50" Background="White" Click="AddSurTax"/>
                 <Button Content="Hủy bỏ" Width="150" Foreground="Black" FontSize="25" Height="50" Margin="40,0,0,0" Background="White" Click="Cancel"/>
             </StackPanel>
 

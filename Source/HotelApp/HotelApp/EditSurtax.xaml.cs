@@ -22,18 +22,55 @@ namespace HotelApp
 	{
 		private List<string> listTypeRoom = new List<string>();
 		private string typeRoom = "";
+		private List<ListViewSurtax> listSurtax;
 		ConnectData connectData;
-		public EditSurtax( ConnectData conData)
+		public EditSurtax(ConnectData conData)
 		{
 			InitializeComponent();
-			InitializeComponent();
 
-			conData.getSurtax();
+			connectData = conData;
+			listSurtax = conData.getSurtax();
+
+			if (checkSurtax(listSurtax))
+			{
+				txtPhuThu.Text = listSurtax[0].TiLePhuThu.ToString();
+			}
+			else
+			{
+				txtPhuThu.Text = "";
+			}
 
 			listTypeRoom.Add("All");
-			listTypeRoom.Add("A");
-			listTypeRoom.Add("B");
-			listTypeRoom.Add("C");
+			for (int i = 0; i < listSurtax.Count; i++)
+			{
+				listTypeRoom.Add(listSurtax[i].MaLP);
+			}
+
+		}
+
+		private bool checkSurtax(List<ListViewSurtax> temp1)
+		{
+			for (int i = 1; i < temp1.Count; i++)
+			{
+				if (temp1[i].TiLePhuThu != temp1[i - 1].TiLePhuThu)
+				{
+					return false;
+				}
+			}
+			return true;
+		}
+
+		private int findIndexSurtax(List<ListViewSurtax> temp1, string type)
+		{
+			int i;
+			for (i = 0; i < temp1.Count; i++)
+			{
+				if (temp1[i].MaLP == type)
+				{
+					return i;
+				}
+			}
+			return -1;
 		}
 
 		private void Combobox_Loaded(object sender, RoutedEventArgs e)
@@ -43,11 +80,20 @@ namespace HotelApp
 			combo.SelectedIndex = 0;
 			combo.Background = Brushes.Yellow;
 		}
+
 		private void Combobox_SelectionChanged(object sender, RoutedEventArgs e)
 		{
 			var selectedComboItem = sender as ComboBox;
 			typeRoom = selectedComboItem.SelectedItem as string;
 			//MessageBox.Show(typeRoom);
+			if (typeRoom != "All")
+			{
+				txtPhuThu.Text = listSurtax[findIndexSurtax(listSurtax, typeRoom)].TiLePhuThu.ToString();
+			}
+			else
+			{
+				txtPhuThu.Text = "";
+			}
 		}
 
 		private bool kiemtraPhuThu(String str)
@@ -70,7 +116,18 @@ namespace HotelApp
 		{
 			return;
 		}
-		private void AddCoeff(object sender, RoutedEventArgs e)
+
+		private void insertSurtax()
+		{
+			int i = findIndexSurtax(listSurtax, typeRoom);
+			float phuthu = listSurtax[i].TiLePhuThu;
+			if (txtPhuThu.Text != phuthu.ToString())
+			{
+				connectData.setSurtax(typeRoom, (float)Convert.ToDouble(txtPhuThu.Text));
+			}
+		}
+
+		private void AddSurTax(object sender, RoutedEventArgs e)
 		{
 			if (!kiemtraPhuThu(txtPhuThu.Text))
 			{
@@ -81,6 +138,17 @@ namespace HotelApp
 
 			if (result == MessageBoxResult.Yes)
 			{
+				if (typeRoom == "All")
+				{
+					//caapj nhat bang phu thu
+					connectData.setSurtax("All", (float)Convert.ToDouble(txtPhuThu.Text));
+
+				}
+				else
+				{
+					//kieemr tra vaf chefn them hangf phu thu moi vaf update laij hangf loaij phongf thay doi
+					insertSurtax();
+				}
 			}
 		}
 	}

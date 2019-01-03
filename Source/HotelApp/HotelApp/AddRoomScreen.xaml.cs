@@ -21,12 +21,21 @@ namespace HotelApp
 	{
 		private List<string> listTypeRoom = new List<string>();
 		private string typeRoom = "";
-		public AddRoomScreen()
+		private List<ListViewDataRoom> list_Type_Rooms = new List<ListViewDataRoom>();
+		private ConnectData connectData;
+		public AddRoomScreen(ConnectData conData)
 		{
 			InitializeComponent();
-			listTypeRoom.Add("A");
-			listTypeRoom.Add("B");
-			listTypeRoom.Add("C");
+			connectData = conData;
+
+			list_Type_Rooms = conData.getTypeOfRoom();
+			//kiểm tra tên phòng có hay chưa
+			//lấy loại phòng và đơn giá của nó show ra
+			//
+			for (int i = 0; i < list_Type_Rooms.Count; i++)
+			{
+				listTypeRoom.Add(list_Type_Rooms[i].LoaiPhong);
+			}
 		}
 
 		private void Combobox_Loaded(object sender, RoutedEventArgs e)
@@ -36,11 +45,27 @@ namespace HotelApp
 			combo.SelectedIndex = 0;
 			combo.Background = Brushes.Yellow;
 		}
+
 		private void Combobox_SelectionChanged(object sender, RoutedEventArgs e)
 		{
 			var selectedComboItem = sender as ComboBox;
 			typeRoom = selectedComboItem.SelectedItem as string;
 			//MessageBox.Show(typeRoom);
+			int vitri = findIndex(list_Type_Rooms, typeRoom);
+			txtDonGia.Text = list_Type_Rooms[vitri].Dongia.ToString();
+		}
+
+		private int findIndex(List<ListViewDataRoom> temp, string type)
+		{
+			int i;
+			for (i = 0; i < temp.Count; i++)
+			{
+				if (temp[i].LoaiPhong == type)
+				{
+					return i;
+				}
+			}
+			return -1;
 		}
 
 		private bool kiemtraDonGia(String str)
@@ -98,6 +123,9 @@ namespace HotelApp
 
 			if (result == MessageBoxResult.Yes)
 			{
+				int vitri = findIndex(list_Type_Rooms, typeRoom);
+				string maLP = list_Type_Rooms[vitri].MaLP;
+				connectData.setNewRoom(maLP, txtTenPhong.Text);
 			}
 		}
 	}
