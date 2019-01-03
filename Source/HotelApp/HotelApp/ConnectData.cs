@@ -403,6 +403,26 @@ namespace HotelApp
 			sql.Close();
 			return;
 		}
+
+		public List<Customer> getListCustomer()
+		{
+			List<Customer> temp = new List<Customer>();
+			sql.Open();
+			if (sql.State == System.Data.ConnectionState.Open)
+			{
+				string q = "SELECT MaKH,TenKH,DiaChi,SDT,CMND,MaLK,DaXoa FROM KHACHHANG";
+				SqlCommand cmd = new SqlCommand(q, sql);
+				SqlDataReader reader = cmd.ExecuteReader();
+				while (reader.Read())
+				{
+					//	var time = reader.GetDateTime(1).ToString("dd/MM/yyyy");
+					temp.Add(new Customer() { MaKH = reader.GetString(0), TenKH = reader.GetString(1), DiaChi = reader.GetString(2), SDT=reader.GetString(3), CMND=reader.GetString(4), MaLK=reader.GetString(5), DaXoa=reader.GetBoolean(6) });
+				}
+				reader.Close();
+			}
+			sql.Close();
+			return temp;
+		}
 	}
 
 	public class ListViewDataRoom
@@ -445,5 +465,23 @@ namespace HotelApp
 		public string MaLP { get; set; }
 
 		public float TiLePhuThu { get; set; }
+	}
+
+	public class Customer
+	{
+		public string MaKH { get; set; }
+
+		public string TenKH { get; set; }
+
+		public string SDT { get; set; }
+
+		public string CMND { get; set; }
+
+		public string MaLK { get; set; }
+
+		public string DiaChi { get; set; }
+
+		public bool DaXoa { get; set; }
+
 	}
 }

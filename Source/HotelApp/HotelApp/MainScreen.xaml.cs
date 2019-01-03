@@ -76,6 +76,8 @@ namespace HotelApp
 					GridMain.Children.Add(usc);
 					break;
 				case "MucDSKhach":
+					usc = new ListCustomer(conData);
+					GridMain.Children.Add(usc);
 					break;
 				case "MucLoaiKhach":
 					usc = new TypeOfCustomer(conData);

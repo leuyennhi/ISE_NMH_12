@@ -72,6 +72,9 @@
     <Compile Include="EditSurtax.xaml.cs">
       <DependentUpon>EditSurtax.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ListCustomer.xaml.cs">
+      <DependentUpon>ListCustomer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="LoginScreen.xaml.cs">
       <DependentUpon>LoginScreen.xaml</DependentUpon>
     </Compile>
@@ -133,6 +136,10 @@
       <DependentUpon>DanhSachNhanVien.xaml</DependentUpon>
     </Compile>
     <Page Include="EditSurtax.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ListCustomer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
