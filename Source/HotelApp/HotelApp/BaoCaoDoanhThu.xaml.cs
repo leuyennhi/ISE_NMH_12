@@ -40,12 +40,13 @@ namespace HotelApp
             string value = typeItem.Content.ToString();
 
             items = connectData.getTurnoverReport(value);
+            lvTurnoverReport.ItemsSource = items;
+
             if (items.Count() == 0)
             {
-                MessageBox.Show("Hiện chưa có dữ liệu để thông kê báo cáo doanh thu cho tháng " + value + "\nVui lòng lựa chọn tháng khác!!!", "Thông Báo!!!", MessageBoxButton.OK);
-                return;
+                MessageBox.Show("Hiện chưa có dữ liệu để thống kê Báo cáo doanh thu cho tháng " + value + "\n\nVui lòng lựa chọn tháng khác!!!", "Chưa Có Dữ Liệu!!!", MessageBoxButton.OK);
+             
             }
-            lvTurnoverReport.ItemsSource = items;
         }
     }
 }

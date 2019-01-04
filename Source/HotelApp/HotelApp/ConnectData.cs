@@ -428,6 +428,7 @@ namespace HotelApp
         {
             List<ListViewTurnoverReport> temp = new List<ListViewTurnoverReport>();
             sql.Open();
+
             if (sql.State == System.Data.ConnectionState.Open)
             {
                 float tongTien = 1;
@@ -469,6 +470,7 @@ namespace HotelApp
         {
             List<ListViewDensityReport> temp = new List<ListViewDensityReport>();
             sql.Open();
+
             if (sql.State == System.Data.ConnectionState.Open)
             {
                 Int32 tongNgayThue = 1;
@@ -504,6 +506,146 @@ namespace HotelApp
             }
             sql.Close();
             return temp;
+        }
+
+        public List<ListStaff> getListStaff()
+        {
+            List<ListStaff> temp = new List<ListStaff>();
+            sql.Open();
+
+            if (sql.State == System.Data.ConnectionState.Open)
+            {
+                string q = "SELECT COUNT(*) FROM NHANVIEN";
+                SqlCommand cmd = new SqlCommand(q, sql);
+                int count = Convert.ToInt32(cmd.ExecuteScalar());
+                if (count == 0)
+                {
+                    sql.Close();
+                    return temp;
+                }
+                else
+                {
+                    q = "SELECT MaNV, HoTen, SDT, ChucVu, DaXoa FROM NHANVIEN";
+                    cmd = new SqlCommand(q, sql);
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        if (!reader.GetSqlBoolean(4))
+                        {
+                            temp.Add(new ListStaff() { MaNV = reader.GetString(0), TenNV = reader.GetString(1), SDT = reader.GetString(2), ChucVu = reader.GetString(3) });
+                        }
+                    }
+                    reader.Close();
+                }
+            }
+            sql.Close();
+            return temp;
+        }
+
+        public List<ListStaff> findStaff(string name)
+        {
+            List<ListStaff> temp = new List<ListStaff>();
+            sql.Open();
+            if (sql.State == System.Data.ConnectionState.Open)
+            {
+                string q = "SELECT COUNT(*) FROM NHANVIEN";
+                SqlCommand cmd = new SqlCommand(q, sql);
+                int count = Convert.ToInt32(cmd.ExecuteScalar());
+                if (count == 0)
+                {
+                    sql.Close();
+                    return temp;
+                }
+                else
+                {
+                    q = "SELECT MaNV, HoTen, SDT, ChucVu FROM NHANVIEN";
+                    cmd = new SqlCommand(q, sql);
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        if (reader.GetString(1).ToLower().IndexOf(name) != -1)
+                        {
+                            temp.Add(new ListStaff() { MaNV = reader.GetString(0), TenNV = reader.GetString(1), SDT = reader.GetString(2), ChucVu = reader.GetString(3) });
+                        }
+                    }
+                    reader.Close();
+                }
+            }
+            sql.Close();
+            return temp;
+        }
+
+        public bool deleteStaffs(List<string> listStaff)
+        {
+            sql.Open();
+            if (sql.State == System.Data.ConnectionState.Open)
+            {
+                for (int i = 0; i < listStaff.Count(); i++)
+                {
+                    string q = "SELECT COUNT(*) FROM DATPHONG WHERE MaNV = N'" + listStaff[i] + "'";
+                    SqlCommand cmd = new SqlCommand(q, sql);
+                    int count = Convert.ToInt32(cmd.ExecuteScalar());
+                    if (count != 0)
+                    {
+                        MessageBox.Show("Không thể xóa nhân viên có mã " + listStaff[i] + "\nDo còn thông tin nhân viên này ở mục đặt phòng!!!", "Không Thể Xóa!!!", MessageBoxButton.OK);
+                        sql.Close();
+                        return false;
+                    }
+
+                    q = "SELECT COUNT(*) FROM TRAPHONG WHERE MaNV = N'" + listStaff[i] + "'";
+                    cmd = new SqlCommand(q, sql);
+                    count = Convert.ToInt32(cmd.ExecuteScalar());
+                    if (count != 0)
+                    {
+                        MessageBox.Show("Không thể xóa nhân viên có mã " + listStaff[i] + "\nDo còn thông tin nhân viên này ở mục trả phòng!!!", "Không Thể Xóa!!!", MessageBoxButton.OK);
+                        sql.Close();
+                        return false;
+                    }
+
+                    q = "UPDATE NHANVIEN SET DaXoa = 1 WHERE MaNV = N'" + listStaff[i] + "'";
+                    cmd = new SqlCommand(q, sql);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            sql.Close();
+            return true;
+        }
+
+        public DetailOfStaff GetDetailOfStaff(string maNV)
+        {
+            DetailOfStaff temp = new DetailOfStaff();
+            sql.Open();
+            if (sql.State == System.Data.ConnectionState.Open)
+            {
+                string q = "SELECT MaNV, HoTen, NgaySinh, CMND, DiaChi, SDT, ChucVu FROM NHANVIEN WHERE MaNV = N'" + maNV + "'";
+                SqlCommand cmd = new SqlCommand(q, sql);
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.Read())
+                {
+                    temp.MaNV = reader.GetString(0);
+                    temp.TenNV = reader.GetString(1);
+                    temp.NgaySinh = reader.GetDateTime(2).ToString();
+                    temp.CMND = reader.GetString(3);
+                    temp.DiaChi = reader.GetString(4);
+                    temp.SDT = reader.GetString(5);
+                    temp.ChucVu = reader.GetString(6);
+                }  
+                reader.Close();
+            }
+            sql.Close();
+            return temp;
+        }
+
+        public void updateInfoStaff(string MaNv, string DiaChi, string SDT, string ChucVu)
+        {
+            sql.Open();
+            if (sql.State == System.Data.ConnectionState.Open)
+            {
+                string q = "UPDATE NHANVIEN SET DiaChi = N'"+ DiaChi +"', SDT = N'"+ SDT +"', ChucVu = N'"+ ChucVu +"' WHERE MaNV = N'" + MaNv + "'";
+                SqlCommand cmd = new SqlCommand(q, sql);
+                cmd.ExecuteNonQuery();
+            }
+            sql.Close();
         }
     }
 
@@ -588,6 +730,24 @@ namespace HotelApp
         public float TiLe { get; set; }
     }
 
+    public class ListStaff
+    {
+        public string MaNV { get; set; }
+        public string TenNV { get; set; }
+        public string SDT { get; set; }
+        public string ChucVu { get; set; }
+    }
+    public class DetailOfStaff
+    {
+        public string MaNV { get; set; }
+        public string TenNV { get; set; }
+        public string NgaySinh { get; set; }
+        public string CMND { get; set; }
+        public string DiaChi { get; set; }
+        public string SDT { get; set; }
+        public string ChucVu { get; set; }
+
+    }
     public class DetailInfoOfRoom
     {
         public int STT { get; set; }

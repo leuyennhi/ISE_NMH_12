@@ -87,11 +87,11 @@ namespace HotelApp
 					usc = new TypeOfRoom(conData);
 					GridMain.Children.Add(usc);
 					break;
-				case "MucTyLeDoanhThu":
+				case "MucBaoCaoDoanhThu":
                     usc = new BaoCaoDoanhThu(conData);
                     GridMain.Children.Add(usc);
                     break;
-				case "MucMatDoDoanhThu":
+				case "MucBaoCaoMatDo":
                     usc = new BaoCaoMatDo(conData);
                     GridMain.Children.Add(usc);
                     break;
@@ -102,10 +102,13 @@ namespace HotelApp
 				case "MucChinhSuaSoKhachToiDa":
 					break;
 				case "MucDSNhanVien":
-					break;
+                    usc = new DanhSachNhanVien(conData);
+                    GridMain.Children.Add(usc);
+                    break;
 				default:
 					break;
 			}
 		}
-	}
+        
+    }
 }

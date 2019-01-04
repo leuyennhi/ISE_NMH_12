@@ -33,14 +33,12 @@ namespace HotelApp
             string value = typeItem.Content.ToString();
 
             items = connectData.getDensityReport(value);
+            lvDensityReport.ItemsSource = items;
+
             if (items.Count() == 0)
             {
-                MessageBox.Show("Hiện chưa có dữ liệu để thông kê báo cáo doanh thu cho tháng " + value + "\nVui lòng lựa chọn tháng khác!!!", "Thông Báo!!!", MessageBoxButton.OK);
-                return;
+                MessageBox.Show("Hiện chưa có dữ liệu để thống kê Báo cáo mật độ cho tháng " + value + "\n\nVui lòng lựa chọn tháng khác!!!", "Chưa Có Dữ Liệu!!!", MessageBoxButton.OK);
             }
-            lvDensityReport.ItemsSource = items;
         }
-
-
     }
 }

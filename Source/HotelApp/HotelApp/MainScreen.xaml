@@ -122,13 +122,13 @@
                             <TextBlock Text="Loại phòng" VerticalAlignment="Center"  Margin="10 10"/>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem Name="MucTyLeDoanhThu" Height="50">
+                    <ListViewItem Name="MucBaoCaoDoanhThu" Height="50">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="CalendarText"  Height="25" Width="25" Margin="15,5"/>
-                            <TextBlock Text="Báo cáo tỷ lệ doanh thu " VerticalAlignment="Center"  Margin="10 10"/>
+                            <TextBlock Name="txtBCDoanhThu"  Text="Báo cáo doanh thu " VerticalAlignment="Center"  Margin="10 10"/>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem Name ="MucMatDoDoanhThu" Height="50">
+                    <ListViewItem Name ="MucBaoCaoMatDo" Height="50">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="CalendarToday"  Height="25" Width="25" Margin="15,5"/>
                             <TextBlock Text="Báo cáo mật độ doanh thu" VerticalAlignment="Center"  Margin="10 10"/>
