@@ -13,7 +13,7 @@
         <TextBox Name="txtUsername" Background="#545d6a" Foreground="White" FontSize="18"/>
         <Label Content="Password:" Foreground="White"/>
         <PasswordBox Name="txtPassword" Background="#545d6a" Foreground="White" FontSize="18"/>
-        <Button Name="btnLogin" Content="Đăng nhập" Margin="50 50" Background="#545d6a" Foreground="White" FontSize="18"/>
+        <Button Name="btnLogin" Click="BtnLogin_Click" Content="Đăng nhập" Margin="50 50" Background="#545d6a" Foreground="White" FontSize="18" IsDefault="True"/>
         <Button x:Name="btnForget" Content="Quên mật khẩu?" Margin="50 0" Background="#545d6a" Foreground="White" FontSize="18"/>
     </StackPanel>
 

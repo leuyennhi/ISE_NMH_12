@@ -17,7 +17,7 @@ namespace HotelApp
     /// <summary>
     /// Interaction logic for RoomChecking.xaml
     /// </summary>
-    public partial class RoomChecking : Window
+    public partial class RoomChecking : UserControl
     {
         public RoomChecking()
         {
