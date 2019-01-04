@@ -22,7 +22,7 @@
                     </ListView.ItemsPanel>
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
-                            <EventSetter Event="PreviewMouseLeftButtonDown" Handler="ListviewClick"/>
+                            <EventSetter Event="PreviewMouseLeftButtonDown" Handler="ListviewDoubleClick"/>
                         </Style>
                     </ListView.ItemContainerStyle>
                     <ListView.ItemTemplate>

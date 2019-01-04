@@ -19,22 +19,33 @@ namespace HotelApp
     /// </summary>
     public partial class ListRoom : UserControl
     {
+        List<Room> items = new List<Room>();
+        private ConnectData connectData;
+        List<string> listDelete = new List<string>();
+
         private List<Room> listRoom;
         public ListRoom(ConnectData conData)
         {
             InitializeComponent();
+            connectData = conData;
             listRoom = conData.getListRoom();
             this.LV_ListRoom.ItemsSource = listRoom;
         }
 
-        private void ListviewClick (object sender, MouseButtonEventArgs e)
+        private void ListviewDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            //this.Hide();
-            //MainWindow a = new MainWindow();
-            //a.Show();
-            var item = sender as ListViewItem;
-            var index = LV_ListRoom.ItemContainerGenerator.IndexFromContainer(item);
-            MessageBox.Show( index + "");
+            var selectedItem = sender as ListViewItem;
+
+            Room dataItem = (Room)LV_ListRoom.ItemContainerGenerator.ItemFromContainer(selectedItem);
+
+            var newWin = new MainScreen();
+            newWin.Show();
+
+            UserControl usc = null;
+            usc = new RoomChecking(connectData, dataItem.MaLP);
+            newWin.GridMain.Children.Add(usc);
+
+            Window.GetWindow(this).Close();
         }
     }
 }
