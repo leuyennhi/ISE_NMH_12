@@ -23,7 +23,7 @@ namespace HotelApp
 		private SqlConnection sql;
 		public ConnectData()
 		{
-			linkSql = "Data Source=THANH_NHUT\\SQLEXPRESS;Initial Catalog=DataForHotelApp;Integrated Security=True";
+			linkSql = "Data Source=LEUYENNHI\\SQLEXPRESS;Initial Catalog=DataForHotelApp;Integrated Security=True";
 			sql = new SqlConnection(linkSql);
 		}
 
@@ -423,7 +423,89 @@ namespace HotelApp
 			sql.Close();
 			return temp;
 		}
-	}
+
+        public List<ListViewTurnoverReport> getTurnoverReport(string month)
+        {
+            List<ListViewTurnoverReport> temp = new List<ListViewTurnoverReport>();
+            sql.Open();
+            if (sql.State == System.Data.ConnectionState.Open)
+            {
+                float tongTien = 1;
+                string q = "SELECT SUM(TP.ThanhTien) FROM TRAPHONG TP GROUP BY MONTH(TP.NgayTraPhong) HAVING MONTH(TP.NgayTraPhong) = " + month;
+                SqlCommand cmd1 = new SqlCommand(q, sql);
+                int count = Convert.ToInt32(cmd1.ExecuteScalar());
+                if (count == 0)
+                {
+                    sql.Close();
+                    return temp;
+                }
+                else
+                {
+
+                    SqlDataReader reader1 = cmd1.ExecuteReader();
+                    if (reader1.Read())
+                    {
+                        tongTien = (float)reader1.GetDouble(0);
+                    }
+                    reader1.Close();
+                }
+
+                q = "SELECT LP.TenLP, SUM(TP.ThanhTien) FROM LOAIPHONG LP left join PHONG P on(LP.MaLP = P.MaLP) left join TRAPHONG TP on(P.MaPhong = TP.MaPhong) GROUP BY MONTH(TP.NgayTraPhong), LP.TenLP HAVING MONTH(TP.NgayTraPhong) = " + month;
+                SqlCommand cmd2 = new SqlCommand(q, sql);
+                SqlDataReader reader2 = cmd2.ExecuteReader();
+                int i = 1;
+                while (reader2.Read())
+                {
+                    temp.Add(new ListViewTurnoverReport() { STT = i, LoaiPhong = reader2.GetString(0), DoanhThu = (float)reader2.GetDouble(1), TiLe = (float)reader2.GetDouble(1) / tongTien });
+                    i++;
+                }
+                reader2.Close();
+            }
+            sql.Close();
+            return temp;
+        }
+
+        public List<ListViewDensityReport> getDensityReport(string month)
+        {
+            List<ListViewDensityReport> temp = new List<ListViewDensityReport>();
+            sql.Open();
+            if (sql.State == System.Data.ConnectionState.Open)
+            {
+                Int32 tongNgayThue = 1;
+                string q = "SELECT COUNT(TP.NgayTraPhong) FROM TRAPHONG TP GROUP BY MONTH(TP.NgayTraPhong) HAVING MONTH(TP.NgayTraPhong) = " + month;
+                SqlCommand cmd1 = new SqlCommand(q, sql);
+                int count = Convert.ToInt32(cmd1.ExecuteScalar());
+                if (count == 0)
+                {
+                    sql.Close();
+                    return temp;
+                }
+                else
+                {
+                    SqlDataReader reader1 = cmd1.ExecuteReader();
+                    if (reader1.Read())
+                    {
+                        tongNgayThue = (Int32)reader1.GetInt32(0);
+                    }
+                    reader1.Close();
+                }
+
+                q = "SELECT P.MaPhong, COUNT(TP.NgayTraPhong) FROM PHONG P left join TRAPHONG TP on(P.MaPhong = TP.MaPhong and MONTH(TP.NgayTraPhong) = " + month + ") GROUP BY P.MaPhong";
+                SqlCommand cmd2 = new SqlCommand(q, sql);
+                SqlDataReader reader2 = cmd2.ExecuteReader();
+                int i = 1;
+
+                while (reader2.Read())
+                {
+                    temp.Add(new ListViewDensityReport() { STT = i, Phong = reader2.GetString(0), SoNgayThue = (Int32)reader2.GetInt32(1), TiLe = (float)reader2.GetInt32(1) / tongNgayThue });
+                    i++;
+                }
+                reader2.Close();
+            }
+            sql.Close();
+            return temp;
+        }
+    }
 
 	public class ListViewDataRoom
 	{
@@ -482,6 +564,39 @@ namespace HotelApp
 		public string DiaChi { get; set; }
 
 		public bool DaXoa { get; set; }
-
 	}
+
+    public class ListViewTurnoverReport
+    {
+        public int STT { get; set; }
+
+        public string LoaiPhong { get; set; }
+
+        public float DoanhThu { get; set; }
+
+        public float TiLe { get; set; }
+    }
+
+    public class ListViewDensityReport
+    {
+        public int STT { get; set; }
+
+        public string Phong { get; set; }
+
+        public Int32 SoNgayThue { get; set; }
+
+        public float TiLe { get; set; }
+    }
+
+    public class DetailInfoOfRoom
+    {
+        public int STT { get; set; }
+
+        public string Phong { get; set; }
+
+        public float SoNgayThue { get; set; }
+
+        public float TiLe { get; set; }
+    }
+
 }

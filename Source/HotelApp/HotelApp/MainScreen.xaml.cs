@@ -88,9 +88,13 @@ namespace HotelApp
 					GridMain.Children.Add(usc);
 					break;
 				case "MucTyLeDoanhThu":
-					break;
+                    usc = new BaoCaoDoanhThu(conData);
+                    GridMain.Children.Add(usc);
+                    break;
 				case "MucMatDoDoanhThu":
-					break;
+                    usc = new BaoCaoMatDo(conData);
+                    GridMain.Children.Add(usc);
+                    break;
 				case "MucChinhSuaPhuThu":
 					usc = new EditSurtax(conData);
 					GridMain.Children.Add(usc);
