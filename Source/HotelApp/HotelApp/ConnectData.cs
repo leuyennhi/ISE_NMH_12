@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Diagnostics;
@@ -400,7 +400,7 @@ namespace HotelApp
 			sql.Close();
 		}
 
-		public void setNewRoom(string maLP, string maPhong, string note)
+		public void setNewRoom(string maLP, string maPhong)
 		{
 			sql.Open();
 			if (sql.State == System.Data.ConnectionState.Open)
@@ -410,18 +410,7 @@ namespace HotelApp
 				int count = Convert.ToInt32(cmd.ExecuteScalar());
 				if (count == 0)
 				{
-					q = "insert into PHONG(MaPhong,MaLP,TinhTrang, GhiChu)values('" + maPhong + "','" + maLP + "','false','"+note+"')";
-					cmd = new SqlCommand(q, sql);
-					cmd.ExecuteNonQuery();
-
-					q = "SELECT SoLuong FROM LOAIPHONG WHERE MaLP = '" + maLP + "'";
-					cmd = new SqlCommand(q, sql);
-					SqlDataReader reader = cmd.ExecuteReader();
-					reader.Read();
-					int sktd = reader.GetInt32(0) + 1;
-					reader.Close();
-
-					q = "UPDATE LOAIPHONG set SoLuong = " + sktd + " where MaLP = '" + maLP + "'";
+					q = "insert into PHONG(MaPhong,MaLP,TinhTrang)values('" + maPhong + "','" + maLP + "','false')";
 					cmd = new SqlCommand(q, sql);
 					cmd.ExecuteNonQuery();
 				}
