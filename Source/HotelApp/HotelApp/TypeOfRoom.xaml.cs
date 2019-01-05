@@ -165,9 +165,9 @@ namespace HotelApp
 					}
 					tempArr.Add(items[i - 1]);
 				}
-				lvTypeRoom.ItemsSource = tempArr;
+				items = connectData.getTypeOfRoom();
+				lvTypeRoom.ItemsSource = items;
 
-				items = tempArr;
 
 				TORText.Text = "";
 				CostText.Text = "";

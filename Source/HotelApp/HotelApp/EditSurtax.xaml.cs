@@ -149,6 +149,23 @@ namespace HotelApp
 					//kieemr tra vaf chefn them hangf phu thu moi vaf update laij hangf loaij phongf thay doi
 					insertSurtax();
 				}
+
+				listSurtax = connectData.getSurtax();
+
+				if (checkSurtax(listSurtax))
+				{
+					txtPhuThu.Text = listSurtax[0].TiLePhuThu.ToString();
+				}
+				else
+				{
+					txtPhuThu.Text = "";
+				}
+				listTypeRoom = new List<string>();
+				listTypeRoom.Add("All");
+				for (int i = 0; i < listSurtax.Count; i++)
+				{
+					listTypeRoom.Add(listSurtax[i].MaLP);
+				}
 			}
 		}
 	}

@@ -116,7 +116,7 @@ namespace HotelApp
 					GridMain.Children.Add(usc);
 					break;
 				case "MucChinhSuaSoKhachToiDa":
-					usc = new BookRoom(conData);
+					usc = new PayScreen(conData,"P2");
 					GridMain.Children.Add(usc);
 					break;
 				case "MucDSNhanVien":
