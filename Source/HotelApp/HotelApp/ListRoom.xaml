@@ -39,7 +39,7 @@
                                 <StackPanel Orientation="Horizontal" Width="170">
                                     <Label Content="Loại phòng: " VerticalContentAlignment="Center" FontSize="16"/>
                                     <Label VerticalContentAlignment="Center" >
-                                        <AccessText TextWrapping="Wrap" Text="{Binding MaPhong}" />
+                                        <AccessText TextWrapping="Wrap" Text="{Binding MaLP}" />
                                     </Label>
 
                                 </StackPanel>

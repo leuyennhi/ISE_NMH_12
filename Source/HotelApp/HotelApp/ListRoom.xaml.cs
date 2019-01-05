@@ -32,6 +32,8 @@ namespace HotelApp
             this.LV_ListRoom.ItemsSource = listRoom;
         }
 
+        public string MaPhong { get; internal set; }
+
         private void ListviewDoubleClick(object sender, MouseButtonEventArgs e)
         {
             var selectedItem = sender as ListViewItem;
@@ -50,9 +52,8 @@ namespace HotelApp
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            //items = connectData.findStaff(txtSearch.Text);
-            //lvListStaff.ItemsSource = items;
-            return;
+            items = connectData.findRoom(txtSearch.Text);
+            LV_ListRoom.ItemsSource = items;
         }
     }
 }
