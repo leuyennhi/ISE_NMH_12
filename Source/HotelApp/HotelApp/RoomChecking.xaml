@@ -323,7 +323,7 @@
                 <Button Content="Đặt phòng" Name="btnDat" Width="170" FontSize="25" Height="50" Foreground="Black" Background="White"/>
                 <Button Content="Xoá phòng" Name="btnDeleteRoom" Width="170" FontSize="25" Margin="40,0,0,0" Foreground="Black" Height="50" Background="White"/>
             </StackPanel>
-            <Button Content="Chỉnh sửa thông tin phòng" Name="btnEditRoom" Width="400" Margin="0,40,0,0" FontSize="25" Height="50" Foreground="Black" Background="White"/>
+            <Button Content="Chỉnh sửa thông tin phòng" Click="BtnEditRoom_Click" Name="btnEditRoom" Width="400" Margin="0,40,0,0" FontSize="25" Height="50" Foreground="Black" Background="White"/>
         </StackPanel>
     </DockPanel>
 </UserControl>

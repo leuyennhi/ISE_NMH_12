@@ -14,6 +14,8 @@ using System.Windows.Shapes;
 using System.Data;
 using System.Data.SqlClient;
 using System.Security;
+using System.Globalization;
+using System.Threading;
 
 namespace HotelApp
 {
@@ -22,12 +24,16 @@ namespace HotelApp
     /// </summary>
     public partial class RegisterScreen : UserControl
     {
+        
         private string typeSite = "";
         private List<string> listTypeSite = new List<string>();
 
         public RegisterScreen()
         {
             InitializeComponent();
+            CultureInfo ci = CultureInfo.CreateSpecificCulture(CultureInfo.CurrentCulture.Name);
+            ci.DateTimeFormat.ShortDatePattern = "dd-MM-yyyy";
+            Thread.CurrentThread.CurrentCulture = ci;
             listTypeSite.Add("--None--");
             listTypeSite.Add("Nhân viên");
             listTypeSite.Add("Quản lý");

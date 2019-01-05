@@ -13,12 +13,18 @@
                     <Label   Content="Danh sách phòng"  FontSize="35" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" Foreground="White" Background="blue" VerticalContentAlignment="Center"/>
                 </Border>
             </StackPanel >
+            <StackPanel HorizontalAlignment="Right"  VerticalAlignment="Center" Margin="0,20,40,0">
+                <CheckBox Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" Content="Phòng trống" FontSize="15" Foreground="Black"/>
+            </StackPanel >
             <StackPanel Height="30" Margin="0,20,0,0" Orientation="Horizontal">
                 <Label Content="Tìm kiếm" FontSize="15" Margin="50,0,0,0"></Label>
-                <Border BorderBrush="White" Background="White" BorderThickness="1" CornerRadius="25" Width="850" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0">
-                    <TextBox Name="txtSearch" Width="800" Background="White" FontSize="15" HorizontalAlignment="Center" Height="30" VerticalAlignment="Top" TextChanged="TextBox_TextChanged" Foreground="Black"></TextBox>
+                <Border BorderBrush="White" Background="White" BorderThickness="1" CornerRadius="25" Width="450" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0">
+                    <TextBox TextChanged="TxtSearch_TextChanged" Name="txtSearch" Width="400" Background="White" FontSize="15" HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Foreground="Black" Margin="24,0,0,0"></TextBox>
                 </Border>
+                <Button Name="btnSearchLP" Click="BtnSearchLP_Click" Margin="20,0,0,0" Content="Tìm theo Loại phòng" Height="30" Width="200" HorizontalAlignment="Center" Foreground="Black" Background="White"></Button>
+                <Button Name="btnSearchTP" Click="BtnSearchTP_Click" Margin="20,0,0,0" Content="Tìm theo Tên phòng" Height="30" Width="200" HorizontalAlignment="Center" Foreground="Black" Background="White"></Button>
             </StackPanel>
+            <Button Background="White" Content="Xóa Phòng" Width="100" Foreground="Black" Margin="140,10,0,0" HorizontalAlignment="Left" Click="click_btnDelete"></Button>
             <StackPanel Margin="0,20,0,0">
                 <ListView Height="500"  Width="1000" Name="LV_ListRoom" BorderThickness="0" Background="LightSkyBlue" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Visible">
                     <ListView.ItemsPanel >
@@ -29,11 +35,13 @@
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
                             <EventSetter Event="PreviewMouseDoubleClick" Handler="ListviewDoubleClick"/>
+                            <EventSetter Event="PreviewMouseLeftButtonDown" Handler="ListviewClick"/>
                         </Style>
                     </ListView.ItemContainerStyle>
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Height="150" Width="200" Margin="15" HorizontalAlignment="Center" Background="#D3D3FF">
+                                
                                 <Label Background="LightBlue" Height="30" Width="150" FontWeight="Bold" HorizontalContentAlignment="Center" Content="{Binding MaPhong}" />
 
                                 <StackPanel Orientation="Horizontal" Width="170">

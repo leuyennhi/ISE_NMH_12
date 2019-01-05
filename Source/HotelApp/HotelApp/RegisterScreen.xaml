@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HotelApp"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2" x:Class="HotelApp.RegisterScreen"
         mc:Ignorable="d"
         Height="612" Width="1100"  >
@@ -343,7 +344,7 @@
                         <TextBox Name="txtCMND" TextWrapping="Wrap" BorderThickness="0" VerticalContentAlignment="Center" Width="400" FontSize="25"/>
                     </Border>
                     <Border BorderBrush="White" Height="35" Background="White"  Margin="0,15,0,0" BorderThickness="2" CornerRadius="25" Width="440" HorizontalAlignment="Center" VerticalAlignment="Center" >
-                        <DatePicker Name="datePicker" BorderThickness="0" HorizontalAlignment="Left" VerticalContentAlignment="Center" Width="392" FontSize="25" Margin="8,-3,0,-2" />
+                        <DatePicker  SelectedDate="{x:Static sys:DateTime.Now}" Name="datePicker" BorderThickness="0" HorizontalAlignment="Left" VerticalContentAlignment="Center" Width="392" FontSize="25" Margin="8,-3,0,-2" />
                     </Border>
                     <Border BorderBrush="White" Height="35" Background="White"  Margin="0,20,0,0" BorderThickness="2" CornerRadius="25" Width="440" HorizontalAlignment="Center" VerticalAlignment="Center" >
                         <TextBox Name="txtAddress" TextWrapping="Wrap" BorderThickness="0" VerticalContentAlignment="Center" Width="400" FontSize="25"/>

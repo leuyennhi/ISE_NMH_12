@@ -22,17 +22,24 @@ namespace HotelApp
         DetailOfRoom item = new DetailOfRoom();
         private ConnectData connectData;
         bool isEditing = false;
-        public RoomChecking(ConnectData conData, string maLP)
+        public RoomChecking(ConnectData conData, string maP)
         {
             InitializeComponent();
             connectData = conData;
-            item = connectData.GetDetailOfRoom(maLP);
+            item = connectData.GetDetailOfRoom(maP);
 
             lblPhong.Content = item.MaPhong;
-            lblLoaiPhong.Content = item.MaLP;
-            lblDonGia.Content = item.DonGia;
-            //lblTinhTrang.Content = item.;
-            //lblGhiChu.Content = item.GhiChu;
+            lblLoaiPhong.Content = item.TenLP;
+            lblDonGia.Content = item.DonGia + " VNĐ/đêm";
+            lblTinhTrang.Content = item.TinhTrang.ToString();
+            lblGhiChu.Content = item.GhiChu;
+        }
+
+        private void BtnEditRoom_Click(object sender, RoutedEventArgs e)
+        {
+            ChinhSuaThongTinPhong edit = new ChinhSuaThongTinPhong();
+            edit.Show();
+            
         }
     }
 }
