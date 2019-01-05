@@ -39,6 +39,9 @@ namespace HotelApp
             txtChucVu.Visibility = Visibility.Hidden;
             txtSdt.Visibility = Visibility.Hidden;
             txtDiaChi.Visibility = Visibility.Hidden;
+            borderCV.Visibility = Visibility.Hidden;
+            borderDC.Visibility= Visibility.Hidden;
+            BorderSdt.Visibility = Visibility.Hidden;
         }
 
         private void click_btnDelete(object sender, RoutedEventArgs e)
@@ -65,6 +68,42 @@ namespace HotelApp
             }
             else
             {
+                isEditing = false;
+
+                txtChucVu.Visibility = Visibility.Hidden;
+                txtSdt.Visibility = Visibility.Hidden;
+                txtDiaChi.Visibility = Visibility.Hidden;
+                borderCV.Visibility = Visibility.Hidden;
+                borderDC.Visibility = Visibility.Hidden;
+                BorderSdt.Visibility = Visibility.Hidden;
+
+                btnDelete.Content = "Xóa Nhân Viên";
+                btnEdit.Content = "Chỉnh Sửa Thông Tin";
+            }
+        }
+
+        private void click_btnEdit(object sender, RoutedEventArgs e)
+        {
+            if (isEditing == false)
+            {
+                isEditing = true;
+
+                txtChucVu.Visibility = Visibility.Visible;
+                txtChucVu.Text = item.ChucVu.Trim();
+                txtSdt.Visibility = Visibility.Visible;
+                txtSdt.Text = item.SDT.Trim();
+                txtDiaChi.Visibility = Visibility.Visible;
+                txtDiaChi.Text = item.DiaChi.Trim();
+                borderCV.Visibility = Visibility.Visible;
+                borderDC.Visibility = Visibility.Visible;
+                BorderSdt.Visibility = Visibility.Visible;
+
+                btnEdit.Content = "Lưu Thay Đổi";
+                btnDelete.Content = "Hủy Thay Đổi";
+            }
+            else
+            {
+
                 if (txtChucVu.Text.Trim() == "" || txtDiaChi.Text.Trim() == "" || txtSdt.Text.Trim() == "")
                 {
                     MessageBox.Show("Vui lòng nhập đầy đủ thông tin!!!", "Thiếu Dữ Liệu!!!", MessageBoxButton.OK);
@@ -103,37 +142,13 @@ namespace HotelApp
                 txtChucVu.Visibility = Visibility.Hidden;
                 txtSdt.Visibility = Visibility.Hidden;
                 txtDiaChi.Visibility = Visibility.Hidden;
+                borderCV.Visibility = Visibility.Hidden;
+                borderDC.Visibility = Visibility.Hidden;
+                BorderSdt.Visibility = Visibility.Hidden;
 
                 btnDelete.Content = "Xóa Nhân Viên";
                 btnEdit.Content = "Chỉnh Sửa Thông Tin";
 
-            }
-        }
-
-        private void click_btnEdit(object sender, RoutedEventArgs e)
-        {
-            if (isEditing == false)
-            {
-                isEditing = true;
-
-                txtChucVu.Visibility = Visibility.Visible;
-                txtChucVu.Text = item.ChucVu.Trim();
-                txtSdt.Visibility = Visibility.Visible;
-                txtSdt.Text = item.SDT.Trim();
-                txtDiaChi.Visibility = Visibility.Visible;
-                txtDiaChi.Text = item.DiaChi.Trim();
-
-                btnDelete.Content = "Lưu Thay Đổi";
-                btnEdit.Content = "Hủy Thay Đổi";
-            }
-            else
-            {
-                isEditing = false;
-                txtChucVu.Visibility = Visibility.Hidden;
-                txtSdt.Visibility = Visibility.Hidden;
-                txtDiaChi.Visibility = Visibility.Hidden;
-                btnDelete.Content = "Xóa Nhân Viên";
-                btnEdit.Content = "Chỉnh Sửa Thông Tin";
             }
         }
 

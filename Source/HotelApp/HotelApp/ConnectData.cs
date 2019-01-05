@@ -23,7 +23,7 @@ namespace HotelApp
 		private SqlConnection sql;
 		public ConnectData()
 		{
-			linkSql = @"Data Source=DESKTOP-8GM7A4F\SQLEXPRESS;Initial Catalog=DataForHotelApp;Integrated Security=True";
+			linkSql = @"Data Source=LEUYENNHI\SQLEXPRESS;Initial Catalog=DataForHotelApp;Integrated Security=True";
 			sql = new SqlConnection(linkSql);
 		}
 
@@ -458,7 +458,7 @@ namespace HotelApp
             sql.Close();
             return temp;
         }
-
+        /*
         public DetailOfRoom GetDetailOfRoom(string maLP)
         {
             DetailOfRoom temp = new DetailOfRoom();
@@ -478,6 +478,37 @@ namespace HotelApp
                     temp.SoKhachToiDa = reader.GetInt32(5);
                     temp.SoLuong = reader.GetInt32(6);
                     //temp.GhiChu = reader.GetString(6);
+                }
+                reader.Close();
+            }
+            sql.Close();
+            return temp;
+        }
+        */
+        public DetailOfRoom GetDetailOfRoom(string maPhong)
+        {
+            DetailOfRoom temp = new DetailOfRoom();
+            sql.Open();
+            if (sql.State == System.Data.ConnectionState.Open)
+            {
+                string q = "SELECT PHONG.MaPhong, TenLP, MaPT, DonGia, SoKhachToiDa, SoLuong, GhiChu FROM LOAIPHONG, PHONG WHERE PHONG.MaLP = LOAIPHONG.MaLP AND PHONG.MaPhong = N'" + maPhong + "'";
+                SqlCommand cmd = new SqlCommand(q, sql);
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.Read())
+                {
+                    temp.MaPhong = reader.GetString(0);
+                    temp.TenLP = reader.GetString(1);
+                    temp.MaPT = reader.GetString(2);
+                    temp.DonGia = reader.GetDouble(3);
+                    temp.SoKhachToiDa = reader.GetInt32(4);
+                    temp.SoLuong = reader.GetInt32(5);
+
+                    /*
+                    if (reader.GetString(6) != null)
+                    {
+                        temp.GhiChu = reader.GetString(6);
+                    }
+                    */
                 }
                 reader.Close();
             }
@@ -706,10 +737,20 @@ namespace HotelApp
             }
             sql.Close();
         }
+
+        public void updateInfoRoom(string MaPhong, string MaLP)
+        {
+            sql.Open();
+            if (sql.State == System.Data.ConnectionState.Open)
+            {
+                string q = "UPDATE NHANVIEN SET MaLP = N'" + MaLP + "' WHERE MaPhong = N'" + MaPhong + "'";
+                SqlCommand cmd = new SqlCommand(q, sql);
+                cmd.ExecuteNonQuery();
+            }
+            sql.Close();
+        }
     }
-
-   
-
+    
     public class ListStaff
     {
         public string MaNV { get; set; }
@@ -831,17 +872,6 @@ namespace HotelApp
         public string Phong { get; set; }
 
         public Int32 SoNgayThue { get; set; }
-
-        public float TiLe { get; set; }
-    }
-
-    public class DetailInfoOfRoom
-    {
-        public int STT { get; set; }
-
-        public string Phong { get; set; }
-
-        public float SoNgayThue { get; set; }
 
         public float TiLe { get; set; }
     }

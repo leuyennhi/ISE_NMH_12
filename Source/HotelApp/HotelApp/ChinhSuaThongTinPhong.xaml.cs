@@ -17,11 +17,90 @@ namespace HotelApp
     /// <summary>
     /// Interaction logic for ChinhSuaThongTinPhong.xaml
     /// </summary>
-    public partial class ChinhSuaThongTinPhong : Window
+    public partial class ChinhSuaThongTinPhong : UserControl
     {
-        public ChinhSuaThongTinPhong()
+
+        private ConnectData connectData;
+        DetailOfRoom infoRoom = new DetailOfRoom();
+        List<ListViewDataRoom> infoTypeOfRoom = new List<ListViewDataRoom>();
+        List<string> listTypeOfRoom = new List<string>();
+        int typeOfRoom = 0;
+        string maP;
+
+        public ChinhSuaThongTinPhong(ConnectData conData, string maPhong)
         {
             InitializeComponent();
+            connectData = conData;
+            maP = maPhong;
+            infoRoom = connectData.GetDetailOfRoom(maPhong);
+            infoTypeOfRoom = connectData.getTypeOfRoom();
+
+            for (int i = 0; i < infoTypeOfRoom.Count; i++)
+            {
+                listTypeOfRoom.Add(infoTypeOfRoom[i].LoaiPhong);
+
+                if (infoTypeOfRoom[i].LoaiPhong.Trim() == infoRoom.TenLP.Trim())
+                {
+                    typeOfRoom = i;
+                }
+            }
+
+            lblMP.Content = maPhong;
+            lbldonGia.Content = infoRoom.DonGia;
+            lblsoKhachToiDa.Content = infoRoom.SoKhachToiDa;
+
+            if (infoRoom.GhiChu != null)
+            {
+                txtghiChu.Text = infoRoom.GhiChu.Trim();
+            }
+        }
+
+        private void click_btnSave(object sender, RoutedEventArgs e)
+        {
+            int loaiPhong = cbbLP.SelectedIndex;
+            connectData.updateInfoRoom(maP, infoTypeOfRoom[loaiPhong].MaLP);
+
+            var newWin = new MainScreen();
+            newWin.Show();
+
+            UserControl usc = null;
+            usc = new RoomChecking();
+            newWin.GridMain.Children.Add(usc);
+
+            Window.GetWindow(this).Close();
+
+
+        }
+
+        private void click_btnCancel(object sender, RoutedEventArgs e)
+        {
+            var newWin = new MainScreen();
+            newWin.Show();
+
+            UserControl usc = null;
+            usc = new RoomChecking();
+            newWin.GridMain.Children.Add(usc);
+
+            Window.GetWindow(this).Close();
+
+        }
+
+        private void cbbLP_Loaded(object sender, RoutedEventArgs e)
+        {
+           
+                var combo = sender as ComboBox;
+                combo.ItemsSource = listTypeOfRoom;
+                combo.SelectedIndex = typeOfRoom;
+        }
+
+        private void cbbLP_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var selectedComboItem = sender as ComboBox;
+            typeOfRoom = selectedComboItem.SelectedIndex;
+
+            lbldonGia.Content = infoTypeOfRoom[typeOfRoom].Dongia;
+            lblsoKhachToiDa.Content = infoTypeOfRoom[typeOfRoom].SoKhachToiDa;
+
         }
     }
 }

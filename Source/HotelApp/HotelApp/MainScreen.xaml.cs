@@ -103,6 +103,7 @@ namespace HotelApp
 					break;
 				case "MucDSNhanVien":
                     usc = new DanhSachNhanVien(conData);
+                    //usc = new ChinhSuaThongTinPhong(conData, "P3");
                     GridMain.Children.Add(usc);
                     break;
 				default:
