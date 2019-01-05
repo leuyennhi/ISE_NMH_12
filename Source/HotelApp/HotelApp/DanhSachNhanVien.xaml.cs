@@ -37,22 +37,12 @@ namespace HotelApp
 
         private void ListviewDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            /*
-            DependencyObject selectedItem = (DependencyObject)e.OriginalSource;
 
-            while ((selectedItem != null) && !(selectedItem is ListViewItem))
-            {
-                selectedItem = VisualTreeHelper.GetParent(selectedItem);
-            }
-
-            if (selectedItem == null)
-            {
-                return;
-            }
-            */
             var selectedItem = sender as ListViewItem;
 
             ListStaff dataItem = (ListStaff)lvListStaff.ItemContainerGenerator.ItemFromContainer(selectedItem);
+
+            //Viết cái dòng chuyển màn hình vô nhaaaaaaaaaaaaaaaaaaaaa
 
             var newWin = new MainScreen();
             newWin.Show();
@@ -73,7 +63,7 @@ namespace HotelApp
         private void ListviewClick(object sender, MouseButtonEventArgs e)
         {
             listDelete = new List<string>();
-           
+
             var selectedItem = sender as ListViewItem;
             ListStaff dataItem = (ListStaff)lvListStaff.ItemContainerGenerator.ItemFromContainer(selectedItem);
 
@@ -98,7 +88,7 @@ namespace HotelApp
             }
         }
 
-        
+
     }
-    
+
 }

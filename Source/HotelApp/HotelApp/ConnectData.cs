@@ -23,7 +23,7 @@ namespace HotelApp
 		private SqlConnection sql;
 		public ConnectData()
 		{
-			linkSql = @"Data Source=DESKTOP-8GM7A4F\SQLEXPRESS;Initial Catalog=DataForHotelApp;Integrated Security=True";
+			linkSql = @"Data Source=LEUYENNHI\SQLEXPRESS;Initial Catalog=DataForHotelApp;Integrated Security=True";
 			sql = new SqlConnection(linkSql);
 		}
 
@@ -405,25 +405,163 @@ namespace HotelApp
 			return;
 		}
 
-		public List<Customer> getListCustomer()
-		{
-			List<Customer> temp = new List<Customer>();
-			sql.Open();
-			if (sql.State == System.Data.ConnectionState.Open)
-			{
-				string q = "SELECT MaKH,TenKH,DiaChi,SDT,CMND,MaLK,DaXoa FROM KHACHHANG";
-				SqlCommand cmd = new SqlCommand(q, sql);
-				SqlDataReader reader = cmd.ExecuteReader();
-				while (reader.Read())
-				{
-					//	var time = reader.GetDateTime(1).ToString("dd/MM/yyyy");
-					temp.Add(new Customer() { MaKH = reader.GetString(0), TenKH = reader.GetString(1), DiaChi = reader.GetString(2), SDT=reader.GetString(3), CMND=reader.GetString(4), MaLK=reader.GetString(5), DaXoa=reader.GetBoolean(6) });
-				}
-				reader.Close();
-			}
-			sql.Close();
-			return temp;
-		}
+        public List<Customer> getListCustomer()
+        {
+            List<Customer> temp = new List<Customer>();
+            sql.Open();
+            if (sql.State == System.Data.ConnectionState.Open)
+            {
+                string q = "SELECT COUNT(*) FROM NHANVIEN";
+                SqlCommand cmd = new SqlCommand(q, sql);
+                int count = Convert.ToInt32(cmd.ExecuteScalar());
+                if (count == 0)
+                {
+                    sql.Close();
+                    return temp;
+                }
+                else
+                {
+                    q = "SELECT KH.MaKH, TenKH, DiaChi, SDT, CMND, LK.TenLK, DaXoa FROM KHACHHANG KH, LOAIKHACH LK WHERE KH.MaLK = LK.MaLK";
+                    cmd = new SqlCommand(q, sql);
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        //	var time = reader.GetDateTime(1).ToString("dd/MM/yyyy");
+                        if (!reader.GetSqlBoolean(6))
+                        {
+                            temp.Add(new Customer() { MaKH = reader.GetString(0), TenKH = reader.GetString(1), DiaChi = reader.GetString(2), SDT = reader.GetString(3), CMND = reader.GetString(4), LoaiKhach = reader.GetString(5), DaXoa = reader.GetBoolean(6) });
+                        }
+
+                    }
+                    reader.Close();
+                }
+            }
+            sql.Close();
+            return temp;
+        }
+
+        public List<Customer> findCustommer_Name(string name)
+        {
+            List<Customer> temp = new List<Customer>();
+            sql.Open();
+
+            if (sql.State == System.Data.ConnectionState.Open)
+            {
+                string q = "SELECT COUNT(*) FROM KHACHHANG";
+                SqlCommand cmd = new SqlCommand(q, sql);
+                int count = Convert.ToInt32(cmd.ExecuteScalar());
+                if (count == 0)
+                {
+                    sql.Close();
+                    return temp;
+                }
+                else
+                {
+                    q = "SELECT KH.MaKH, TenKH, DiaChi, SDT, CMND, LK.TenLK, DaXoa FROM KHACHHANG KH, LOAIKHACH LK WHERE KH.MaLK = LK.MaLK";
+                    cmd = new SqlCommand(q, sql);
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        if (!reader.GetBoolean(6))
+                        {
+                            if (reader.GetString(1).ToLower().IndexOf(name.ToLower()) != -1)
+                            {
+                                temp.Add(new Customer() { MaKH = reader.GetString(0), TenKH = reader.GetString(1), DiaChi = reader.GetString(2), SDT = reader.GetString(3), CMND = reader.GetString(4), LoaiKhach = reader.GetString(5), DaXoa = reader.GetBoolean(6) });
+                            }
+                        }
+                    }
+                    reader.Close();
+                }
+            }
+            sql.Close();
+            return temp;
+        }
+
+        public List<Customer> findCustommer_Type(string type)
+        {
+            List<Customer> temp = new List<Customer>();
+            sql.Open();
+
+            if (sql.State == System.Data.ConnectionState.Open)
+            {
+                string q = "SELECT COUNT(*) FROM KHACHHANG";
+                SqlCommand cmd = new SqlCommand(q, sql);
+                int count = Convert.ToInt32(cmd.ExecuteScalar());
+                if (count == 0)
+                {
+                    sql.Close();
+                    return temp;
+                }
+                else
+                {
+                    q = "SELECT KH.MaKH, TenKH, DiaChi, SDT, CMND, LK.TenLK, DaXoa FROM KHACHHANG KH, LOAIKHACH LK WHERE KH.MaLK = LK.MaLK";
+                    cmd = new SqlCommand(q, sql);
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        if (!reader.GetBoolean(6))
+                        {
+                            if (reader.GetString(5).ToLower().IndexOf(type.ToLower()) != -1)
+                            {
+                                temp.Add(new Customer() { MaKH = reader.GetString(0), TenKH = reader.GetString(1), DiaChi = reader.GetString(2), SDT = reader.GetString(3), CMND = reader.GetString(4), LoaiKhach = reader.GetString(5), DaXoa = reader.GetBoolean(6) });
+                            }
+                        }
+                    }
+                    reader.Close();
+                }
+            }
+            sql.Close();
+            return temp;
+        }
+
+        public bool deleteCustomer(List<string> listCustomer)
+        {
+            sql.Open();
+            if (sql.State == System.Data.ConnectionState.Open)
+            {
+                for (int i = 0; i < listCustomer.Count(); i++)
+                {
+                    string q = "SELECT COUNT(*) FROM DATPHONG WHERE MaKH = N'" + listCustomer[i] + "'";
+                    SqlCommand cmd = new SqlCommand(q, sql);
+                    int count = Convert.ToInt32(cmd.ExecuteScalar());
+                    if (count != 0)
+                    {
+                        MessageBox.Show("Không thể xóa khách hàng có mã" + listCustomer[i] + "\nDo khách hàng đang đặt phòng!!!", "Không Thể Xóa!!!", MessageBoxButton.OK);
+                        sql.Close();
+                        return false;
+                    }
+
+                    q = "SELECT COUNT(*) FROM TRAPHONG WHERE MaKH = N'" + listCustomer[i] + "'";
+                    cmd = new SqlCommand(q, sql);
+                    count = Convert.ToInt32(cmd.ExecuteScalar());
+                    if (count != 0)
+                    {
+                        MessageBox.Show("Không thể xóa khách hàng có mã " + listCustomer[i] + "\nDo còn thông tin khách hàng này ở mục trả phòng!!!", "Không Thể Xóa!!!", MessageBoxButton.OK);
+                        sql.Close();
+                        return false;
+                    }
+
+                    q = "UPDATE KHACHHANG SET DaXoa = 1 WHERE MaKH = N'" + listCustomer[i] + "'";
+                    cmd = new SqlCommand(q, sql);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            sql.Close();
+            return true;
+        }
+
+        public void updateCustomer(string MaKH, string SDT, string DiaChi, string MaLK)
+        {
+            sql.Open();
+            if (sql.State == System.Data.ConnectionState.Open)
+            {
+                string q = "UPDATE KHACHHANG SET DiaChi = N'" + DiaChi + "', SDT = N'" + SDT + "', MaLK = N'" + MaLK + "' WHERE MaKH = N'" + MaKH + "'";
+                SqlCommand cmd = new SqlCommand(q, sql);
+                cmd.ExecuteNonQuery();
+            }
+            sql.Close();
+        }
+
 
         public List<Room> getListRoom()
         {
@@ -457,6 +595,18 @@ namespace HotelApp
            
             sql.Close();
             return temp;
+        }
+
+        public void updateInfoRoom(string MaPhong, string MaLP, string ghiChu)
+        {
+            sql.Open();
+            if (sql.State == System.Data.ConnectionState.Open)
+            {
+                string q = "UPDATE PHONG SET MaLP = N'" + MaLP + "', GhiChu = N'" + ghiChu + "' WHERE MaPhong = N'" + MaPhong + "'";
+                SqlCommand cmd = new SqlCommand(q, sql);
+                cmd.ExecuteNonQuery();
+            }
+            sql.Close();
         }
 
         //public DetailOfRoom GetDetailOfRoom(string maPhong)
@@ -513,13 +663,8 @@ namespace HotelApp
                     temp.DonGia = reader.GetDouble(4);
                     temp.SoKhachToiDa = reader.GetInt32(5);
                     temp.SoLuong = reader.GetInt32(6);
-
-                    /*
-                    if (reader.GetString(6) != null)
-                    {
-                        temp.GhiChu = reader.GetString(6);
-                    }
-                    */
+                    temp.GhiChu = reader.GetString(7);
+                   
                 }
                 reader.Close();
             }
@@ -868,7 +1013,7 @@ namespace HotelApp
 
 		public string CMND { get; set; }
 
-		public string MaLK { get; set; }
+		public string LoaiKhach { get; set; }
 
 		public string DiaChi { get; set; }
 

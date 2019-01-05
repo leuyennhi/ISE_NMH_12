@@ -14,9 +14,9 @@
         <Label Content="BÁO CÁO DOANH THU THEO LOẠI PHÒNG" HorizontalAlignment="Center" Margin="0,58,0,0" VerticalAlignment="Top" FontSize="30" FontWeight="Black"/>
         <StackPanel  Orientation="Horizontal" HorizontalAlignment="Left" Margin="100,30,0,0">
             <Label Content="Tháng: " FontSize="30" Margin="0,0,23,0"/>
-            <Border BorderBrush="White" Height="50" Background="White" BorderThickness="1" CornerRadius="25" Width="140" HorizontalAlignment="Center" VerticalAlignment="Center" >
+            <Border BorderBrush="White" Height="50" Background="White" BorderThickness="1" CornerRadius="25" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" >
                 <ComboBox  Name ="month" SelectionChanged="month_SelectionChanged" VerticalContentAlignment="Center" HorizontalAlignment="Center" Background="White"
-                                Width="100" FontSize="25" BorderThickness="0" Foreground="Black">
+                                Width="70" FontSize="25" BorderThickness="0" Foreground="Black">
                     <ComboBox.ItemContainerStyle>
                         <Style TargetType="{x:Type ComboBoxItem}">
                             <Setter Property="Background" Value="White"/>

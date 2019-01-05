@@ -40,7 +40,7 @@ namespace HotelApp
             txtSdt.Visibility = Visibility.Hidden;
             txtDiaChi.Visibility = Visibility.Hidden;
             borderCV.Visibility = Visibility.Hidden;
-            borderDC.Visibility= Visibility.Hidden;
+            borderDC.Visibility = Visibility.Hidden;
             BorderSdt.Visibility = Visibility.Hidden;
         }
 
@@ -54,6 +54,7 @@ namespace HotelApp
                     temp.Add(item.MaNV);
                     if (connectData.deleteStaffs(temp))
                     {
+                        //Viết cái dòng chuyển màn hình vô nhaaaaaaaaaaaaaaaaaaaaa
                         var newWin = new MainScreen();
                         newWin.Show();
 
@@ -78,7 +79,7 @@ namespace HotelApp
                 BorderSdt.Visibility = Visibility.Hidden;
 
                 btnDelete.Content = "Xóa Nhân Viên";
-                btnEdit.Content = "Chỉnh Sửa Thông Tin";
+                btnEdit.Content = "Chỉnh Sửa";
             }
         }
 
@@ -147,7 +148,7 @@ namespace HotelApp
                 BorderSdt.Visibility = Visibility.Hidden;
 
                 btnDelete.Content = "Xóa Nhân Viên";
-                btnEdit.Content = "Chỉnh Sửa Thông Tin";
+                btnEdit.Content = "Chỉnh Sửa";
 
             }
         }
@@ -162,6 +163,7 @@ namespace HotelApp
 
             else
             {
+                //Viết cái dòng chuyển màn hình vô nhaaaaaaaaaaaaaaaaaaaaa
                 var newWin = new MainScreen();
                 newWin.Show();
 

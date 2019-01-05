@@ -220,7 +220,7 @@
     <Resource Include="Resources\screen.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\back.png" />
+    <Resource Include="Resources\back.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

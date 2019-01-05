@@ -39,7 +39,6 @@
                         <DataTemplate>
                             <StackPanel Height="150" Width="200" Margin="15" HorizontalAlignment="Center" Background="LightSkyBlue">
                                 <StackPanel Orientation="Horizontal" Width="200" Height="30">
-                                    <CheckBox Name ="checkBox" Height="20" Width="20" HorizontalAlignment="Left" Background="DeepSkyBlue" ></CheckBox>
                                     <Label Name="lblMaNV" Background="DeepSkyBlue" Height="30" Width="200" FontWeight="Bold" HorizontalContentAlignment="Center" Content="{Binding MaNV}" />
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" Width="200">

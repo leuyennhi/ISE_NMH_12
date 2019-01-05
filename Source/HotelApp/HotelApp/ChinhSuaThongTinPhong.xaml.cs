@@ -57,14 +57,21 @@ namespace HotelApp
 
         private void click_btnSave(object sender, RoutedEventArgs e)
         {
-            int loaiPhong = cbbLP.SelectedIndex;
-            connectData.updateInfoRoom(maP, infoTypeOfRoom[loaiPhong].MaLP);
+            string loaiPhong = cbbLP.SelectedItem.ToString();
+
+            int i = 0;
+            while (infoTypeOfRoom[i].LoaiPhong.Trim() != loaiPhong)
+            {
+                i++;
+            }
+
+            connectData.updateInfoRoom(maP, infoTypeOfRoom[i].MaLP, txtghiChu.Text);
 
             var newWin = new MainScreen();
             newWin.Show();
 
             UserControl usc = null;
-            usc = new RoomChecking();
+            usc = new RoomChecking(connectData, maP);
             newWin.GridMain.Children.Add(usc);
 
             Window.GetWindow(this).Close();
@@ -78,7 +85,7 @@ namespace HotelApp
             newWin.Show();
 
             UserControl usc = null;
-            usc = new RoomChecking();
+            usc = new RoomChecking(connectData, maP);
             newWin.GridMain.Children.Add(usc);
 
             Window.GetWindow(this).Close();
@@ -87,10 +94,10 @@ namespace HotelApp
 
         private void cbbLP_Loaded(object sender, RoutedEventArgs e)
         {
-           
-                var combo = sender as ComboBox;
-                combo.ItemsSource = listTypeOfRoom;
-                combo.SelectedIndex = typeOfRoom;
+
+            var combo = sender as ComboBox;
+            combo.ItemsSource = listTypeOfRoom;
+            combo.SelectedIndex = typeOfRoom;
         }
 
         private void cbbLP_SelectionChanged(object sender, SelectionChangedEventArgs e)

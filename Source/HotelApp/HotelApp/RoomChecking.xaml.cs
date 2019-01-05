@@ -21,11 +21,13 @@ namespace HotelApp
     {
         DetailOfRoom item = new DetailOfRoom();
         private ConnectData connectData;
+        string maPhong;
         bool isEditing = false;
         public RoomChecking(ConnectData conData, string maP)
         {
             InitializeComponent();
             connectData = conData;
+            maPhong = maP;
             item = connectData.GetDetailOfRoom(maP);
 
             lblPhong.Content = item.MaPhong;
@@ -37,8 +39,8 @@ namespace HotelApp
 
         private void BtnEditRoom_Click(object sender, RoutedEventArgs e)
         {
-            ChinhSuaThongTinPhong edit = new ChinhSuaThongTinPhong();
-            edit.Show();
+            ChinhSuaThongTinPhong edit = new ChinhSuaThongTinPhong(connectData,maPhong);
+            //edit.Show();
             
         }
     }

@@ -9,9 +9,9 @@
     Height="612" Width="1100">
 
     <StackPanel Margin="0,0,0,0" Grid.Row="0" Grid.Column="1" Background="#DEDEDE" >
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,58,0,0">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"    Margin="0,58,0,0">
             <Canvas/>
-            <Label Content="CHỈNH SỬA THÔNG TIN PHÒNG" HorizontalAlignment="Center" Margin="310,0,0,0" VerticalAlignment="Top" FontSize="25" FontWeight="Black"/>
+            <Label Content="CHỈNH SỬA THÔNG TIN PHÒNG" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Top" FontSize="25" FontWeight="Black"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="400,40,0,0">
             <Label Content="Mã phòng:" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" FontSize="20"/>
@@ -34,12 +34,12 @@
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="400,25,0,0">
             <Label Content="Ghi chú:" HorizontalAlignment="Left" Margin="0,0,0,0" FontSize="20" VerticalAlignment="Top"/>
             <Border BorderBrush="White" Height="35" Background="White" BorderThickness="1" CornerRadius="25" Width="450" HorizontalAlignment="Center" VerticalAlignment="Center" >
-                <TextBox Name="txtghiChu" HorizontalAlignment="Center" Height="30" Background="White" Margin="5,0,0,0" FontSize="20" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="400"/>
+                <TextBox Name="txtghiChu" HorizontalAlignment="Center" Foreground="Black" Height="30" Background="White" Margin="5,0,0,0" FontSize="20" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="400"/>
             </Border>
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,25,0,0">
-            <Button Click="click_btnSave" Content="Lưu Thay Đổi" HorizontalAlignment="Center" Margin="0,0,0,0" FontSize="20" VerticalAlignment="Center" Width="170"/>
-            <Button Click="click_btnCancel" Content="Hủy Thay Đổi" HorizontalAlignment="Center" Margin="20,0,0,0" FontSize="20" VerticalAlignment="Center" Width="170"/>
+            <Button Click="click_btnSave" Background="White" Foreground="Black" Content="Lưu Thay Đổi" Margin="0,0,0,0" Width="170"/>
+            <Button Click="click_btnCancel" Background="White" Foreground="Black" Content="Hủy Thay Đổi" HorizontalAlignment="Center" Margin="20,0,0,0" VerticalAlignment="Center" Width="170"/>
         </StackPanel>
     </StackPanel>
 </UserControl>

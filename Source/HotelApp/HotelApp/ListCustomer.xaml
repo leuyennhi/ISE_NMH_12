@@ -6,42 +6,60 @@
         xmlns:local="clr-namespace:HotelApp"
         mc:Ignorable="d"
         Height="612" Width="1100">
+
     <DockPanel Background="#DEDEDE" LastChildFill="True">
-        <StackPanel Margin="0,0,40,0" Orientation="Vertical">
-            <StackPanel HorizontalAlignment="Center"  VerticalAlignment="Center" Margin="0,20,40,0">
-                <Border BorderBrush="White" BorderThickness="2" CornerRadius="10" Height="60" Width="400" HorizontalAlignment="Left" VerticalAlignment="Top"  Background="Blue">
-                    <Label   Content="Danh sách khách"  FontSize="35" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" Foreground="White" Background="blue" VerticalContentAlignment="Center"/>
-                </Border>
+        <StackPanel Margin="0,0,0,0" Orientation="Vertical">
+            <StackPanel HorizontalAlignment="Center"  VerticalAlignment="Center" Margin="0,58,0,0">
+                <Label   Content="Danh Sách Khách Hàng" FontSize="30" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" Foreground="Black" VerticalContentAlignment="Center"/>
             </StackPanel >
+            <StackPanel Height="32" Margin="0,20,0,0" Orientation="Horizontal">
+                <Label Content="Tìm kiếm" FontSize="15" Margin="50,0,0,0"></Label>
+                <Border BorderBrush="White" Background="White" BorderThickness="1" CornerRadius="25" Width="650" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0">
+                    <TextBox Name="txtSearch" Width="600" Background="White" FontSize="15" HorizontalAlignment="Center" Height="30" VerticalAlignment="Top" Foreground="Black" TextChanged="txtSearch_TextChanged"></TextBox>
+                </Border>
+                <Button Name="btnFindName" Content="Tìm theo tên" FontSize="12" Width="110" Background="White" Foreground="Black" Margin="10,0,0,0" VerticalAlignment="Bottom" Click="btnFindName_Click"></Button>
+                <Button Name="btnFindType" Content="Tìm theo loại" FontSize="12" Width="110" Background="White" Foreground="Black" Margin="10,0,0,0" VerticalAlignment="Top" Click="btnFindType_Click"></Button>
+            </StackPanel>
+            <Button Background="White" Content="Xóa KH" Width="100" Foreground="Black" Margin="140,10,0,0" HorizontalAlignment="Left" Click="click_btnDelete"></Button>
             <StackPanel Margin="0,20,0,0">
-                <ListView Height="500"  Width="1000" Name="LV_ListCustomer" BorderThickness="0" Background="LightSkyBlue" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                <ListView Height="500"  Width="1000" Name="lvListCustomer" BorderThickness="0" Background="LightSkyBlue" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Visible">
                     <ListView.ItemsPanel >
                         <ItemsPanelTemplate >
                             <WrapPanel Orientation="Horizontal" Width="1000" VerticalAlignment="Top"></WrapPanel>
                         </ItemsPanelTemplate>
                     </ListView.ItemsPanel>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <EventSetter Event="PreviewMouseDoubleClick" Handler="ListviewDoubleClick"/>
+                            <EventSetter Event="PreviewMouseLeftButtonDown" Handler="ListviewClick"/>
+                        </Style>
+                    </ListView.ItemContainerStyle>
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Height="150" Width="200" Margin="15" HorizontalAlignment="Center" Background="#D3D3FF">
-                                <Label Background="LightBlue" Height="30" Width="150" FontWeight="Bold" HorizontalContentAlignment="Center" Content="{Binding MaKH}" />
-
-                                <StackPanel Orientation="Horizontal" Width="150">
-                                    <Label Content="Ho Ten: " VerticalContentAlignment="Center" FontSize="16"/>
+                            <StackPanel Height="150" Width="200" Margin="15" HorizontalAlignment="Center" Background="LightSkyBlue">
+                                <StackPanel Orientation="Horizontal" Width="200" Height="30">
+                                    <Label Name="lblMaKH" Background="DeepSkyBlue" Height="30" Width="200" FontWeight="Bold" HorizontalContentAlignment="Center" Content="{Binding MaKH}" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Width="200">
+                                    <Label Content="Họ Tên: " VerticalContentAlignment="Center"/>
                                     <Label VerticalContentAlignment="Center" >
                                         <AccessText TextWrapping="Wrap" Text="{Binding TenKH}" />
                                     </Label>
-                                    
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
                                     <Label Content="SDT: " VerticalContentAlignment="center" />
                                     <Label Content="{Binding SDT}" VerticalContentAlignment="center"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" >
-                                    <Label Content="CMND: " VerticalContentAlignment="center" />
-                                    <Label Content="{Binding CMND}" VerticalContentAlignment="center"/>
+                                    <Label Content="Loại Khách: " VerticalContentAlignment="center" />
+                                    <Label Content="{Binding LoaiKhach}" VerticalContentAlignment="center"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" >
+                                    <Label Content="Địa Chỉ: " VerticalContentAlignment="center" />
+                                    <Label Content="{Binding DiaChi}" VerticalContentAlignment="center"/>
                                 </StackPanel>
                             </StackPanel>
-                            
+
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>

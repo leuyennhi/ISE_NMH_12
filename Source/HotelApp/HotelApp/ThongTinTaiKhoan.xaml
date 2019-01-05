@@ -38,7 +38,7 @@
                 <Border Name="borderDC" BorderBrush="White" Height="35" Background="White" BorderThickness="1" CornerRadius="25" Width="550" HorizontalAlignment="Center" VerticalAlignment="Center" >
                     <TextBox Name="txtDiaChi" Margin="5,0,0,0"  Width="500" Background="White" FontSize="20" Foreground="Black"></TextBox>
                 </Border>
-            </Canvas>           
+            </Canvas>
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="400,10,0,0">
             <Label Content="Số điện thoại:" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" FontSize="20"/>
@@ -57,10 +57,10 @@
                     <TextBox Name="txtChucVu" Margin="5,0,0,0" Width="200" Background="White" FontSize="20" Foreground="Black"></TextBox>
                 </Border>
             </Canvas>
-            </StackPanel>
+        </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
-            <Button Name="btnEdit" Content="Chỉnh Sửa Thông Tin" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Width="170" Click="click_btnEdit"/>
-            <Button Name="btnDelete" Content="Xóa Nhân Viên" HorizontalAlignment="Center" Margin="20,0,0,0" VerticalAlignment="Center" Width="170" Click="click_btnDelete"/>
+            <Button Name="btnEdit" Background="White" Foreground="Black" Content="Chỉnh Sửa Thông Tin" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Width="170" Click="click_btnEdit"/>
+            <Button Name="btnDelete" Background="White" Foreground="Black" Content="Xóa Nhân Viên" HorizontalAlignment="Center" Margin="20,0,0,0" VerticalAlignment="Center" Width="170" Click="click_btnDelete"/>
         </StackPanel>
     </StackPanel>
 </UserControl>
