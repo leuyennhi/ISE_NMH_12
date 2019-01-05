@@ -18,18 +18,30 @@ namespace HotelApp
 	/// <summary>
 	/// Interaction logic for MainScreen.xaml
 	/// </summary>
-	public partial class MainScreen : Window
+	public partial class MainScreen : UserControl
 	{
 		private ConnectData conData;
-
+		private ListStaff currentUser;
 		public MainScreen()
 		{
 			InitializeComponent();
 
 			conData = new ConnectData();
+			
+
+			Global.mainNavigate = GridMain;
+
+			currentUser = conData.getCurrentUser();
+			lbltenNV.Content = currentUser.TenNV;
+			lblchucVu.Content = currentUser.ChucVu;
+
+
 			//nếu là nhân viên thì ẩn đi
-			//MucDSNhanVien.Visibility = Visibility.Hidden;
-			//MucDSNhanVien.Visibility = Visibility.Collapsed;
+			if (currentUser.ChucVu == "Nhân viên")
+			{
+				MucDSNhanVien.Visibility = Visibility.Hidden;
+				MucDSNhanVien.Visibility = Visibility.Collapsed;
+			}
 		}
 
 		private void ButtonOpenMenu_Click(object sender, RoutedEventArgs e)
@@ -61,9 +73,10 @@ namespace HotelApp
 
 		private void Logout_Click(object sender, RoutedEventArgs e)
 		{
-            LoginScreen lgScreen = new LoginScreen();
-            lgScreen.Show();
-            this.Close();
+			//chuyen sang login
+			UserControl urc = new LoginScreen();
+			Global.registernavigation.Children.Add(urc);
+			Global.MaNV = "";
 			
 		}
 
@@ -103,6 +116,8 @@ namespace HotelApp
 					GridMain.Children.Add(usc);
 					break;
 				case "MucChinhSuaSoKhachToiDa":
+					usc = new BookRoom(conData);
+					GridMain.Children.Add(usc);
 					break;
 				case "MucDSNhanVien":
                     usc = new DanhSachNhanVien(conData);

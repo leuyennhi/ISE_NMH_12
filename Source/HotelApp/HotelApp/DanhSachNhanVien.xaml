@@ -21,9 +21,12 @@
                     <TextBox Name="txtSearch" Width="800" Background="White" FontSize="15" HorizontalAlignment="Center" Height="30" VerticalAlignment="Top" TextChanged="TextBox_TextChanged" Foreground="Black"></TextBox>
                 </Border>
             </StackPanel>
-            <Button Background="White" Content="Xóa NV" Width="100" Foreground="Black" Margin="140,10,0,0" HorizontalAlignment="Left" Click="click_btnDelete"></Button>
+            <StackPanel Orientation="Horizontal">
+                <Button Background="White" Content="Xóa Nhân viên" Width="150" Foreground="Black" Margin="140,10,0,0" HorizontalAlignment="Left" Click="click_btnDelete"></Button>
+
+            </StackPanel>
             <StackPanel Margin="0,20,0,0">
-                <ListView Height="500"  Width="1000" Name="lvListStaff" BorderThickness="0" Background="LightSkyBlue" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                <ListView Height="404"  Width="1000" Name="lvListStaff" BorderThickness="0" Background="LightSkyBlue" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Visible">
                     <ListView.ItemsPanel >
                         <ItemsPanelTemplate >
                             <WrapPanel Orientation="Horizontal" Width="1000" VerticalAlignment="Top"></WrapPanel>

@@ -42,16 +42,9 @@ namespace HotelApp
 
             ListStaff dataItem = (ListStaff)lvListStaff.ItemContainerGenerator.ItemFromContainer(selectedItem);
 
-            //Viết cái dòng chuyển màn hình vô nhaaaaaaaaaaaaaaaaaaaaa
-
-            var newWin = new MainScreen();
-            newWin.Show();
-
-            UserControl usc = null;
-            usc = new ThongTinTaiKhoan(connectData, dataItem.MaNV);
-            newWin.GridMain.Children.Add(usc);
-
-            Window.GetWindow(this).Close();
+			UserControl usc = null;
+			usc = new ThongTinTaiKhoan(connectData, dataItem.MaNV);
+			Global.mainNavigate.Children.Add(usc);
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -86,9 +79,7 @@ namespace HotelApp
                 items = connectData.getListStaff();
                 lvListStaff.ItemsSource = items;
             }
-        }
-
-
-    }
+        }	
+	}
 
 }

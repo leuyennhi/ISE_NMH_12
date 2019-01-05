@@ -1,11 +1,11 @@
-﻿<Window x:Class="HotelApp.LoginScreen"
+﻿<UserControl x:Class="HotelApp.LoginScreen"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Hotel Management" Height="700" Width="1300" FontSize="14"
-        ResizeMode="NoResize">
-    <Window.Background>
+        Height="700" Width="1300" FontSize="14"
+       >
+    <UserControl.Background>
         <ImageBrush ImageSource="pack://siteoforigin:,,,/Resources/screen.jpg"/>
-    </Window.Background>
+    </UserControl.Background>
     <StackPanel Margin="94" HorizontalAlignment="Center">
         <Label Content="Đăng nhập" Foreground="White" HorizontalAlignment="Center" FontSize="25"/>
         <Separator></Separator>
@@ -13,8 +13,8 @@
         <TextBox Name="txtUsername" Background="#545d6a" Foreground="White" FontSize="18"/>
         <Label Content="Password:" Foreground="White"/>
         <PasswordBox Name="txtPassword" Background="#545d6a" Foreground="White" FontSize="18"/>
-        <Button Name="btnLogin" Click="BtnLogin_Click" Content="Đăng nhập" Margin="50 50" Background="#545d6a" Foreground="White" FontSize="18" IsDefault="True"/>
-        <Button x:Name="btnForget" Content="Quên mật khẩu?" Margin="50 0" Background="#545d6a" Foreground="White" FontSize="18"/>
+        <Button Name="btnLogin" Click="BtnLogin_Click" Content="Đăng nhập" Margin="50,50,50,25" Background="#545d6a" Foreground="White" FontSize="18" IsDefault="True"/>
+        <Button Name="btnForget" Click="BtnForget_Click" Content="Quên mật khẩu?" Margin="50 0" Background="#545d6a" Foreground="White" FontSize="18" />
+        <Button Name="btnRegister" Click="BtnRegister_Click" Content="Đăng kí tài khoản" Margin="50,25" Background="#545d6a" Foreground="White" FontSize="18"/>
     </StackPanel>
-
-</Window>
+</UserControl>

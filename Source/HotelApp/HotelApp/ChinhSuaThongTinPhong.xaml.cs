@@ -67,28 +67,19 @@ namespace HotelApp
 
             connectData.updateInfoRoom(maP, infoTypeOfRoom[i].MaLP, txtghiChu.Text);
 
-            var newWin = new MainScreen();
-            newWin.Show();
-
+            
             UserControl usc = null;
             usc = new RoomChecking(connectData, maP);
-            newWin.GridMain.Children.Add(usc);
-
-            Window.GetWindow(this).Close();
+            Global.mainNavigate.Children.Add(usc);
 
 
         }
 
         private void click_btnCancel(object sender, RoutedEventArgs e)
         {
-            var newWin = new MainScreen();
-            newWin.Show();
-
             UserControl usc = null;
             usc = new RoomChecking(connectData, maP);
-            newWin.GridMain.Children.Add(usc);
-
-            Window.GetWindow(this).Close();
+            Global.mainNavigate.Children.Add(usc);
 
         }
 

@@ -53,6 +53,7 @@ namespace HotelApp
 			//MessageBox.Show(typeRoom);
 			int vitri = findIndex(list_Type_Rooms, typeRoom);
 			txtDonGia.Text = list_Type_Rooms[vitri].Dongia.ToString();
+			txtSoKhachToiDa.Text = list_Type_Rooms[vitri].SoKhachToiDa.ToString();
 		}
 
 		private int findIndex(List<ListViewDataRoom> temp, string type)
@@ -99,15 +100,6 @@ namespace HotelApp
 			return true;
 		}
 
-		private void DanhSachPhong(object sender, RoutedEventArgs e)
-		{
-
-		}
-
-		private void LoaiPhong(object sender, RoutedEventArgs e)
-		{
-		}
-
 		private void Cancel(object sender, RoutedEventArgs e)
 		{
 			return;
@@ -125,7 +117,7 @@ namespace HotelApp
 			{
 				int vitri = findIndex(list_Type_Rooms, typeRoom);
 				string maLP = list_Type_Rooms[vitri].MaLP;
-				connectData.setNewRoom(maLP, txtTenPhong.Text);
+				connectData.setNewRoom(maLP, txtTenPhong.Text, txtGhiChu.Text);
 			}
 		}
 	}

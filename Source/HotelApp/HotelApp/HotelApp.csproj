@@ -68,6 +68,9 @@
     <Compile Include="AddRoomScreen.xaml.cs">
       <DependentUpon>AddRoomScreen.xaml</DependentUpon>
     </Compile>
+    <Compile Include="BookRoom.xaml.cs">
+      <DependentUpon>BookRoom.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ConnectData.cs" />
     <Compile Include="EditSurtax.xaml.cs">
       <DependentUpon>EditSurtax.xaml</DependentUpon>
@@ -81,8 +84,14 @@
     <Compile Include="MainScreen.xaml.cs">
       <DependentUpon>MainScreen.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MainView.xaml.cs">
+      <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PasswordChanging.xaml.cs">
       <DependentUpon>PasswordChanging.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PayScreen.xaml.cs">
+      <DependentUpon>PayScreen.xaml</DependentUpon>
     </Compile>
     <Compile Include="RegisterScreen.xaml.cs">
       <DependentUpon>RegisterScreen.xaml</DependentUpon>
@@ -110,6 +119,10 @@
     <Page Include="BaoCaoMatDo.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="BookRoom.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ChinhSuaThongTinPhong.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -151,9 +164,17 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MainView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="PasswordChanging.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PayScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="RegisterScreen.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -195,7 +216,6 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -218,9 +238,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\screen.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\back.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

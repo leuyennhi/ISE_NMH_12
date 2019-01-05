@@ -53,7 +53,10 @@ namespace HotelApp
 
             Customer dataItem = (Customer)lvListCustomer.ItemContainerGenerator.ItemFromContainer(selectedItem);
 
-            /*
+			//UserControl usc = null;
+			//usc = new InfoCustomer(connectData, dataItem.MaNV);
+			//Global.mainNavigate.Children.Add(usc);
+			/*
              
             //Viết cái dòng chuyển màn hình vô nhaaaaaaaaaaaaaaaaaaaaa
            
@@ -67,7 +70,7 @@ namespace HotelApp
 
             Window.GetWindow(this).Close();
             */
-        }
+		}
 
         private void ListviewClick(object sender, MouseButtonEventArgs e)
         {

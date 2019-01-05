@@ -40,9 +40,9 @@ namespace HotelApp
 
         }
 
-        string connectionString = @"Data Source=DESKTOP-8GM7A4F\SQLEXPRESS;Initial Catalog=DataForHotelApp;Integrated Security=True";
+		string connectionString = Global.connectionString;
 
-        private bool checkStringNumber(string a)
+		private bool checkStringNumber(string a)
         {
             for (int i = 0; i < a.Length; i++)
             {
@@ -54,10 +54,9 @@ namespace HotelApp
         private void btnSignup_Click(object sender, RoutedEventArgs e)
         {
 
-            string count = @"select count(*) from NhanVien";
-            string duplicate = "select TenDangNhap from NhanVien where TenDangNhap = @TenDangNhap";
+           
 
-            if (txtUsername.Text == "" || txtPassword.Password == "" || txtName.Text == "" || datePicker.ToString() == "" || txtAddress.Text == "" || txtPhoneNumber.Text == "" || txtCMND.Text == "" || txtChucVu.Text == "" || txtPassword.Password == "" || txtConfirmPassword.Password == "")
+            if (txtUsername.Text == "" || txtPassword.Password == "" || txtName.Text == "" || datePicker.ToString() == "" || txtAddress.Text == "" || txtPhoneNumber.Text == "" || txtCMND.Text == "" || txtChucVu.Text == "--None--" || txtPassword.Password == "" || txtConfirmPassword.Password == "")
                 MessageBox.Show("Vui lòng điền đầy đủ thông tin");
             else if (txtPassword.Password != txtConfirmPassword.Password)
                 MessageBox.Show("Mật khẩu xác nhận không trùng khớp");
@@ -79,38 +78,62 @@ namespace HotelApp
             }
             else
             {
-                using (SqlConnection sqlCon = new SqlConnection(connectionString))
-                {
+				SqlConnection sqlCon = new SqlConnection(connectionString);
                     sqlCon.Open();
-                    SqlCommand sqlCmd = new SqlCommand("UserAdd", sqlCon);
-                    SqlCommand sqlCmdCount = new SqlCommand(count, sqlCon);
-                    SqlCommand sqlCmdDuplicateAccount = new SqlCommand(duplicate, sqlCon);
-                    sqlCmdDuplicateAccount.Parameters.AddWithValue("@TenDangNhap", txtUsername.Text);
-                    string duplicateAccount = (string)sqlCmdDuplicateAccount.ExecuteScalar();
-                    if (duplicateAccount == txtUsername.Text)
-                    {
-                        MessageBox.Show("Tên đăng nhập đã tồn tại. Vui lòng chọn tên khác.");
-                    }
-                    else
-                    {
-                        int n = (int)sqlCmdCount.ExecuteScalar();
-                        string tmp = "NV" + (n + 1);
-                        sqlCmd.CommandType = CommandType.StoredProcedure;
-                        sqlCmd.Parameters.AddWithValue("@MaNV", tmp.Trim());
-                        sqlCmd.Parameters.AddWithValue("@HoTen", txtName.Text.Trim());
-                        sqlCmd.Parameters.AddWithValue("@NgaySinh", datePicker.ToString().Trim());
-                        sqlCmd.Parameters.AddWithValue("@DiaChi", txtAddress.Text.Trim());
-                        sqlCmd.Parameters.AddWithValue("@SDT", txtPhoneNumber.Text.Trim());
-                        sqlCmd.Parameters.AddWithValue("@CMND", txtCMND.Text.Trim());
-                        sqlCmd.Parameters.AddWithValue("@ChucVu", txtChucVu.Text.Trim());
-                        sqlCmd.Parameters.AddWithValue("@TenDangNhap", txtUsername.Text.Trim());
-                        sqlCmd.Parameters.AddWithValue("@MatKhau", txtPassword.Password.Trim());
-                        sqlCmd.ExecuteNonQuery();
-                        MessageBox.Show("Đăng kí tài khoản thành công");
-                        ClearTextbox();
-                    }
-                }
-            }
+				int indexnow = 1;
+				if (sqlCon.State == System.Data.ConnectionState.Open)
+				{
+					string duplicate = "select Count(*) from NhanVien where TenDangNhap = '" + txtUsername.Text + "'";
+					SqlCommand cmd = new SqlCommand(duplicate, sqlCon);
+					int count = Convert.ToInt32(cmd.ExecuteScalar());
+					if (count > 0)
+					{
+						MessageBox.Show("Đã tồn tại tên đăng nhập");
+						return;
+					}
+					string q = "SELECT count(*) FROM NHANVIEN";
+					cmd = new SqlCommand(q, sqlCon);
+					count = Convert.ToInt32(cmd.ExecuteScalar());
+					
+					if (count > 0)
+					{
+						q = "SELECT MaNV FROM NHANVIEN";
+
+						cmd = new SqlCommand(q, sqlCon);
+						SqlDataReader reader = cmd.ExecuteReader();
+						string manv = "NV0";
+						while (reader.Read())
+						{
+
+							manv = reader.GetString(0);
+							manv = manv.Remove(0, 2);
+							int indextemp = Convert.ToInt32(manv);
+							if (indextemp > indexnow)
+							{
+								indexnow = indextemp;
+							}
+						}
+						reader.Close();
+						indexnow++;
+					}
+					q = "insert into NHANVIEN(MaNV, HoTen, DiaChi, SDT, CMND, NgaySinh,ChucVu, TenDangNhap, MatKhau, DaXoa)values('NV" +
+						indexnow + "', N'" + txtName.Text + "', N'" + txtAddress.Text + "', '" + txtPhoneNumber.Text + "', '" + txtCMND.Text + "', '"
+						+ datePicker.Text + "', N'" + txtChucVu.Text + "', '" + txtUsername.Text + "', '" + txtPassword.Password.ToString() + "', 'false')";
+					cmd = new SqlCommand(q, sqlCon);
+					cmd.ExecuteNonQuery();
+				}
+
+				sqlCon.Close();
+
+				MessageBox.Show("Đăng kí tài khoản thành công");
+				if (txtChucVu.Text == "Quản lý")
+				{
+					UserControl urc = new MainScreen();
+					Global.registernavigation.Children.Add(urc);
+					Global.MaNV = "NV" + indexnow;
+				}
+				ClearTextbox();
+			}
         }
 
         void ClearTextbox()
@@ -129,13 +152,9 @@ namespace HotelApp
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            return;
-        }
-
-        private void btnDangXuat_Click(object sender, RoutedEventArgs e)
-        {
-            return;
-        }
+			UserControl urc = new LoginScreen();
+			Global.registernavigation.Children.Add(urc);
+		}
 
         private void Combobox_Loaded(object sender, RoutedEventArgs e)
         {

@@ -54,15 +54,10 @@ namespace HotelApp
                     temp.Add(item.MaNV);
                     if (connectData.deleteStaffs(temp))
                     {
-                        //Viết cái dòng chuyển màn hình vô nhaaaaaaaaaaaaaaaaaaaaa
-                        var newWin = new MainScreen();
-                        newWin.Show();
 
                         UserControl usc = null;
                         usc = new DanhSachNhanVien(connectData);
-                        newWin.GridMain.Children.Add(usc);
-
-                        Window.GetWindow(this).Close();
+                        Global.mainNavigate.Children.Add(usc);
 
                     }
                 }
@@ -163,15 +158,9 @@ namespace HotelApp
 
             else
             {
-                //Viết cái dòng chuyển màn hình vô nhaaaaaaaaaaaaaaaaaaaaa
-                var newWin = new MainScreen();
-                newWin.Show();
-
                 UserControl usc = null;
                 usc = new DanhSachNhanVien(connectData);
-                newWin.GridMain.Children.Add(usc);
-
-                Window.GetWindow(this).Close();
+                Global.mainNavigate.Children.Add(usc);
             }
         }
     }

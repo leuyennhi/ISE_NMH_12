@@ -7,8 +7,10 @@
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2" x:Class="HotelApp.RegisterScreen"
         mc:Ignorable="d"
-        Height="612" Width="1100"  >
-
+        Height="700" Width="1300"  >
+    <UserControl.Background>
+        <ImageBrush ImageSource="pack://siteoforigin:,,,/Resources/screen.jpg"/>
+    </UserControl.Background>
     <UserControl.Resources>
         <Style x:Key="FocusVisual">
             <Setter Property="Control.Template">
@@ -313,7 +315,7 @@
         </Style>
     </UserControl.Resources>
 
-    <DockPanel Background="LightGray" LastChildFill="True">
+    <Grid Background="LightGray">
         <StackPanel Margin="0,0,40,0">
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0">
                 <Border BorderBrush="White" BorderThickness="2" CornerRadius="10" Height="50" Width="400" HorizontalAlignment="Left" VerticalAlignment="Top"  Background="Blue">
@@ -335,31 +337,31 @@
                 </StackPanel>
                 <StackPanel Margin="10,0,0,0">
                     <Border BorderBrush="White" Height="35" Background="White"  Margin="0,15,0,0" BorderThickness="1" CornerRadius="25" Width="440" HorizontalAlignment="Center" VerticalAlignment="Center" >
-                        <TextBox Name="txtName" TextWrapping="Wrap" BorderThickness="0" VerticalContentAlignment="Center" Width="400" FontSize="25"/>
+                        <TextBox Name="txtName" TextWrapping="Wrap" BorderThickness="0" VerticalContentAlignment="Center" Width="400" FontSize="18"/>
                     </Border>
                     <Border BorderBrush="White" Height="35" Background="White"  Margin="0,20,0,0" BorderThickness="1" CornerRadius="25" Width="440" HorizontalAlignment="Center" VerticalAlignment="Center" >
-                        <TextBox Name="txtPhoneNumber" TextWrapping="Wrap" BorderThickness="0" VerticalContentAlignment="Center" Width="400" FontSize="25"/>
+                        <TextBox Name="txtPhoneNumber" TextWrapping="Wrap" BorderThickness="0" VerticalContentAlignment="Center" Width="400" FontSize="18"/>
                     </Border>
                     <Border BorderBrush="White" Height="35" Background="White"  Margin="0,15,0,0" BorderThickness="2" CornerRadius="25" Width="440" HorizontalAlignment="Center" VerticalAlignment="Center" >
-                        <TextBox Name="txtCMND" TextWrapping="Wrap" BorderThickness="0" VerticalContentAlignment="Center" Width="400" FontSize="25"/>
+                        <TextBox Name="txtCMND" TextWrapping="Wrap" BorderThickness="0" VerticalContentAlignment="Center" Width="400" FontSize="18"/>
                     </Border>
                     <Border BorderBrush="White" Height="35" Background="White"  Margin="0,15,0,0" BorderThickness="2" CornerRadius="25" Width="440" HorizontalAlignment="Center" VerticalAlignment="Center" >
-                        <DatePicker  SelectedDate="{x:Static sys:DateTime.Now}" Name="datePicker" BorderThickness="0" HorizontalAlignment="Left" VerticalContentAlignment="Center" Width="392" FontSize="25" Margin="8,-3,0,-2" />
+                        <DatePicker SelectedDate="{x:Static sys:DateTime.Now}" Name="datePicker" BorderThickness="0" HorizontalAlignment="Left" VerticalContentAlignment="Center" Width="392" FontSize="18" Margin="8,-3,0,-2" />
                     </Border>
                     <Border BorderBrush="White" Height="35" Background="White"  Margin="0,20,0,0" BorderThickness="2" CornerRadius="25" Width="440" HorizontalAlignment="Center" VerticalAlignment="Center" >
-                        <TextBox Name="txtAddress" TextWrapping="Wrap" BorderThickness="0" VerticalContentAlignment="Center" Width="400" FontSize="25"/>
+                        <TextBox Name="txtAddress" TextWrapping="Wrap" BorderThickness="0" VerticalContentAlignment="Center" Width="400" FontSize="18"/>
                     </Border>
                     <Border BorderBrush="White" Height="35" Background="White"  Margin="0,20,0,0" BorderThickness="2" CornerRadius="25" Width="440" HorizontalAlignment="Center" VerticalAlignment="Center" >
-                        <ComboBox Name="txtChucVu" BorderThickness="0" VerticalContentAlignment="Center" Width="400" Loaded="Combobox_Loaded" SelectionChanged="Combobox_SelectionChanged" FontSize="20" Style="{DynamicResource ComboBoxStyle3}" Margin="18,0,18,-2"/>
+                        <ComboBox Name="txtChucVu" BorderThickness="0" VerticalContentAlignment="Center" Width="400" Loaded="Combobox_Loaded" SelectionChanged="Combobox_SelectionChanged" FontSize="18" Style="{DynamicResource ComboBoxStyle3}" Margin="18,0,18,-2"/>
                     </Border>
                     <Border BorderBrush="White" Height="35" Background="White"  Margin="0,20,0,0" BorderThickness="2" CornerRadius="25" Width="440" HorizontalAlignment="Center" VerticalAlignment="Center" >
-                        <TextBox Name="txtUsername" TextWrapping="Wrap" BorderThickness="0" VerticalContentAlignment="Center" Width="400" FontSize="25"/>
+                        <TextBox Name="txtUsername" TextWrapping="Wrap" BorderThickness="0" VerticalContentAlignment="Center" Width="400" FontSize="18"/>
                     </Border>
                     <Border BorderBrush="White" Height="30" Background="White"  Margin="0,20,0,0" BorderThickness="2" CornerRadius="25" Width="440" HorizontalAlignment="Center" VerticalAlignment="Center" >
-                        <PasswordBox Name="txtPassword" BorderThickness="0" VerticalContentAlignment="Center" Width="400" FontSize="25"/>
+                        <PasswordBox Name="txtPassword" BorderThickness="0" VerticalContentAlignment="Center" Width="400" FontSize="18"/>
                     </Border>
                     <Border BorderBrush="White" Height="35" Background="White"  Margin="0,20,0,0" BorderThickness="2" CornerRadius="25" Width="440" HorizontalAlignment="Center" VerticalAlignment="Center" >
-                        <PasswordBox Name="txtConfirmPassword" BorderThickness="0" VerticalContentAlignment="Center" Width="400" FontSize="25"/>
+                        <PasswordBox Name="txtConfirmPassword" BorderThickness="0" VerticalContentAlignment="Center" Width="400" FontSize="18"/>
                     </Border>
                 </StackPanel>
             </StackPanel>
@@ -371,6 +373,6 @@
         </StackPanel>
 
 
-    </DockPanel>
+    </Grid>
 
 </UserControl>

@@ -76,16 +76,23 @@ namespace HotelApp
 		private void ThemHang(object sender, RoutedEventArgs e)
 		{
 
-			if (!kiemtraHeSo(CostText.Text) || TORText.Text.Length < 1)
+			if (!kiemtraHeSo(CostText.Text) || TORText.Text.Length < 1 || !kiemtraHeSo(txtSKTD.Text))
 			{
-				MessageBox.Show("Bạn chưa nhập thông tin hoặc hệ số sai (hệ số bao gồm số từ 0->9 hoặc thêm dấu chấm nếu là số thực.", "Cảnh báo!!!", MessageBoxButton.OK);
+				MessageBox.Show("Bạn chưa nhập thông tin hoặc hệ số sai hoặc số khách tối đa sai (hệ số bao gồm số từ 0->9 hoặc thêm dấu chấm nếu là số thực. số khách tối đa phải là số nhỏ hơn bằng 3", "Cảnh báo!!!", MessageBoxButton.OK);
 				return;
 			}
+
+			if(Convert.ToInt32(txtSKTD.Text)> Global.SoKhToiDa)
+			{
+				MessageBox.Show("Số khách tối đa phải là số nhỏ hơn bằng 3", "Cảnh báo!!!", MessageBoxButton.OK);
+				return;
+			}
+
 			MessageBoxResult result = MessageBox.Show("Bạn muốn thêm loại phòng?", "Xác nhận!!!", MessageBoxButton.YesNo);
 
 			if (result == MessageBoxResult.Yes)
 			{
-				ListViewDataRoom temp = new ListViewDataRoom() { STT = items.Count + 1, LoaiPhong = TORText.Text, Dongia = float.Parse(CostText.Text) };
+				ListViewDataRoom temp = new ListViewDataRoom() { STT = items.Count + 1, LoaiPhong = TORText.Text, Dongia = float.Parse(CostText.Text), SoKhachToiDa = int.Parse(txtSKTD.Text) };
 				
 				if (connectData.setTypeOfRoom(temp))            //set data in server
 				{
@@ -93,6 +100,7 @@ namespace HotelApp
 					lvTypeRoom.ItemsSource = items;
 					TORText.Text = "";
 					CostText.Text = "";
+					txtSKTD.Text = "";
 				}
 			}
 		}
@@ -119,14 +127,25 @@ namespace HotelApp
 
 			editAction = true;
 
-			if (!kiemtraHeSo(CostText.Text) || TORText.Text.Length < 1)
+			
+			if (!kiemtraHeSo(CostText.Text) || TORText.Text.Length < 1 || !kiemtraHeSo(txtSKTD.Text))
 			{
 				if (numSuportEdit == 1)
 				{
-					MessageBox.Show("Bạn chưa chỉnh sửa thông tin hoặc hệ số sai (hệ số bao gồm số từ 0->9 hoặc thêm dấu chấm nếu là số thực.", "Cảnh báo!!!", MessageBoxButton.OK);
+					MessageBox.Show("Bạn chưa nhập thông tin hoặc hệ số sai hoặc số khách tối đa sai (hệ số bao gồm số từ 0->9 hoặc thêm dấu chấm nếu là số thực. số khách tối đa phải là số nhỏ hơn bằng 3", "Cảnh báo!!!", MessageBoxButton.OK);
 				}
 				return;
 			}
+
+			if (Convert.ToInt32(txtSKTD.Text) > Global.SoKhToiDa)
+			{
+				if (numSuportEdit == 1)
+				{
+					MessageBox.Show("Số khách tối đa phải là số nhỏ hơn bằng 3", "Cảnh báo!!!", MessageBoxButton.OK);
+				}
+				return;
+			}
+
 			MessageBoxResult result = MessageBox.Show("Bạn muốn chỉnh sửa khách hàng?", "Xác nhận!!!", MessageBoxButton.YesNo);
 
 			if (result == MessageBoxResult.Yes)
@@ -137,7 +156,7 @@ namespace HotelApp
 				{
 					if (i == Stttext)
 					{
-						tempArr.Add(new ListViewDataRoom() { STT = i, LoaiPhong = TORText.Text, Dongia = float.Parse(CostText.Text), MaLP = items[i-1].MaLP });
+						tempArr.Add(new ListViewDataRoom() { STT = i, LoaiPhong = TORText.Text, Dongia = float.Parse(CostText.Text), MaLP = items[i-1].MaLP , SoKhachToiDa = int.Parse(txtSKTD.Text)});
 						if (!connectData.updateTypeOfRoom(tempArr[i - 1], items[i - 1].Dongia, items[i - 1].LoaiPhong))      //update data in server
 						{
 							return;
@@ -152,6 +171,7 @@ namespace HotelApp
 
 				TORText.Text = "";
 				CostText.Text = "";
+				txtSKTD.Text = "";
 			}
 		}
 
@@ -166,6 +186,7 @@ namespace HotelApp
 					Stttext = lvc.STT;
 					TORText.Text = lvc.LoaiPhong.ToString();
 					CostText.Text = lvc.Dongia.ToString();
+					txtSKTD.Text = lvc.SoKhachToiDa.ToString();
 				}
 
 			}

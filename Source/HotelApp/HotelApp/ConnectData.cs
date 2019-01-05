@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -23,8 +25,12 @@ namespace HotelApp
 		private SqlConnection sql;
 		public ConnectData()
 		{
-			linkSql = @"Data Source=LEUYENNHI\SQLEXPRESS;Initial Catalog=DataForHotelApp;Integrated Security=True";
+			linkSql = "Data Source=THANH_NHUT\\SQLEXPRESS;Initial Catalog=DataForHotelApp;Integrated Security=True";
 			sql = new SqlConnection(linkSql);
+
+			CultureInfo ci = CultureInfo.CreateSpecificCulture(CultureInfo.CurrentCulture.Name);
+			ci.DateTimeFormat.ShortDatePattern = "dd/MM/yyyy";
+			Thread.CurrentThread.CurrentCulture = ci;
 		}
 
 
@@ -34,17 +40,23 @@ namespace HotelApp
 			sql.Open();
 			if (sql.State == System.Data.ConnectionState.Open)
 			{
-				string q = "SELECT TenLP,DonGia,SoLuong,MaLP FROM LOAIPHONG";
+				string q = "SELECT Count(*) FROM LOAIPHONG";
 				SqlCommand cmd = new SqlCommand(q, sql);
-				SqlDataReader reader = cmd.ExecuteReader();
-				int i = 1;
-				while (reader.Read())
+				int count = Convert.ToInt32(cmd.ExecuteScalar());
+				if (count > 0)
 				{
-					//	var time = reader.GetDateTime(1).ToString("dd/MM/yyyy");
-					temp.Add(new ListViewDataRoom() { STT = i, LoaiPhong = reader.GetString(0), Dongia = (float)reader.GetDouble(1), SoLuong = reader.GetInt32(2), MaLP = reader.GetString(3) });
-					i++;
+					q = "SELECT TenLP,DonGia,SoLuong,MaLP, SoKhachToiDa FROM LOAIPHONG";
+					cmd = new SqlCommand(q, sql);
+					SqlDataReader reader = cmd.ExecuteReader();
+					int i = 1;
+					while (reader.Read())
+					{
+						//	var time = reader.GetDateTime(1).ToString("dd/MM/yyyy");
+						temp.Add(new ListViewDataRoom() { STT = i, LoaiPhong = reader.GetString(0), Dongia = (float)reader.GetDouble(1), SoLuong = reader.GetInt32(2), MaLP = reader.GetString(3), SoKhachToiDa = reader.GetInt32(4) });
+						i++;
+					}
+					reader.Close();
 				}
-				reader.Close();
 			}
 			sql.Close();
 			return temp;
@@ -72,7 +84,7 @@ namespace HotelApp
 					newIndex++;
 					reader.Close();
 
-					q = "insert into LOAIPHONG(MaLP,TenLP,MaPT,DonGia,SoKhachToiDa,SoLuong)values('LP" + newIndex + "',N'" + item.LoaiPhong + "','PT1','" + item.Dongia + "','3','" + item.SoLuong + "')";
+					q = "insert into LOAIPHONG(MaLP,TenLP,MaPT,DonGia,SoKhachToiDa,SoLuong,GhiChu)values('LP" + newIndex + "',N'" + item.LoaiPhong + "','PT1','" + item.Dongia + "','"+ item.SoKhachToiDa+"','" + item.SoLuong + "','')";
 					cmd = new SqlCommand(q, sql);
 					cmd.ExecuteNonQuery();
 				}
@@ -92,9 +104,9 @@ namespace HotelApp
 			sql.Open();
 			if (sql.State == System.Data.ConnectionState.Open)
 			{
-				if (item.Dongia != dongia && tenLp == item.LoaiPhong)
+				if (tenLp == item.LoaiPhong)
 				{
-					string q = "UPDATE LOAIPHONG set TenLP = N'" + item.LoaiPhong + "',DonGia = " + item.Dongia + " where MaLP = '" + item.MaLP + "'";
+					string q = "UPDATE LOAIPHONG set TenLP = N'" + item.LoaiPhong + "',DonGia = " + item.Dongia +",SoKhachToiDa = " + item.SoKhachToiDa + " where MaLP = '" + item.MaLP + "'";
 					SqlCommand cmd = new SqlCommand(q, sql);
 					cmd.ExecuteNonQuery();
 				}
@@ -105,7 +117,7 @@ namespace HotelApp
 					int count = Convert.ToInt32(cmd.ExecuteScalar());
 					if (count == 0)
 					{
-						q = "UPDATE LOAIPHONG set TenLP = N'" + item.LoaiPhong + "',DonGia = " + item.Dongia + " where MaLP = '" + item.MaLP + "'";
+						q = "UPDATE LOAIPHONG set TenLP = N'" + item.LoaiPhong + "',DonGia = " + item.Dongia + ",SoKhachToiDa = " + item.SoKhachToiDa  + " where MaLP = '" + item.MaLP + "'";
 						cmd = new SqlCommand(q, sql);
 						cmd.ExecuteNonQuery();
 					}
@@ -160,16 +172,22 @@ namespace HotelApp
 			sql.Open();
 			if (sql.State == System.Data.ConnectionState.Open)
 			{
-				string q = "SELECT TenLK,HeSo,MaLK FROM LOAIKHACH";
+				string q = "SELECT Count(*) FROM LOAIKHACH";
 				SqlCommand cmd = new SqlCommand(q, sql);
-				SqlDataReader reader = cmd.ExecuteReader();
-				int i = 1;
-				while (reader.Read())
+				int count = Convert.ToInt32(cmd.ExecuteScalar());
+				if (count > 0)
 				{
-					temp.Add(new ListViewDataCustommer() { STT = i, LoaiKhach = reader.GetString(0), HeSo = (float)reader.GetDouble(1), MaLK = reader.GetString(2) });
-					i++;
+					q = "SELECT TenLK,HeSo,MaLK FROM LOAIKHACH";
+					cmd = new SqlCommand(q, sql);
+					SqlDataReader reader = cmd.ExecuteReader();
+					int i = 1;
+					while (reader.Read())
+					{
+						temp.Add(new ListViewDataCustommer() { STT = i, LoaiKhach = reader.GetString(0), HeSo = (float)reader.GetDouble(1), MaLK = reader.GetString(2) });
+						i++;
+					}
+					reader.Close();
 				}
-				reader.Close();
 			}
 			sql.Close();
 			return temp;
@@ -382,7 +400,7 @@ namespace HotelApp
 			sql.Close();
 		}
 
-		public void setNewRoom(string maLP, string maPhong)
+		public void setNewRoom(string maLP, string maPhong, string note)
 		{
 			sql.Open();
 			if (sql.State == System.Data.ConnectionState.Open)
@@ -392,7 +410,18 @@ namespace HotelApp
 				int count = Convert.ToInt32(cmd.ExecuteScalar());
 				if (count == 0)
 				{
-					q = "insert into PHONG(MaPhong,MaLP,TinhTrang)values('" + maPhong + "','" + maLP + "','false')";
+					q = "insert into PHONG(MaPhong,MaLP,TinhTrang, GhiChu)values('" + maPhong + "','" + maLP + "','false','"+note+"')";
+					cmd = new SqlCommand(q, sql);
+					cmd.ExecuteNonQuery();
+
+					q = "SELECT SoLuong FROM LOAIPHONG WHERE MaLP = '" + maLP + "'";
+					cmd = new SqlCommand(q, sql);
+					SqlDataReader reader = cmd.ExecuteReader();
+					reader.Read();
+					int sktd = reader.GetInt32(0) + 1;
+					reader.Close();
+
+					q = "UPDATE LOAIPHONG set SoLuong = " + sktd + " where MaLP = '" + maLP + "'";
 					cmd = new SqlCommand(q, sql);
 					cmd.ExecuteNonQuery();
 				}
@@ -938,11 +967,206 @@ namespace HotelApp
             }
             sql.Close();
         }
-    }
 
-   
+		public ListBookRoom getInfoPayRoom(string maphong)
+		{
+			ListBookRoom itemRoom = new ListBookRoom();
+			List<Customer> itemListCus = new List<Customer>();
+			DateTime itemdate = new DateTime();
 
-    public class ListStaff
+			sql.Open();
+			if (sql.State == System.Data.ConnectionState.Open)
+			{
+				string q = "SELECT P.MaPhong, LP.MaLP, LP.TenLP, LP.DonGia, LP.SoKhachToiDa, PT.TiLePhuThu FROM PHONG P, LOAIPHONG LP, PHUTHU PT WHERE P.MaLP = LP.MaLP and LP.MaPT = PT.MaPT and P.MaPhong = '" + maphong + "'";
+				SqlCommand cmd = new SqlCommand(q, sql);
+				SqlDataReader reader = cmd.ExecuteReader();
+				reader.Read();
+				itemRoom = new ListBookRoom() { MaPhong = reader.GetString(0), MaLP = reader.GetString(1), TenLP = reader.GetString(2), DonGia = reader.GetDouble(3), SoKhachToiDa = reader.GetInt32(4), PhuThu = (float)reader.GetDouble(5) };
+				reader.Close();
+
+				float itemHeSo = 0;
+				q = "SELECT KH.MaKH, KH.TenKH, KH.SDT, KH.CMND, KH.DiaChi, LK.HeSo, LK.TenLK, LK.MaLK,DP.NgayBatDau FROM PHONG P, DATPHONG DP, KHACHHANG KH, LOAIKHACH LK WHERE P.MaPhong = DP.MaPhong and P.MaPhong = '" + maphong + "' and DP.MaKH = KH.MaKH and LK.MaLK = KH.MaLK and KH.DaXoa = 'false'";
+				cmd = new SqlCommand(q, sql);
+				reader = cmd.ExecuteReader();
+				int i = 1;
+				while (reader.Read())
+				{
+					itemListCus.Add(new Customer()
+					{
+						STT = i,
+						MaKH = reader.GetString(0),
+						TenKH = reader.GetString(1),
+						SDT = reader.GetString(2),
+						CMND = reader.GetString(3),
+						DiaChi = reader.GetString(4),
+						TenLK = reader.GetString(6),
+						MaLK = reader.GetString(7)
+					});
+					if (itemHeSo < (float)reader.GetDouble(5))
+					{
+						itemHeSo = (float)reader.GetDouble(5);
+					}
+
+					itemdate = reader.GetDateTime(8);
+					i++;
+				}
+				reader.Close();
+				itemRoom.HeSo = itemHeSo;
+			}
+			Global.room = itemRoom;
+			Global.listCustomer = itemListCus;
+			Global.songay = (DateTime.Now.Date - itemdate.Date).Days;
+			Global.valuedayStart = itemdate.Date.ToShortDateString();
+			Global.valuedayEnd = DateTime.Now.Date.ToShortDateString();
+			sql.Close();
+			return itemRoom;
+		}
+
+		public float getFactor(List<string> ltCustomer)
+		{
+			float maxFactor = 1;
+
+			sql.Open();
+			if (sql.State == System.Data.ConnectionState.Open)
+			{
+				for (int i = 0; i < ltCustomer.Count; i++)
+				{
+					string q = "SELECT Top(1) HeSo FROM LOAIKHACH WHERE TenLK = N'" + ltCustomer[i] + "'";
+					SqlCommand cmd = new SqlCommand(q, sql);
+					SqlDataReader reader = cmd.ExecuteReader();
+					reader.Read();
+					if ((float)reader.GetDouble(0) > maxFactor)
+					{
+						maxFactor = (float)reader.GetDouble(0);
+					}
+					reader.Close();
+				}
+
+			}
+			sql.Close();
+
+			return maxFactor;
+		}
+
+		public ListBookRoom getBookRoom(string maphong)
+		{
+			ListBookRoom itemRoom = new ListBookRoom();
+			sql.Open();
+			if (sql.State == System.Data.ConnectionState.Open)
+			{
+				string q = "SELECT P.MaPhong,P.MaLP,LP.DonGia, LP.SoKhachToiDa, LP.TenLP, PT.TiLePhuThu FROM PHONG P, LOAIPHONG LP, PHUTHU PT WHERE P.MaLP = LP.MaLP and P.MaPhong = '" + maphong + "' and PT.MaPT = LP.MaPT";
+				SqlCommand cmd = new SqlCommand(q, sql);
+				SqlDataReader reader = cmd.ExecuteReader();
+				reader.Read();
+				itemRoom = new ListBookRoom() { MaPhong = reader.GetString(0), MaLP = reader.GetString(1), DonGia = reader.GetDouble(2), SoKhachToiDa = reader.GetInt32(3), TenLP = reader.GetString(4), PhuThu = (float)reader.GetDouble(5) };
+
+				reader.Close();
+			}
+			sql.Close();
+			return itemRoom;
+		}
+
+		public bool setBookRoom(List<Customer> listCus, ListBookRoom room, string dayStart, string dayEnd, string note, double thanhtien, int indexCus, bool justPay)
+		{
+			sql.Open();
+			if (sql.State == System.Data.ConnectionState.Open)
+			{
+				if (justPay)
+				{
+
+					string q = "SELECT MaKH FROM KHACHHANG order by MaKH desc";
+
+					SqlCommand cmd = new SqlCommand(q, sql);
+					SqlDataReader reader = cmd.ExecuteReader();
+					string malk = "KH0";
+					int indexnow = 0;
+					while (reader.Read())
+					{
+
+						malk = reader.GetString(0);
+						malk = malk.Remove(0, 2);
+						int indextemp = Convert.ToInt32(malk);
+						if (indextemp > indexnow)
+						{
+							indexnow = indextemp;
+						}
+					}
+					reader.Close();
+					indexnow++;
+
+					string MaKHPay = "";
+
+					for (int i = 0; i < listCus.Count; i++)
+					{
+						q = "insert into KHACHHANG(MaKH,TenKH,DiaChi, SDT, CMND, MaLK, DaXoa)values('KH" + indexnow + "',N'" + listCus[i].TenKH + "',N'" + listCus[i].DiaChi + "','" + listCus[i].SDT + "','" + listCus[i].CMND + "','" + listCus[i].MaLK + "','false')";
+						cmd = new SqlCommand(q, sql);
+						cmd.ExecuteNonQuery();
+
+						q = "insert into DATPHONG(MaKH,MaPhong,NgayBatDau, NgayKetThuc, MaNV, GhiChu)values('KH" + indexnow + "','" + room.MaPhong + "','" + dayStart + "','" + dayEnd + "','" + Global.MaNV + "','" + note + "')";
+						cmd = new SqlCommand(q, sql);
+						cmd.ExecuteNonQuery();
+
+						if (indexCus == i)
+						{
+							MaKHPay = indexnow.ToString();
+						}
+						indexnow++;
+					}
+
+					q = "UPDATE PHONG SET TinhTrang = 1 WHERE MaPhong = '" + room.MaPhong + "'";
+					cmd = new SqlCommand(q, sql);
+					cmd.ExecuteNonQuery();
+
+					if (thanhtien > 0)
+					{
+						q = "insert into TRAPHONG(MaKH,MaPhong,NgayTraPhong, HeSo, MaNV, DonGia, TongKhach, PhuThu, ThanhTien, GhiChu)values('KH" +
+							MaKHPay + "','" + room.MaPhong + "','" + dayEnd + "','" + room.HeSo + "','" + Global.MaNV + "','" + room.DonGia + "','" + listCus.Count + "','" + room.PhuThu + "','" + thanhtien + "','')";
+						cmd = new SqlCommand(q, sql);
+						cmd.ExecuteNonQuery();
+					}
+				}
+				else
+				{
+					string q = "SELECT COUNT(*) FROM TRAPHONG TP where MaKH = '" + listCus[indexCus].MaKH + "' and MaPhong = '"+room.MaPhong + "' and NgayTraPhong = '" +dayEnd+"'";
+					SqlCommand cmd = new SqlCommand(q, sql);
+					int count = Convert.ToInt32(cmd.ExecuteScalar());
+					if (count == 0)
+					{
+						q = "insert into TRAPHONG(MaKH,MaPhong,NgayTraPhong, HeSo, MaNV, DonGia, TongKhach, PhuThu, ThanhTien, GhiChu)values('" +
+							listCus[indexCus].MaKH + "','" + room.MaPhong + "','" + dayEnd + "','" + room.HeSo + "','" + Global.MaNV + "','" + room.DonGia + "','" + listCus.Count + "','" + room.PhuThu + "','" + thanhtien + "','')";
+						cmd = new SqlCommand(q, sql);
+						cmd.ExecuteNonQuery();
+					}
+				}
+
+			}
+			sql.Close();
+			return true;
+		}
+
+		public ListStaff getCurrentUser()
+		{
+			ListStaff nv = new ListStaff();
+			sql.Open();
+			if (sql.State == System.Data.ConnectionState.Open)
+			{
+
+				string q = "SELECT HoTen, ChucVu FROM NHANVIEN WHERE MaNV = '" + Global.MaNV + "'";
+				SqlCommand cmd = new SqlCommand(q, sql);
+				SqlDataReader reader = cmd.ExecuteReader();
+				reader.Read();
+				nv.TenNV = reader.GetString(0);
+				nv.ChucVu = reader.GetString(1);
+				reader.Close();
+			}
+			sql.Close();
+			return nv;
+		}
+	}
+
+
+
+	public class ListStaff
     {
         public string MaNV { get; set; }
         public string TenNV { get; set; }
@@ -1005,6 +1229,7 @@ namespace HotelApp
 
 	public class Customer
 	{
+		public int STT { get; set; }
 		public string MaKH { get; set; }
 
 		public string TenKH { get; set; }
@@ -1013,7 +1238,11 @@ namespace HotelApp
 
 		public string CMND { get; set; }
 
-		public string LoaiKhach { get; set; }
+		public string MaLK { get; set; }
+
+		public string TenLK { get; set; }
+
+		public string LoaiKhach { get; set; } /// <summary>
 
 		public string DiaChi { get; set; }
 
@@ -1078,5 +1307,50 @@ namespace HotelApp
 
         public float TiLe { get; set; }
     }
+
+	public class ListBookRoom
+	{
+		public int STT { get; set; }
+		public string MaPhong { get; set; }
+
+		public string MaLP { get; set; }
+
+		public double DonGia { get; set; }
+
+		public int SoKhachToiDa { get; set; }
+
+		public string TenLP { get; set; }
+
+		public string MaPT { get; set; }
+
+		public float PhuThu { get; set; }
+
+		public float HeSo { get; set; }
+	}
+
+	class Global
+	{
+		public static int SoKhToiDa = 3;
+
+		public static Grid mainNavigate;
+
+		public static Grid registernavigation;
+
+		public static string MaNV = "";
+
+		public static List<Customer> listCustomer; //
+
+		public static ListBookRoom room; //
+
+		public static string valuedayStart = ""; //
+
+		public static string valuedayEnd = ""; //
+
+		public static int songay = 0; //
+
+		public static string note = "";
+
+		public static string connectionString = "Data Source=THANH_NHUT\\SQLEXPRESS;Initial Catalog=DataForHotelApp;Integrated Security=True";
+	}
 
 }
