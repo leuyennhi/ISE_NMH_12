@@ -19,9 +19,20 @@ namespace HotelApp
     /// </summary>
     public partial class RoomChecking : UserControl
     {
-        public RoomChecking()
+        DetailOfRoom item = new DetailOfRoom();
+        private ConnectData connectData;
+        bool isEditing = false;
+        public RoomChecking(ConnectData conData, string maLP)
         {
             InitializeComponent();
+            connectData = conData;
+            item = connectData.GetDetailOfRoom(maLP);
+
+            lblPhong.Content = item.MaPhong;
+            lblLoaiPhong.Content = item.MaLP;
+            lblDonGia.Content = item.DonGia;
+            //lblTinhTrang.Content = item.;
+            //lblGhiChu.Content = item.GhiChu;
         }
     }
 }

@@ -47,5 +47,12 @@ namespace HotelApp
 
             Window.GetWindow(this).Close();
         }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            //items = connectData.findStaff(txtSearch.Text);
+            //lvListStaff.ItemsSource = items;
+            return;
+        }
     }
 }

@@ -13,6 +13,12 @@
                     <Label   Content="Danh sách phòng"  FontSize="35" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" Foreground="White" Background="blue" VerticalContentAlignment="Center"/>
                 </Border>
             </StackPanel >
+            <StackPanel Height="30" Margin="0,20,0,0" Orientation="Horizontal">
+                <Label Content="Tìm kiếm" FontSize="15" Margin="50,0,0,0"></Label>
+                <Border BorderBrush="White" Background="White" BorderThickness="1" CornerRadius="25" Width="850" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0">
+                    <TextBox Name="txtSearch" Width="800" Background="White" FontSize="15" HorizontalAlignment="Center" Height="30" VerticalAlignment="Top" TextChanged="TextBox_TextChanged" Foreground="Black"></TextBox>
+                </Border>
+            </StackPanel>
             <StackPanel Margin="0,20,0,0">
                 <ListView Height="500"  Width="1000" Name="LV_ListRoom" BorderThickness="0" Background="LightSkyBlue" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Visible">
                     <ListView.ItemsPanel >
@@ -22,7 +28,7 @@
                     </ListView.ItemsPanel>
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
-                            <EventSetter Event="PreviewMouseLeftButtonDown" Handler="ListviewDoubleClick"/>
+                            <EventSetter Event="PreviewMouseDoubleClick" Handler="ListviewDoubleClick"/>
                         </Style>
                     </ListView.ItemContainerStyle>
                     <ListView.ItemTemplate>
@@ -33,7 +39,7 @@
                                 <StackPanel Orientation="Horizontal" Width="170">
                                     <Label Content="Loại phòng: " VerticalContentAlignment="Center" FontSize="16"/>
                                     <Label VerticalContentAlignment="Center" >
-                                        <AccessText TextWrapping="Wrap" Text="{Binding MaLP}" />
+                                        <AccessText TextWrapping="Wrap" Text="{Binding MaPhong}" />
                                     </Label>
 
                                 </StackPanel>
