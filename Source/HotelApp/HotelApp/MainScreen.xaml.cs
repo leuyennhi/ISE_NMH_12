@@ -61,7 +61,10 @@ namespace HotelApp
 
 		private void Logout_Click(object sender, RoutedEventArgs e)
 		{
-			MessageBox.Show(" xử lí đăng xuất!!!");
+            LoginScreen lgScreen = new LoginScreen();
+            lgScreen.Show();
+            this.Close();
+			
 		}
 
 		private void ListViewMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -72,7 +75,7 @@ namespace HotelApp
 			switch (((ListViewItem)((ListView)sender).SelectedItem).Name)
 			{
 				case "MucDSPhong":
-					usc = new AddRoomScreen(conData);
+					usc = new ListRoom(conData);
 					GridMain.Children.Add(usc);
 					break;
 				case "MucDSKhach":
@@ -103,7 +106,6 @@ namespace HotelApp
 					break;
 				case "MucDSNhanVien":
                     usc = new DanhSachNhanVien(conData);
-                    //usc = new ChinhSuaThongTinPhong(conData, "P3");
                     GridMain.Children.Add(usc);
                     break;
 				default:

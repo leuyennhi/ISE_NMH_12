@@ -50,6 +50,8 @@ namespace HotelApp
 
 
                     MainScreen mScreen = new MainScreen();
+                    mScreen.ten.Content = name;
+                    mScreen.chucVu.Content = chucVu;
                     mScreen.Show();
                     this.Close();
                 }
