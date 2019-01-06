@@ -187,7 +187,9 @@ namespace HotelApp
 
 		private void Cancel(object sender, RoutedEventArgs e)
 		{
-
+			UserControl usc = null;
+			usc = new BookRoom(connectData, maPhong);
+			Global.mainNavigate.Children.Add(usc);
 		}
 
 		private void Combobox_SelectionChanged(object sender, SelectionChangedEventArgs e)

@@ -25,7 +25,7 @@ namespace HotelApp
 		private SqlConnection sql;
 		public ConnectData()
 		{
-			linkSql = "Data Source=DESKTOP-8GM7A4F\\SQLEXPRESS;Initial Catalog=DataForHotelApp;Integrated Security=True";
+			linkSql = "Data Source=THANH_NHUT\\SQLEXPRESS;Initial Catalog=DataForHotelApp;Integrated Security=True";
 			sql = new SqlConnection(linkSql);
 
 			CultureInfo ci = CultureInfo.CreateSpecificCulture(CultureInfo.CurrentCulture.Name);
@@ -772,35 +772,6 @@ namespace HotelApp
             return true;
         }
 
-        public bool CheckChucVu(bool chucVu)
-        {
-            sql.Open();
-            if (sql.State == System.Data.ConnectionState.Open)
-            {
-                string q = "SELECT ChucVu FROM NHANVIEN";
-                SqlCommand cmd = new SqlCommand(q, sql);
-                SqlDataReader reader = cmd.ExecuteReader();
-                
-                while (reader.Read())
-                {
-                    string tmp = reader.GetString(0);
-                    if (tmp == "Quản lý")
-                    {
-                        chucVu = true;
-                        return chucVu;
-                    }
-                    else if (tmp == "Nhân viên")
-                    {
-                        chucVu = false;
-                        return chucVu;
-                    }
-                }
-                reader.Close();
-            }
-            sql.Close();
-            return chucVu;
-        }
-
         public DetailOfRoom GetDetailOfRoom(string maPhong)
         {
             DetailOfRoom temp = new DetailOfRoom();
@@ -1532,7 +1503,7 @@ namespace HotelApp
 
 		public static string note = "";
 
-		public static string connectionString = "Data Source=DESKTOP-8GM7A4F\\SQLEXPRESS;Initial Catalog=DataForHotelApp;Integrated Security=True";
+		public static string connectionString = "Data Source=THANH_NHUT\\SQLEXPRESS;Initial Catalog=DataForHotelApp;Integrated Security=True";
 	}
 
 }

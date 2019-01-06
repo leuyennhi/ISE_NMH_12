@@ -75,8 +75,14 @@
     <Compile Include="EditSurtax.xaml.cs">
       <DependentUpon>EditSurtax.xaml</DependentUpon>
     </Compile>
+    <Compile Include="InfoCustomer.xaml.cs">
+      <DependentUpon>InfoCustomer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ListCustomer.xaml.cs">
       <DependentUpon>ListCustomer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ListRoom.xaml.cs">
+      <DependentUpon>ListRoom.xaml</DependentUpon>
     </Compile>
     <Compile Include="LoginScreen.xaml.cs">
       <DependentUpon>LoginScreen.xaml</DependentUpon>
@@ -152,7 +158,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="InfoCustomer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ListCustomer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ListRoom.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

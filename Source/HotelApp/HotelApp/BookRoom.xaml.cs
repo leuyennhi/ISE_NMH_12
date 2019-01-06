@@ -34,10 +34,11 @@ namespace HotelApp
 		private int vitriChon = 0;
 		private ListBookRoom room;
 
-		public BookRoom(ConnectData conData)
+		public BookRoom(ConnectData conData, string MP)
 		{
 			InitializeComponent();
 			connectData = conData;
+			maPhong = MP; //mã phognf
 
 			listTypeOfCustomer = conData.getTypeOfCustommer();
 
@@ -286,16 +287,19 @@ namespace HotelApp
 			Global.valuedayEnd = valuedayEnd;
 			Global.note = txtGhichu.Text;
 
+			UserControl usc = null;
 			if (dpkDayEnd.Text.Length > 7)          //đủ thông tin qua thanh toán
 			{
 				Global.songay = (int)((dpkDayEnd.SelectedDate.Value.Date - dpkDayBegin.SelectedDate.Value.Date).TotalDays + 1);
-				UserControl usc = null;
+				
 				usc = new PayScreen(connectData, "");
 				Global.mainNavigate.Children.Add(usc);
 				return;
 			}
 
 			connectData.setBookRoom(listCustomer, room, formatDate(valuedayStart), valuedayEnd, txtGhichu.Text, 0, -1, true);
+			usc = new ListRoom(connectData);
+			Global.mainNavigate.Children.Add(usc);
 		}
 
 		private string formatDate(string str)
@@ -314,7 +318,9 @@ namespace HotelApp
 
 		private void Cancel(object sender, RoutedEventArgs e)
 		{
-
+			UserControl usc = null;
+			usc = new RoomChecking(connectData, maPhong);
+			Global.mainNavigate.Children.Add(usc);
 		}
 
 		private bool KTNgayTraPhong()

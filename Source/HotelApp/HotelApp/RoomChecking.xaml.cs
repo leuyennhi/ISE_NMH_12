@@ -41,8 +41,9 @@ namespace HotelApp
 
         private void BtnEditRoom_Click(object sender, RoutedEventArgs e)
         {
-            bool chucVu = false;
-            if (connectData.CheckChucVu(chucVu) == true)
+			ListStaff currentUser;
+			currentUser = connectData.getCurrentUser();
+			if (currentUser.ChucVu == "Quản lý")
             {
                 UserControl usc = null;
                 usc = new ChinhSuaThongTinPhong(connectData, maPhong);
@@ -71,8 +72,15 @@ namespace HotelApp
 
         private void BtnDat_Click(object sender, RoutedEventArgs e)
         {
-            UserControl usc = null;
-            usc = new BookRoom(connectData);
+			UserControl usc = null;
+			if (lblTinhTrang.Content.ToString() == "Hết phòng")
+			{
+				usc = new PayScreen(connectData, maPhong);
+				Global.mainNavigate.Children.Add(usc);
+				return;
+			}
+			
+            usc = new BookRoom(connectData, maPhong);
             Global.mainNavigate.Children.Add(usc);
         }
 
