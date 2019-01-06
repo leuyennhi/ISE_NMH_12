@@ -75,7 +75,7 @@ namespace HotelApp
 			UserControl usc = null;
 			if (lblTinhTrang.Content.ToString() == "Hết phòng")
 			{
-				usc = new PayScreen(connectData, maPhong);
+				usc = new PayScreen(connectData, maPhong, false);
 				Global.mainNavigate.Children.Add(usc);
 				return;
 			}

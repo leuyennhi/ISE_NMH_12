@@ -30,7 +30,7 @@ namespace HotelApp
 		private string valueCus;
 		private string valuedayStart;
 		private string valuedayEnd = "";
-		private string maPhong = "P1";
+		private string maPhong = "";
 		private int vitriChon = 0;
 		private ListBookRoom room;
 
@@ -292,13 +292,19 @@ namespace HotelApp
 			{
 				Global.songay = (int)((dpkDayEnd.SelectedDate.Value.Date - dpkDayBegin.SelectedDate.Value.Date).TotalDays + 1);
 				
-				usc = new PayScreen(connectData, "");
+				usc = new PayScreen(connectData, "", true);
 				Global.mainNavigate.Children.Add(usc);
 				return;
 			}
 
 			connectData.setBookRoom(listCustomer, room, formatDate(valuedayStart), valuedayEnd, txtGhichu.Text, 0, -1, true);
 			usc = new ListRoom(connectData);
+			Global.listCustomer = null;
+			Global.room = null;
+			Global.valuedayStart = "";
+			Global.valuedayEnd = "";
+			Global.songay = 0;
+			Global.note = "";
 			Global.mainNavigate.Children.Add(usc);
 		}
 

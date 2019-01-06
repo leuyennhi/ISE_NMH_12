@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HotelApp"
         mc:Ignorable="d"
-        Height="700" Width="1330">
+        Height="730" Width="1300">
     <Grid Name="GridChange" Background="#DEDEDE" >
         
     </Grid>

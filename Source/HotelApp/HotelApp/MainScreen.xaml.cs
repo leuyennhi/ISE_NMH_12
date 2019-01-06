@@ -35,12 +35,21 @@ namespace HotelApp
 			lbltenNV.Content = currentUser.TenNV;
 			lblchucVu.Content = currentUser.ChucVu;
 
-
+			ListViewMenu.SelectedIndex = 0;
 			//nếu là nhân viên thì ẩn đi
 			if (currentUser.ChucVu == "Nhân viên")
 			{
 				MucDSNhanVien.Visibility = Visibility.Hidden;
 				MucDSNhanVien.Visibility = Visibility.Collapsed;
+
+				MucBaoCaoDoanhThu.Visibility = Visibility.Hidden;
+				MucBaoCaoDoanhThu.Visibility = Visibility.Collapsed;
+
+				MucBaoCaoMatDo.Visibility = Visibility.Hidden;
+				MucBaoCaoMatDo.Visibility = Visibility.Collapsed;
+
+				MucChinhSuaPhuThu.Visibility = Visibility.Hidden;
+				MucChinhSuaPhuThu.Visibility = Visibility.Collapsed;
 			}
 		}
 
@@ -113,10 +122,6 @@ namespace HotelApp
                     break;
 				case "MucChinhSuaPhuThu":
 					usc = new EditSurtax(conData);
-					GridMain.Children.Add(usc);
-					break;
-				case "MucChinhSuaSoKhachToiDa":
-					usc = new PayScreen(conData,"P2");
 					GridMain.Children.Add(usc);
 					break;
 				case "MucDSNhanVien":

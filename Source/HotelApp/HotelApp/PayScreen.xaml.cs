@@ -33,14 +33,15 @@ namespace HotelApp
 		private float valueHeSo;
 		private double thanhtien;
 		private string maPhong;
+		private bool book;
 
-		public PayScreen(ConnectData conData, string mp)
+		public PayScreen(ConnectData conData, string mp, bool book)
 		{
 			InitializeComponent();
 
 			connectData = conData;
 			maPhong = mp;
-
+			book = book;
 			if (Global.songay == 0)
 			{
 				connectData.getInfoPayRoom(maPhong);
@@ -183,13 +184,34 @@ namespace HotelApp
 			Global.valuedayEnd = "";
 			Global.songay = 0;
 			Global.note = "";
+
+			UserControl usc = null;
+			usc = new ListRoom(connectData);
+			Global.mainNavigate.Children.Add(usc);
 		}
 
 		private void Cancel(object sender, RoutedEventArgs e)
 		{
-			UserControl usc = null;
-			usc = new BookRoom(connectData, maPhong);
-			Global.mainNavigate.Children.Add(usc);
+			if (book)
+			{
+				UserControl usc = null;
+				usc = new BookRoom(connectData, maPhong);
+				Global.mainNavigate.Children.Add(usc);
+			}
+			else
+			{
+				Global.listCustomer = null;
+				Global.room = null;
+				Global.valuedayStart = "";
+				Global.valuedayEnd = "";
+				Global.songay = 0;
+				Global.note = "";
+
+				UserControl usc = null;
+				usc = new ListRoom(connectData);
+				Global.mainNavigate.Children.Add(usc);
+			}
+
 		}
 
 		private void Combobox_SelectionChanged(object sender, SelectionChangedEventArgs e)

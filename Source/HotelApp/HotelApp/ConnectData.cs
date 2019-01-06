@@ -664,9 +664,24 @@ namespace HotelApp
             sql.Open();
             if (sql.State == System.Data.ConnectionState.Open)
             {
-                string q = "SELECT MaPhong, PHONG.MaLP, TinhTrang, LOAIPHONG.DonGia FROM PHONG, LOAIPHONG WHERE PHONG.MaLP = LOAIPHONG.MaLP";
 
-                SqlCommand cmd = new SqlCommand(q, sql);
+				//string q = "select DISTINCT P.MaLP from DATPHONG DP, PHONG P where DP.MaPhong = P.MaPhong and(DP.NgayKetThuc = '01/01/1900' or  DP.NgayKetThuc > cast(GETDATE() as DATE))";
+
+				//SqlCommand cmd = new SqlCommand(q, sql);
+				//SqlDataReader reader = cmd.ExecuteReader();
+				//while (reader.Read())
+				//{
+				//	reader.GetString(0);
+				//	string q = "select DISTINCT P.MaLP from DATPHONG DP, PHONG P where DP.MaPhong = P.MaPhong and(DP.NgayKetThuc = '01/01/1900' or  DP.NgayKetThuc > cast(GETDATE() as DATE))";
+
+				//	SqlCommand cmd = new SqlCommand(q, sql);
+				//	SqlDataReader reader = cmd.ExecuteReader();
+				//}
+				//reader.Close();
+
+				string	q = "SELECT MaPhong, PHONG.MaLP, TinhTrang, LOAIPHONG.DonGia FROM PHONG, LOAIPHONG WHERE PHONG.MaLP = LOAIPHONG.MaLP";
+
+				SqlCommand cmd = new SqlCommand(q, sql);
 
 
                 SqlDataReader reader = cmd.ExecuteReader();
@@ -674,7 +689,7 @@ namespace HotelApp
                 {
                     bool tmpTinhTrang = reader.GetBoolean(2);
                     string stringTinhTrang = tmpTinhTrang.ToString();
-                    if (tmpTinhTrang == true)
+                    if (tmpTinhTrang == false)
                     {
                         stringTinhTrang = "Còn trống";
                     }
@@ -721,7 +736,7 @@ namespace HotelApp
                 {
                     check = reader.GetBoolean(2);
                     string stringTinhTrang = check.ToString();
-                    if (check == true)
+                    if (check == false)
                     {
                         stringTinhTrang = "Còn trống";
                         double tmpDonGia = reader.GetDouble(3);
@@ -785,7 +800,7 @@ namespace HotelApp
                 {
                     bool tmpTinhTrang = reader.GetBoolean(1);
                     string stringTinhTrang = tmpTinhTrang.ToString();
-                    if (tmpTinhTrang == true)
+                    if (tmpTinhTrang == false)
                     {
                         stringTinhTrang = "Còn trống";
                     }
@@ -834,7 +849,7 @@ namespace HotelApp
                     {
                         bool tmpTinhTrang = reader.GetBoolean(2);
                         string stringTinhTrang = tmpTinhTrang.ToString();
-                        if (tmpTinhTrang == true)
+                        if (tmpTinhTrang == false)
                         {
                             stringTinhTrang = "Còn trống";
                         }
@@ -879,7 +894,7 @@ namespace HotelApp
                     {
                         bool tmpTinhTrang = reader.GetBoolean(2);
                         string stringTinhTrang = tmpTinhTrang.ToString();
-                        if (tmpTinhTrang == true)
+                        if (tmpTinhTrang == false)
                         {
                             stringTinhTrang = "Còn trống";
                         }

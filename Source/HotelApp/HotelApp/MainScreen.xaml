@@ -139,12 +139,6 @@
                             <TextBlock Text="Chỉnh sửa phụ thu" VerticalAlignment="Center"  Margin="10 10"/>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem Name="MucChinhSuaSoKhachToiDa" Height="50">
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="PencilBox"  Height="25" Width="25" Margin="15,5"/>
-                            <TextBlock Text="Chỉnh sửa số khách tối đa" VerticalAlignment="Center"  Margin="10 10"/>
-                        </StackPanel>
-                    </ListViewItem>
                     <ListViewItem Name="MucDSNhanVien" Height="50">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="PlaylistPlus"  Height="25" Width="25" Margin="15,5"/>
