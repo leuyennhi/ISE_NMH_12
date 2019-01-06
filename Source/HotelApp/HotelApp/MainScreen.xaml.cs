@@ -88,9 +88,9 @@ namespace HotelApp
 			switch (((ListViewItem)((ListView)sender).SelectedItem).Name)
 			{
 				case "MucDSPhong":
-					//usc = new ListRoom(conData);
-					//GridMain.Children.Add(usc);
-					break;
+                    usc = new ListRoom(conData);
+                    GridMain.Children.Add(usc);
+                    break;
 				case "MucDSKhach":
 					usc = new ListCustomer(conData);
 					GridMain.Children.Add(usc);

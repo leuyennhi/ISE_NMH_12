@@ -37,11 +37,65 @@ namespace HotelApp
             lblGhiChu.Content = item.GhiChu;
         }
 
+        
+
         private void BtnEditRoom_Click(object sender, RoutedEventArgs e)
         {
-            ChinhSuaThongTinPhong edit = new ChinhSuaThongTinPhong(connectData,maPhong);
-            //edit.Show();
-            
+            bool chucVu = false;
+            if (connectData.CheckChucVu(chucVu) == true)
+            {
+                UserControl usc = null;
+                usc = new ChinhSuaThongTinPhong(connectData, maPhong);
+                Global.mainNavigate.Children.Add(usc);
+            } else
+            {
+                MessageBox.Show("Bạn không có quyền Chỉnh sửa phòng");
+            }
+        }
+
+        private void click_btnBack(object sender, RoutedEventArgs e)
+        {
+            if (isEditing)
+            {
+                MessageBox.Show("Chưa lưu thông tin đang chỉnh sửa!!!\n\nVui lòng lưu trước khi rời khỏi trang!!!", "Chưa Lưu Thay Đổi!!!", MessageBoxButton.OK);
+                return;
+            }
+
+            else
+            {
+                UserControl usc = null;
+                usc = new ListRoom(connectData);
+                Global.mainNavigate.Children.Add(usc);
+            }
+        }
+
+        private void BtnDat_Click(object sender, RoutedEventArgs e)
+        {
+            UserControl usc = null;
+            usc = new BookRoom(connectData);
+            Global.mainNavigate.Children.Add(usc);
+        }
+
+       
+
+        private void BtnDeleteRoom_Click(object sender, RoutedEventArgs e)
+        {
+            if (isEditing == false)
+            {
+                if (MessageBox.Show("Bạn có thực sự muốn xóa phòng này???", "Xác Nhận", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    List<string> temp = new List<string>();
+                    temp.Add(item.MaPhong);
+                    if (connectData.deleteRoom(temp))
+                    {
+
+                        UserControl usc = null;
+                        usc = new ListRoom(connectData);
+                        Global.mainNavigate.Children.Add(usc);
+
+                    }
+                }
+            }
         }
     }
 }

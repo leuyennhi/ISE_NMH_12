@@ -300,7 +300,10 @@
                 </Border>
                 <Separator></Separator>
                 <Label Name="lblPhong" Content="Phòng P1" FontSize="25" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-                
+                <Canvas>
+                    <Image Width="32" Height="32" Margin="0,15,0,0" Source="pack://siteoforigin:,,,/Resources/back.png"/>
+                    <Button Width="32" Height="32" Margin="0,15,0,0" Background="Transparent" BorderThickness="2" Click="click_btnBack"></Button>
+                </Canvas>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,40,0,0" HorizontalAlignment="Center">
                 <StackPanel >
@@ -320,8 +323,8 @@
                 </StackPanel>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,30,0,0">
-                <Button Content="Đặt phòng" Name="btnDat" Width="170" FontSize="25" Height="50" Foreground="Black" Background="White"/>
-                <Button Content="Xoá phòng" Name="btnDeleteRoom" Width="170" FontSize="25" Margin="40,0,0,0" Foreground="Black" Height="50" Background="White"/>
+                <Button Content="Đặt phòng" Name="btnDat" Click="BtnDat_Click" Width="170" FontSize="25" Height="50" Foreground="Black" Background="White"/>
+                <Button Content="Xoá phòng" Name="btnDeleteRoom" Click="BtnDeleteRoom_Click" Width="170" FontSize="25" Margin="40,0,0,0" Foreground="Black" Height="50" Background="White"/>
             </StackPanel>
             <Button Content="Chỉnh sửa thông tin phòng" Click="BtnEditRoom_Click" Name="btnEditRoom" Width="400" Margin="0,40,0,0" FontSize="25" Height="50" Foreground="Black" Background="White"/>
         </StackPanel>

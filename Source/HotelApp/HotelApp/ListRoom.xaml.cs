@@ -40,23 +40,11 @@ namespace HotelApp
         {
             var selectedItem = sender as ListViewItem;
 
-          
-            var newWin = new MainScreen();
-            newWin.Show();
-
+            Room dataItem = (Room)LV_ListRoom.ItemContainerGenerator.ItemFromContainer(selectedItem);
             UserControl usc = null;
-            usc = new RoomChecking(connectData, listRoom[LV_ListRoom.SelectedIndex].MaPhong);
-            newWin.GridMain.Children.Add(usc);
-
-            Window.GetWindow(this).Close();
+            usc = new RoomChecking(connectData, dataItem.MaPhong);
+            Global.mainNavigate.Children.Add(usc);
         }
-
-        //private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        //{
-        //    items = connectData.findRoom(txtSearch.Text);
-        //    LV_ListRoom.ItemsSource = items;
-        //}
-
 
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
