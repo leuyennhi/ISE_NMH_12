@@ -25,7 +25,7 @@ namespace HotelApp
 		private SqlConnection sql;
 		public ConnectData()
 		{
-			linkSql = "Data Source=LEUYENNHI\\SQLEXPRESS;Initial Catalog=DataForHotelApp;Integrated Security=True";
+			linkSql = "Data Source=DESKTOP-8GM7A4F\\SQLEXPRESS;Initial Catalog=DataForHotelApp;Integrated Security=True";
 			sql = new SqlConnection(linkSql);
 
 			CultureInfo ci = CultureInfo.CreateSpecificCulture(CultureInfo.CurrentCulture.Name);
@@ -658,41 +658,42 @@ namespace HotelApp
 		}
 
 
-		public List<Room> getListRoom()
-		{
-			List<Room> temp = new List<Room>();
-			sql.Open();
-			if (sql.State == System.Data.ConnectionState.Open)
-			{
-				string q = "SELECT MaPhong, PHONG.MaLP, TinhTrang, LOAIPHONG.DonGia FROM PHONG, LOAIPHONG WHERE PHONG.MaLP = LOAIPHONG.MaLP";
+        public List<Room> getListRoom()
+        {
+            List<Room> temp = new List<Room>();
+            sql.Open();
+            if (sql.State == System.Data.ConnectionState.Open)
+            {
+                string q = "SELECT MaPhong, PHONG.MaLP, TinhTrang, LOAIPHONG.DonGia FROM PHONG, LOAIPHONG WHERE PHONG.MaLP = LOAIPHONG.MaLP";
 
-				SqlCommand cmd = new SqlCommand(q, sql);
+                SqlCommand cmd = new SqlCommand(q, sql);
 
 
-				SqlDataReader reader = cmd.ExecuteReader();
-				while (reader.Read())
-				{
-					bool tmpTinhTrang = reader.GetBoolean(2);
-					string stringTinhTrang = tmpTinhTrang.ToString();
-					if (tmpTinhTrang == true)
-					{
-						stringTinhTrang = "Còn trống";
-					}
-					else
-					{
-						stringTinhTrang = "Hết phòng";
-					}
-					double tmpDonGia = reader.GetDouble(3);
-					temp.Add(new Room() { MaPhong = reader.GetString(0), MaLP = reader.GetString(1), TinhTrang = stringTinhTrang, DonGia = tmpDonGia.ToString() + " VNĐ" });
-				}
-				reader.Close();
-			}
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    bool tmpTinhTrang = reader.GetBoolean(2);
+                    string stringTinhTrang = tmpTinhTrang.ToString();
+                    if (tmpTinhTrang == true)
+                    {
+                        stringTinhTrang = "Còn trống";
+                    }
+                    else
+                    {
+                        stringTinhTrang = "Hết phòng";
+                    }
+                    double tmpDonGia = reader.GetDouble(3);
+                    temp.Add(new Room() { MaPhong = reader.GetString(0), MaLP = reader.GetString(1), TinhTrang = stringTinhTrang, DonGia = tmpDonGia.ToString() + " VNĐ" });
+                }
+                reader.Close();
+            }
 
-			sql.Close();
-			return temp;
-		}
+            sql.Close();
+            return temp;
+        }
 
-		public void updateInfoRoom(string MaPhong, string MaLP, string ghiChu)
+
+        public void updateInfoRoom(string MaPhong, string MaLP, string ghiChu)
 		{
 			sql.Open();
 			if (sql.State == System.Data.ConnectionState.Open)
@@ -704,115 +705,231 @@ namespace HotelApp
 			sql.Close();
 		}
 
-		//public DetailOfRoom GetDetailOfRoom(string maPhong)
-		//{
-		//    DetailOfRoom temp = new DetailOfRoom();
-		//    sql.Open();
-		//    if (sql.State == System.Data.ConnectionState.Open)
-		//    {
-		//        string q = "SELECT PHONG.MaPhong, TenLP, MaPT, DonGia, SoKhachToiDa, SoLuong, GhiChu FROM LOAIPHONG, PHONG WHERE PHONG.MaLP = LOAIPHONG.MaLP AND PHONG.MaPhong = N'" + maPhong + "'"; ;
-		//        SqlCommand cmd = new SqlCommand(q, sql);
-		//        SqlDataReader reader = cmd.ExecuteReader();
-		//        if (reader.Read())
-		//        {
-		//            temp.MaPhong = reader.GetString(0);
-		//            temp.MaLP = reader.GetString(0);
-		//            temp.TenLP = reader.GetString(1);
-		//            temp.MaPT = reader.GetString(2);
-		//            temp.DonGia = reader.GetDouble(3);
-		//            temp.SoKhachToiDa = reader.GetInt32(4);
-		//            temp.SoLuong = reader.GetInt32(5);
-		//            temp.GhiChu = reader.GetString(6);
-		//        }
-		//        reader.Close();
-		//    }
-		//    sql.Close();
-		//    return temp;
-		//}
+        public List<Room> getCheckedListRoom(bool check)
+        {
+            List<Room> temp = new List<Room>();
+            sql.Open();
+            if (sql.State == System.Data.ConnectionState.Open)
+            {
+                string q = "SELECT MaPhong, PHONG.MaLP, TinhTrang, LOAIPHONG.DonGia FROM PHONG, LOAIPHONG WHERE PHONG.MaLP = LOAIPHONG.MaLP";
 
-		public DetailOfRoom GetDetailOfRoom(string maPhong)
-		{
-			DetailOfRoom temp = new DetailOfRoom();
-			sql.Open();
-			if (sql.State == System.Data.ConnectionState.Open)
-			{
-				string q = "SELECT PHONG.MaPhong, PHONG.TinhTrang, TenLP, MaPT, DonGia, SoKhachToiDa, SoLuong, GhiChu FROM LOAIPHONG, PHONG WHERE PHONG.MaLP = LOAIPHONG.MaLP AND LOAIPHONG.MaLP = N'" + maPhong + "'";
-				SqlCommand cmd = new SqlCommand(q, sql);
-				SqlDataReader reader = cmd.ExecuteReader();
-				if (reader.Read())
-				{
-					bool tmpTinhTrang = reader.GetBoolean(1);
-					string stringTinhTrang = tmpTinhTrang.ToString();
-					if (tmpTinhTrang == true)
-					{
-						stringTinhTrang = "Còn trống";
-					}
-					else
-					{
-						stringTinhTrang = "Hết phòng";
-					}
-					temp.TinhTrang = stringTinhTrang;
-					temp.MaPhong = reader.GetString(0);
-					temp.TenLP = reader.GetString(2);
-					temp.MaPT = reader.GetString(3);
-					temp.DonGia = reader.GetDouble(4);
-					temp.SoKhachToiDa = reader.GetInt32(5);
-					temp.SoLuong = reader.GetInt32(6);
-					temp.GhiChu = reader.GetString(7);
+                SqlCommand cmd = new SqlCommand(q, sql);
 
-				}
-				reader.Close();
-			}
-			sql.Close();
-			return temp;
-		}
 
-		public List<Room> findRoom(string name)
-		{
-			List<Room> temp = new List<Room>();
-			sql.Open();
-			if (sql.State == System.Data.ConnectionState.Open)
-			{
-				string q = "SELECT COUNT(*) FROM PHONG";
-				SqlCommand cmd = new SqlCommand(q, sql);
-				int count = Convert.ToInt32(cmd.ExecuteScalar());
-				if (count == 0)
-				{
-					sql.Close();
-					return temp;
-				}
-				else
-				{
-					q = "SELECT MaPhong, PHONG.MaLP, TinhTrang, LOAIPHONG.DonGia FROM PHONG, LOAIPHONG WHERE PHONG.MaLP = LOAIPHONG.MaLP";
-					cmd = new SqlCommand(q, sql);
-					SqlDataReader reader = cmd.ExecuteReader();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    check = reader.GetBoolean(2);
+                    string stringTinhTrang = check.ToString();
+                    if (check == true)
+                    {
+                        stringTinhTrang = "Còn trống";
+                        double tmpDonGia = reader.GetDouble(3);
+                        temp.Add(new Room() { MaPhong = reader.GetString(0), MaLP = reader.GetString(1), TinhTrang = stringTinhTrang, DonGia = tmpDonGia.ToString() + " VNĐ" });
+                    }
 
-					while (reader.Read())
-					{
-						bool tmpTinhTrang = reader.GetBoolean(2);
-						string stringTinhTrang = tmpTinhTrang.ToString();
-						if (tmpTinhTrang == true)
-						{
-							stringTinhTrang = "Còn trống";
-						}
-						else
-						{
-							stringTinhTrang = "Hết phòng";
-						}
-						double tmpDonGia = reader.GetDouble(3);
-						if (reader.GetString(1).ToLower().IndexOf(name) != -1)
-						{
-							temp.Add(new Room() { MaPhong = reader.GetString(0), MaLP = reader.GetString(1), TinhTrang = stringTinhTrang, DonGia = tmpDonGia.ToString() + " VNĐ" });
-						}
-					}
-					reader.Close();
-				}
-			}
-			sql.Close();
-			return temp;
-		}
 
-		public List<ListViewTurnoverReport> getTurnoverReport(string month)
+                }
+                reader.Close();
+            }
+
+            sql.Close();
+            return temp;
+        }
+
+        public bool deleteRoom(List<string> listRoom)
+        {
+            sql.Open();
+            if (sql.State == System.Data.ConnectionState.Open)
+            {
+                for (int i = 0; i < listRoom.Count(); i++)
+                {
+                    string q = "SELECT COUNT(*) FROM DATPHONG WHERE MaPhong = N'" + listRoom[i] + "'";
+                    SqlCommand cmd = new SqlCommand(q, sql);
+                    int count = Convert.ToInt32(cmd.ExecuteScalar());
+                    if (count != 0)
+                    {
+                        MessageBox.Show("Không thể xóa phòng " + listRoom[i] + "\nDo còn thông tin phòng này ở mục đặt phòng!!!", "Không Thể Xóa!!!");
+                        sql.Close();
+                        return false;
+                    }
+
+                    q = "SELECT COUNT(*) FROM TRAPHONG WHERE MaPhong = N'" + listRoom[i] + "'";
+                    cmd = new SqlCommand(q, sql);
+                    count = Convert.ToInt32(cmd.ExecuteScalar());
+                    if (count != 0)
+                    {
+                        MessageBox.Show("Không thể xóa nhân phong " + listRoom[i] + "\nDo còn thông tin phòng này ở mục trả phòng!!!", "Không Thể Xóa!!!");
+                        sql.Close();
+                        return false;
+                    }
+                    q = "DELETE FROM PHONG WHERE MaPhong = N'" + listRoom[i] + "'";
+                    cmd = new SqlCommand(q, sql);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            sql.Close();
+            return true;
+        }
+
+        public bool CheckChucVu(bool chucVu)
+        {
+            sql.Open();
+            if (sql.State == System.Data.ConnectionState.Open)
+            {
+                string q = "SELECT ChucVu FROM NHANVIEN";
+                SqlCommand cmd = new SqlCommand(q, sql);
+                SqlDataReader reader = cmd.ExecuteReader();
+                
+                while (reader.Read())
+                {
+                    string tmp = reader.GetString(0);
+                    if (tmp == "Quản lý")
+                    {
+                        chucVu = true;
+                        return chucVu;
+                    }
+                    else if (tmp == "Nhân viên")
+                    {
+                        chucVu = false;
+                        return chucVu;
+                    }
+                }
+                reader.Close();
+            }
+            sql.Close();
+            return chucVu;
+        }
+
+        public DetailOfRoom GetDetailOfRoom(string maPhong)
+        {
+            DetailOfRoom temp = new DetailOfRoom();
+            sql.Open();
+            if (sql.State == System.Data.ConnectionState.Open)
+            {
+                string q = "SELECT PHONG.MaPhong, PHONG.TinhTrang, TenLP, MaPT, DonGia, SoKhachToiDa, SoLuong, PHONG.GhiChu FROM LOAIPHONG, PHONG WHERE PHONG.MaLP = LOAIPHONG.MaLP AND PHONG.MaPhong = '" + maPhong + "'";
+                SqlCommand cmd = new SqlCommand(q, sql);
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.Read())
+                {
+                    bool tmpTinhTrang = reader.GetBoolean(1);
+                    string stringTinhTrang = tmpTinhTrang.ToString();
+                    if (tmpTinhTrang == true)
+                    {
+                        stringTinhTrang = "Còn trống";
+                    }
+                    else
+                    {
+                        stringTinhTrang = "Hết phòng";
+                    }
+                    temp.TinhTrang = stringTinhTrang;
+                    temp.MaPhong = reader.GetString(0);
+                    temp.TenLP = reader.GetString(2);
+                    temp.MaPT = reader.GetString(3);
+                    temp.DonGia = reader.GetDouble(4);
+                    temp.SoKhachToiDa = reader.GetInt32(5);
+                    temp.SoLuong = reader.GetInt32(6);
+                    temp.GhiChu = reader.GetString(7);
+
+
+                }
+                reader.Close();
+            }
+            sql.Close();
+            return temp;
+        }
+
+        public List<Room> findRoom(string name)
+        {
+            List<Room> temp = new List<Room>();
+            sql.Open();
+            if (sql.State == System.Data.ConnectionState.Open)
+            {
+                string q = "SELECT COUNT(*) FROM PHONG";
+                SqlCommand cmd = new SqlCommand(q, sql);
+                int count = Convert.ToInt32(cmd.ExecuteScalar());
+                if (count == 0)
+                {
+                    sql.Close();
+                    return temp;
+                }
+                else
+                {
+                    q = "SELECT MaPhong, PHONG.MaLP, TinhTrang, LOAIPHONG.DonGia FROM PHONG, LOAIPHONG WHERE PHONG.MaLP = LOAIPHONG.MaLP";
+                    cmd = new SqlCommand(q, sql);
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        bool tmpTinhTrang = reader.GetBoolean(2);
+                        string stringTinhTrang = tmpTinhTrang.ToString();
+                        if (tmpTinhTrang == true)
+                        {
+                            stringTinhTrang = "Còn trống";
+                        }
+                        else
+                        {
+                            stringTinhTrang = "Hết phòng";
+                        }
+                        double tmpDonGia = reader.GetDouble(3);
+                        if (reader.GetString(1).ToLower().IndexOf(name.ToLower()) != -1)
+                        {
+                            temp.Add(new Room() { MaPhong = reader.GetString(0), MaLP = reader.GetString(1), TinhTrang = stringTinhTrang, DonGia = tmpDonGia.ToString() + " VNĐ" });
+                        }
+                    }
+                    reader.Close();
+                }
+            }
+            sql.Close();
+            return temp;
+        }
+
+        public List<Room> findRoomName(string name)
+        {
+            List<Room> temp = new List<Room>();
+            sql.Open();
+            if (sql.State == System.Data.ConnectionState.Open)
+            {
+                string q = "SELECT COUNT(*) FROM PHONG";
+                SqlCommand cmd = new SqlCommand(q, sql);
+                int count = Convert.ToInt32(cmd.ExecuteScalar());
+                if (count == 0)
+                {
+                    sql.Close();
+                    return temp;
+                }
+                else
+                {
+                    q = "SELECT PHONG.MaPhong, PHONG.MaLP, TinhTrang, LOAIPHONG.DonGia FROM PHONG, LOAIPHONG WHERE PHONG.MaLP = LOAIPHONG.MaLP";
+                    cmd = new SqlCommand(q, sql);
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        bool tmpTinhTrang = reader.GetBoolean(2);
+                        string stringTinhTrang = tmpTinhTrang.ToString();
+                        if (tmpTinhTrang == true)
+                        {
+                            stringTinhTrang = "Còn trống";
+                        }
+                        else
+                        {
+                            stringTinhTrang = "Hết phòng";
+                        }
+                        double tmpDonGia = reader.GetDouble(3);
+                        if (reader.GetString(0).ToLower().IndexOf(name.ToLower()) != -1)
+                        {
+                            temp.Add(new Room() { MaPhong = reader.GetString(0), MaLP = reader.GetString(1), TinhTrang = stringTinhTrang, DonGia = tmpDonGia.ToString() + " VNĐ" });
+                        }
+                    }
+                    reader.Close();
+                }
+            }
+            sql.Close();
+            return temp;
+        }
+
+        public List<ListViewTurnoverReport> getTurnoverReport(string month)
 		{
 			List<ListViewTurnoverReport> temp = new List<ListViewTurnoverReport>();
 			sql.Open();
@@ -1415,7 +1532,7 @@ namespace HotelApp
 
 		public static string note = "";
 
-		public static string connectionString = "Data Source=LEUYENNHI\\SQLEXPRESS;Initial Catalog=DataForHotelApp;Integrated Security=True";
+		public static string connectionString = "Data Source=DESKTOP-8GM7A4F\\SQLEXPRESS;Initial Catalog=DataForHotelApp;Integrated Security=True";
 	}
 
 }
