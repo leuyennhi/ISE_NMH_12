@@ -25,7 +25,7 @@ namespace HotelApp
 		private SqlConnection sql;
 		public ConnectData()
 		{
-			linkSql = "Data Source=THANH_NHUT\\SQLEXPRESS;Initial Catalog=DataForHotelApp;Integrated Security=True";
+			linkSql = "Data Source=LEUYENNHI\\SQLEXPRESS;Initial Catalog=DataForHotelApp;Integrated Security=True";
 			sql = new SqlConnection(linkSql);
 
 			CultureInfo ci = CultureInfo.CreateSpecificCulture(CultureInfo.CurrentCulture.Name);
@@ -434,7 +434,73 @@ namespace HotelApp
 			return;
 		}
 
-		public List<Customer> getListCustomer()
+        public Customer getInfoCustomer(string maKH)
+        {
+            Customer temp = new Customer();
+            sql.Open();
+
+            if (sql.State == System.Data.ConnectionState.Open)
+            {
+                string q = "SELECT KH.MaKH, TenKH, DiaChi, SDT, CMND, LK.TenLK, DaXoa FROM KHACHHANG KH join LOAIKHACH LK on (KH.MaLK = LK.MaLK) AND MaKH = N'" + maKH + "'";
+                SqlCommand cmd = new SqlCommand(q, sql);
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.Read())
+                {
+                    temp = new Customer() { MaKH = reader.GetString(0), TenKH = reader.GetString(1), DiaChi = reader.GetString(2), SDT = reader.GetString(3), CMND = reader.GetString(4), LoaiKhach = reader.GetString(5), DaXoa = reader.GetBoolean(6) };
+                    reader.Close();
+
+                    q = "SELECT COUNT(*) FROM DATPHONG DP WHERE MaKH = N'" + maKH + "'";
+                    cmd = new SqlCommand(q, sql);
+                    int count = Convert.ToInt32(cmd.ExecuteScalar());
+                    if (count == 0)
+                    {
+                        sql.Close();
+                        temp.PhongDangO = "Không có";
+                        return temp;
+                    }
+                    else
+                    {
+                        q = "SELECT MaPhong, NgayBatDau FROM DATPHONG DP WHERE MaKH = N'" + maKH + "'";
+                        cmd = new SqlCommand(q, sql);
+                        reader = cmd.ExecuteReader();
+                        reader.Read();
+                        string maPhong = reader.GetString(0);
+                        if (reader.GetDateTime(1) > DateTime.Now.Date)
+                        {
+                            sql.Close();
+                            temp.PhongDangO = "Không có";
+                            return temp;
+                        }
+                        else
+                        {
+                            q = "SELECT COUNT(*) FROM TRAPHONG TP WHERE MaKH = N'" + maKH + "' AND MaPhong = N'" + reader.GetString(0) + "'";
+                            reader.Close();
+                            cmd = new SqlCommand(q, sql);
+                            count = Convert.ToInt32(cmd.ExecuteScalar());
+                            if (count == 0)
+                            {
+                                sql.Close();
+                                temp.PhongDangO = maPhong;
+                                return temp;
+                            }
+                            else
+                            {
+                                sql.Close();
+                                temp.PhongDangO = "Không có";
+                                return temp;
+                            }
+                        }
+                    }
+
+                }
+
+                reader.Close();
+            }
+            sql.Close();
+            return temp;
+        }
+
+        public List<Customer> getListCustomer()
 		{
 			List<Customer> temp = new List<Customer>();
 			sql.Open();
@@ -1244,6 +1310,8 @@ namespace HotelApp
 
 		public string DiaChi { get; set; }
 
+        public string PhongDangO { get; set; }
+
 		public bool DaXoa { get; set; }
 	}
 
@@ -1347,7 +1415,7 @@ namespace HotelApp
 
 		public static string note = "";
 
-		public static string connectionString = "Data Source=THANH_NHUT\\SQLEXPRESS;Initial Catalog=DataForHotelApp;Integrated Security=True";
+		public static string connectionString = "Data Source=LEUYENNHI\\SQLEXPRESS;Initial Catalog=DataForHotelApp;Integrated Security=True";
 	}
 
 }

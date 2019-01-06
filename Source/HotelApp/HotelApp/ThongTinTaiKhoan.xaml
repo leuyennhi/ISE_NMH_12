@@ -13,7 +13,9 @@
                 <Image Width="32" Height="32" Margin="0" Source="pack://siteoforigin:,,,/Resources/back.png"/>
                 <Button Width="32" Height="32" Margin="0,0,0,0" Background="Transparent" BorderThickness="2" Click="click_btnBack"></Button>
             </Canvas>
-            <Label Content="THÔNG TIN TÀI KHOẢN" HorizontalAlignment="Center" Margin="310,0,0,0" VerticalAlignment="Top" FontSize="25" FontWeight="Black"/>
+            <Border BorderBrush="White" BorderThickness="2" Margin="350,0,0,0" CornerRadius="10" Height="60" Width="400" HorizontalAlignment="Center" VerticalAlignment="Top"  Background="Blue">
+                <Label   Content="Thông Tin Nhân Viên"  FontSize="35" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" Foreground="White" Background="blue" VerticalContentAlignment="Center"/>
+            </Border>
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="400,40,0,0">
             <Label Content="ID nhân viên:" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Top" FontSize="20"/>

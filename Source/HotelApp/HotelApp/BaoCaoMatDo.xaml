@@ -10,7 +10,9 @@
         WindowStartupLocation="CenterScreen"
         WindowState="Maximized"-->
     <StackPanel Margin="0,0,0,0" Grid.Row="0" Grid.Column="1" Background="#DEDEDE">
-        <Label Content="BÁO CÁO MẬT ĐỘ SỬ DỤNG PHÒNG" HorizontalAlignment="Center" Margin="0,58,0,0" VerticalAlignment="Top" FontSize="30" FontWeight="Black"/>
+        <Border BorderBrush="White" BorderThickness="2" Margin="0,20,0,0" CornerRadius="10" Height="60" Width="600" HorizontalAlignment="Center" VerticalAlignment="Top"  Background="Blue">
+            <Label   Content="Báo Cáo Mật Độ Sử Dụng Phòng"  FontSize="35" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" Foreground="White" Background="blue" VerticalContentAlignment="Center"/>
+        </Border>
         <StackPanel  Orientation="Horizontal" HorizontalAlignment="Left" Margin="100,30,0,0">
             <Label Content="Tháng: " FontSize="30" Margin="0,0,23,0"/>
             <Border BorderBrush="White" Height="50" Background="White" BorderThickness="1" CornerRadius="25" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" >

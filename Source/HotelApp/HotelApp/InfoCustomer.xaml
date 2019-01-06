@@ -1,0 +1,69 @@
+﻿<UserControl
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HotelApp"
+        xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2" x:Class="HotelApp.InfoCustomer"
+        mc:Ignorable="d"
+        Height="612" Width="1100">
+
+    <StackPanel Margin="0,0,0,0" Background="#DEDEDE">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,20,0,0">
+            <Canvas>
+                <Image Width="32" Height="32" Margin="0,0,0,0" Source="pack://siteoforigin:,,,/Resources/back.png"/>
+                <Button Width="32" Height="32" Margin="0,0,0,0" Background="Transparent" BorderThickness="2" Click="click_btnBack"></Button>
+            </Canvas>
+            <Border BorderBrush="White" BorderThickness="2" Margin="320,0,0,0" CornerRadius="10" Height="60" Width="450" HorizontalAlignment="Center" VerticalAlignment="Top"  Background="Blue">
+                <Label   Content="Thông Tin Khách Hàng"  FontSize="35" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" Foreground="White" Background="blue" VerticalContentAlignment="Center"/>
+            </Border>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="400,20,0,0" HorizontalAlignment="Left">
+            <Label Content="Mã KH: " FontSize="20" Margin="0,0,0,0"/>
+            <Label Name="lblMaKH" Content="******" FontSize="20" Margin="0,0,0,0"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="400,20,0,0" HorizontalAlignment="Left">
+            <Label Content="Tên KH: " FontSize="20" Margin="0,0,0,0"/>
+            <Label Name="lblTenKH" Content="******" FontSize="20" Margin="0,0,0,0"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="400,20,0,0" HorizontalAlignment="Left">
+            <Label Content="Số điện thoại: " FontSize="20" Margin="0,0,0,0"/>
+            <Canvas>
+                <Label Name="lblSDT" Content="******" FontSize="20" Margin="0,0,0,0"/>
+                <Border Name="borderSDT" BorderBrush="White" Height="35" Background="White" BorderThickness="1" CornerRadius="25" Width="250" HorizontalAlignment="Center" VerticalAlignment="Center" >
+                    <TextBox Name="txtSDT" Width="200" Background="White" Foreground="Black" FontSize="20"></TextBox>
+                </Border>
+            </Canvas>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="400,20,0,0" HorizontalAlignment="Left">
+            <Label Content="CMND: " FontSize="20" Margin="0,0,0,0"/>
+            <Label Name="lblCMND" Content="******" FontSize="20" Margin="0,0,0,0"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="400,20,0,0" HorizontalAlignment="Left">
+            <Label Content="Ðịa chỉ: " FontSize="20" Margin="0,0,0,0"/>
+            <Canvas>
+                <Label Name="lblDiaChi" Content="******" FontSize="20" Margin="0,0,0,0"/>
+                <Border Name="borderDiaChi" BorderBrush="White" Height="35" Background="White" BorderThickness="1" CornerRadius="25" Width="450" HorizontalAlignment="Center" VerticalAlignment="Center" >
+                    <TextBox Name="txtDiaChi" Width="400" Background="White" Foreground="Black" FontSize="20"></TextBox>
+                </Border>
+            </Canvas>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="400,20,0,0" HorizontalAlignment="Left">
+            <Label Content="Loại Khách: " FontSize="20" Margin="0,0,0,0"/>
+            <Canvas>
+                <Label Name="lblLK" Content="******" FontSize="20" Margin="0,0,0,0"/>
+                <Border Name="borderLK" BorderBrush="White" Height="40" Background="White" BorderThickness="1" CornerRadius="25" Width="170" HorizontalAlignment="Center" VerticalAlignment="Center" >
+                    <ComboBox Name="cbbLK" Loaded="cbbLK_Loaded" HorizontalAlignment="Center" Margin="0,0,0,0" FontSize="20" Background="White" VerticalAlignment="Stretch" Width="120" Foreground="Black"/>
+                </Border>
+            </Canvas>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="400,20,0,0" HorizontalAlignment="Left">
+            <Label Content="Phòng Ðang Ở: " FontSize="20" Margin="0,0,0,0"/>
+            <Label Name="lblPhong" Content="******" FontSize="20" Margin="0,0,0,0"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,15,0,0">
+            <Button Name="btnEdit" Click="btnEdit_Click" Content="Chỉnh Sửa" Width="150" Margin="0,0,0,0" Foreground="Black" Background="White" />
+            <Button Name="btnDelete" Click="btnDelete_Click" Content="Xóa KH" Width="150" Foreground="Black" Background="White" Margin="20,0,0,0"/>
+        </StackPanel>
+    </StackPanel>
+</UserControl>

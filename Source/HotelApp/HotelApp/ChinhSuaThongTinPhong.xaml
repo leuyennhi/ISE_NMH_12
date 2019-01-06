@@ -9,10 +9,9 @@
     Height="612" Width="1100">
 
     <StackPanel Margin="0,0,0,0" Grid.Row="0" Grid.Column="1" Background="#DEDEDE" >
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"    Margin="0,58,0,0">
-            <Canvas/>
-            <Label Content="CHỈNH SỬA THÔNG TIN PHÒNG" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Top" FontSize="25" FontWeight="Black"/>
-        </StackPanel>
+            <Border BorderBrush="White" BorderThickness="2" Margin="0,20,0,0" CornerRadius="10" Height="60" Width="600" HorizontalAlignment="Center" VerticalAlignment="Top"  Background="Blue">
+                <Label   Content="Chỉnh Sửa THông Tin Phòng"  FontSize="35" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" Foreground="White" Background="blue" VerticalContentAlignment="Center"/>
+            </Border>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="400,40,0,0">
             <Label Content="Mã phòng:" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" FontSize="20"/>
             <Label Name="lblMP" Content="010" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" FontSize="20"/>
