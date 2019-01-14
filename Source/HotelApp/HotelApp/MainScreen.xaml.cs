@@ -50,6 +50,12 @@ namespace HotelApp
 
 				MucChinhSuaPhuThu.Visibility = Visibility.Hidden;
 				MucChinhSuaPhuThu.Visibility = Visibility.Collapsed;
+
+				MucLoaiKhach.Visibility = Visibility.Hidden;
+				MucLoaiKhach.Visibility = Visibility.Collapsed;
+
+				MucLoaiPhong.Visibility = Visibility.Hidden;
+				MucLoaiPhong.Visibility = Visibility.Collapsed;
 			}
 		}
 

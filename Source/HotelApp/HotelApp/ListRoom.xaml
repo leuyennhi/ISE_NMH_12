@@ -26,7 +26,7 @@
             </StackPanel>
             <Button Background="White" Content="Xóa Phòng" Width="100" Foreground="Black" Margin="140,10,0,0" HorizontalAlignment="Left" Click="click_btnDelete"></Button>
             <StackPanel Margin="0,20,0,0">
-                <ListView Height="500"  Width="1000" Name="LV_ListRoom" BorderThickness="0" Background="LightSkyBlue" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                <ListView Height="353"  Width="1000" Name="LV_ListRoom" BorderThickness="0" Background="LightSkyBlue" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto">
                     <ListView.ItemsPanel >
                         <ItemsPanelTemplate >
                             <WrapPanel Orientation="Horizontal" Width="1000" VerticalAlignment="Top"></WrapPanel>
@@ -40,9 +40,9 @@
                     </ListView.ItemContainerStyle>
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Height="150" Width="200" Margin="15" HorizontalAlignment="Center" Background="#D3D3FF">
+                            <StackPanel Height="150" Width="200" Margin="15" HorizontalAlignment="Center" Background="LightSkyBlue">
 
-                                <Label Background="LightBlue" Height="30" Width="150" FontWeight="Bold" HorizontalContentAlignment="Center" Content="{Binding MaPhong}" />
+                                <Label Background="DeepSkyBlue" Height="30" Width="200" FontWeight="Bold" HorizontalContentAlignment="Center" Content="{Binding MaPhong}" />
 
                                 <StackPanel Orientation="Horizontal" Width="170">
                                     <Label Content="Loại phòng: " VerticalContentAlignment="Center" FontSize="16"/>

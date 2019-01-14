@@ -26,7 +26,7 @@
 
             </StackPanel>
             <StackPanel Margin="0,20,0,0">
-                <ListView Height="404"  Width="1000" Name="lvListStaff" BorderThickness="0" Background="LightSkyBlue" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                <ListView Height="404"  Width="1000" Name="lvListStaff" BorderThickness="0" Background="LightSkyBlue" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto">
                     <ListView.ItemsPanel >
                         <ItemsPanelTemplate >
                             <WrapPanel Orientation="Horizontal" Width="1000" VerticalAlignment="Top"></WrapPanel>
